@@ -7,6 +7,7 @@ import subprocess
 import sys
 import tarfile
 import tempfile
+import tomllib
 import venv
 import zipfile
 
@@ -15,6 +16,7 @@ def main() -> None:
     from setuptools import build_meta
 
     root = Path(__file__).resolve().parents[1]
+    version = tomllib.loads((root / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
     os.chdir(root)
     output = root / "dist"
     output.mkdir(exist_ok=True)
@@ -22,9 +24,9 @@ def main() -> None:
     wheel = output / build_meta.build_wheel(str(output))
     with zipfile.ZipFile(wheel) as archive:
         wheel_names = archive.namelist()
-        for name in ("validator.py", "cli.py", "__main__.py", "__init__.py"):
+        for name in ("validator.py", "cli.py", "comparison.py", "reporting.py", "__main__.py", "__init__.py"):
             assert archive.read("insuredatagate/" + name) == (root / "src" / "insuredatagate" / name).read_bytes()
-        metadata = archive.read("insuredatagate-0.1.0.dist-info/METADATA")
+        metadata = archive.read(f"insuredatagate-{version}.dist-info/METADATA")
         assert b"Requires-Dist:" not in metadata
     with tarfile.open(sdist) as archive:
         source_names = ["/".join(item.name.split("/")[1:]) for item in archive.getmembers() if item.isfile()]
@@ -48,7 +50,7 @@ def main() -> None:
             return result
 
         run(python, "-m", "pip", "install", "--no-index", "--no-deps", wheel)
-        assert "0.1.0" in run(cli, "--version").stdout
+        assert version in run(cli, "--version").stdout
         manifest = root / "examples" / "insurance-demo" / "manifest.json"
         report = json.loads(run(cli, "check", manifest, "--json").stdout)
         assert report["status"] == "PASS" and report["counts"]["cases"] == 6
@@ -60,7 +62,18 @@ def main() -> None:
         assert len(rows) == 6 and all(set(row) == {"case_id", "input", "source_ids"} for row in rows)
         run(cli, "export-inputs", manifest, "--output", inputs, expected=2)
         assert inputs.read_bytes() == before
-    print("PASS: wheel/sdist contents, isolated offline wheel install, both entrypoints, demo, gold-free export, output preservation")
+        candidate = root / "examples" / "insurance-demo-v2" / "manifest.json"
+        difference = json.loads(run(cli, "compare", manifest, candidate, "--json").stdout)
+        assert difference["status"] == "PASS" and difference["content_changed"] and difference["review_required"]
+        review = temp / "review.html"
+        run(cli, "compare", manifest, candidate, "--html", review)
+        assert "Content-Security-Policy" in review.read_text(encoding="utf-8")
+        assert report["dataset_id"] in review.read_text(encoding="utf-8")
+        assert review.read_bytes() == (root / "docs/examples/release-review.html").read_bytes()
+        validation = temp / "validation.html"
+        run(cli, "check", manifest, "--html", validation)
+        assert validation.read_bytes() == (root / "docs/examples/validation-review.html").read_bytes()
+    print("PASS: wheel/sdist contents, isolated offline wheel install, entrypoints, demo, gold-free export, comparison, offline HTML, output preservation")
 
 
 if __name__ == "__main__":

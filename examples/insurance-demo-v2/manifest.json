@@ -1,0 +1,24 @@
+{
+  "schema_version": "insuredatagate.manifest.v1",
+  "dataset_id": "fictional-document-window",
+  "version": "0.2.0",
+  "synthetic": true,
+  "sources": [
+    {
+      "source_id": "fictional-rules-v1",
+      "path": "sources/rules.txt",
+      "sha256": "71f9cfcdd4856aa5a1336e1c791c5f71acf1d4feb996957b2d3b0f837240d73a",
+      "license": "Apache-2.0",
+      "status": "APPROVED",
+      "approved_by": "fictional-demo-curator"
+    }
+  ],
+  "cases": {
+    "path": "cases.jsonl",
+    "sha256": "d559739e3aad6a6e67b478e6065f5c68735ce6050b4b3357382706ec70bc6309"
+  },
+  "gold": {
+    "path": "gold.jsonl",
+    "sha256": "6d5ac990425906d2e1ab60495071edb6c16c87cf7462224af2689f30d25d068b"
+  }
+}

@@ -1,0 +1,309 @@
+{
+  "status": "fail",
+  "contract": "docs/QUALITY_UPGRADE.md#html-contract (HTML contract and design)",
+  "targetViewports": [
+    "390x844",
+    "1440x900"
+  ],
+  "accessibility": {
+    "status": "fail",
+    "evidence": "Checks incomplete; inspect failure."
+  },
+  "responsive": {
+    "status": "fail",
+    "evidence": "Checks incomplete; inspect failure."
+  },
+  "contentStates": {
+    "loading": {
+      "status": "not-applicable",
+      "reason": "Static offline result document has no asynchronous loading state."
+    },
+    "permission": {
+      "status": "not-applicable",
+      "reason": "Static offline review has no authentication or permission action; unreadable input is a BLOCK result."
+    }
+  },
+  "renderedEvidence": [
+    {
+      "viewport": "390x844",
+      "artifact": "changed-390x844.png",
+      "observation": "Actual offline Chrome full-page changed report, gate PASS."
+    }
+  ],
+  "observations": [
+    {
+      "state": "changed",
+      "viewport": "390x844",
+      "artifact": "changed-390x844.png",
+      "metrics": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "PASS",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status pass",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "review",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "fail",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": false
+    }
+  ],
+  "versions": {
+    "playwright": "1.64.1",
+    "pyee": "14.0.0",
+    "greenlet": "3.5.6",
+    "typing_extensions": "4.16.0",
+    "python": "3.12.10",
+    "chrome": "156.0.8078.48"
+  },
+  "sourceHashes": {
+    "src\\insuredatagate\\reporting.py": "df7ce2e921a4fb3baf1bb9ba2f81e63d5419593ee1e5035c5da332990995f566",
+    "scripts\\check_report_browser.py": "fa51bf2d41ae36c486d981d05197a9d7051605783c7becc14ce55704a3dcc838"
+  },
+  "failure": {
+    "type": "AssertionError",
+    "message": "changed/390x844: skip Enter does not transfer focus to main"
+  },
+  "exitCode": 1
+}

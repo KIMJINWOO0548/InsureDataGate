@@ -2,6 +2,8 @@
 
 Status: SPECIFIED. Implementation and evidence are recorded separately in VALIDATION.md.
 
+This is the preserved 0.1 contract. The compatible 0.2 additions and stronger checked-reread/output behavior are specified in [QUALITY_UPGRADE.md](QUALITY_UPGRADE.md).
+
 ## Purpose
 
 A dependency-free, offline CLI for maintainers of synthetic insurance AI evaluation datasets. Validate a versioned manifest, source rights declarations, pinned file bytes, case/gold separation, reviews and split isolation. Export allowlisted model inputs only after all checks pass. No LLM, network, customer data, legal/insurance decision, or authenticated approval service. This is independently written companion tooling inspired by CaseProof, without importing its code/database/API.

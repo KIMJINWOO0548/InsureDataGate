@@ -1,0 +1,13 @@
+{
+  "query": "error summary validation",
+  "domain": "ux",
+  "exit_code": 0,
+  "source": "ux-guidelines.csv",
+  "top_result": {
+    "category": "Forms / Accessibility",
+    "issue": "Focusable Error Summary",
+    "platform": "Web"
+  },
+  "adaptation": "static issue count and native anchor only; no alert/aria-live/automatic JS focus",
+  "original_local_evidence": "reports/runs/20261031T163932Z-ui-pro/search.txt"
+}

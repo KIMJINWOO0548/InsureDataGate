@@ -46,6 +46,8 @@ API `reporting.render_html(report: dict) -> str`. verifier 보고서 또는 위 
 
 상태: success=PASS 요약; error=BLOCK와 사유·원본 수정 후 재검사; partial=side BLOCK일 때 비교 수치 미제공을 명시; empty=변경 없음 또는 issue 없음 설명. loading/permission은 정적 오프라인 결과물이라 해당 없음. OS 읽기 거절은 BLOCK이며 권한 변경을 자동 실행하지 않는다.
 
+사용자의 후속 출처·UI 요구에 따라 UI/UX Pro Max의 Web 오류 요약 원칙과 GX Data Docs/DVC diff/GitHub Actions의 정보 구조를 대조했다. 상단 issue 수와 native findings anchor, 변화 종류별 entry 요약을 추가한다. alert/aria-live/JS 자동 초점은 추가하지 않는다. 375x812·390x844·844x390·1440x900에서 정상/동일/부분/차단/악성 metadata/버전 재사용의 6상태를 검사한다. 출처·라이선스·적용 위치·불채택은 UI_REFERENCES.md에 기록한다.
+
 ## 인수 기준
 
 기존 전체 회귀 + 의미적 동일성/추가/삭제/수정/정답/출처/버전 재사용/잘못된 입력 비교 + 모든 파일 snapshot 변경 + write/close/interrupt + HTML escaping/본문 비노출/CSP/결정성 + CLI 기존 파일 보존. 실제 브라우저의 PASS/BLOCK/동일/변경/partial 상태와 좁고 넓은 화면을 확인한다. 새 버전 package와 실제 CI를 확인하고 원격 SHA 및 clean tree를 남긴다. 전문가/운영 인증은 별도다.

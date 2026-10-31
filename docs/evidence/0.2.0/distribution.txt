@@ -1,0 +1,126 @@
+running sdist
+running egg_info
+writing src\insuredatagate.egg-info\PKG-INFO
+writing dependency_links to src\insuredatagate.egg-info\dependency_links.txt
+writing entry points to src\insuredatagate.egg-info\entry_points.txt
+writing top-level names to src\insuredatagate.egg-info\top_level.txt
+reading manifest file 'src\insuredatagate.egg-info\SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+warning: no previously-included files matching '*.py[cod]' found anywhere in distribution
+writing manifest file 'src\insuredatagate.egg-info\SOURCES.txt'
+running check
+creating insuredatagate-0.2.0
+creating insuredatagate-0.2.0\docs
+creating insuredatagate-0.2.0\docs\examples
+creating insuredatagate-0.2.0\docs\images
+creating insuredatagate-0.2.0\docs\superpowers\plans
+creating insuredatagate-0.2.0\examples\insurance-demo
+creating insuredatagate-0.2.0\examples\insurance-demo-v2
+creating insuredatagate-0.2.0\examples\insurance-demo-v2\sources
+creating insuredatagate-0.2.0\examples\insurance-demo\sources
+creating insuredatagate-0.2.0\scripts
+creating insuredatagate-0.2.0\src\insuredatagate
+creating insuredatagate-0.2.0\src\insuredatagate.egg-info
+creating insuredatagate-0.2.0\tests
+copying files to insuredatagate-0.2.0...
+copying AGENTS.md -> insuredatagate-0.2.0
+copying CHANGELOG.md -> insuredatagate-0.2.0
+copying LICENSE -> insuredatagate-0.2.0
+copying MANIFEST.in -> insuredatagate-0.2.0
+copying README.md -> insuredatagate-0.2.0
+copying SECURITY.md -> insuredatagate-0.2.0
+copying VALIDATION.md -> insuredatagate-0.2.0
+copying pyproject.toml -> insuredatagate-0.2.0
+copying requirements-browser.lock -> insuredatagate-0.2.0
+copying requirements-build.lock -> insuredatagate-0.2.0
+copying docs\CONTRACT.md -> insuredatagate-0.2.0\docs
+copying docs\FORMAT.md -> insuredatagate-0.2.0\docs
+copying docs\QUALITY_UPGRADE.md -> insuredatagate-0.2.0\docs
+copying docs\REQUIREMENTS.md -> insuredatagate-0.2.0\docs
+copying docs\REVIEW.md -> insuredatagate-0.2.0\docs
+copying docs\TOOLING.md -> insuredatagate-0.2.0\docs
+copying docs\UI_REFERENCES.md -> insuredatagate-0.2.0\docs
+copying docs\examples\release-review.html -> insuredatagate-0.2.0\docs\examples
+copying docs\examples\validation-review.html -> insuredatagate-0.2.0\docs\examples
+copying docs\images\release-review-desktop.png -> insuredatagate-0.2.0\docs\images
+copying docs\images\release-review-mobile.png -> insuredatagate-0.2.0\docs\images
+copying docs\superpowers\plans\2026-11-01-insuredatagate.md -> insuredatagate-0.2.0\docs\superpowers\plans
+copying docs\superpowers\plans\2026-11-01-release-review.md -> insuredatagate-0.2.0\docs\superpowers\plans
+copying examples\insurance-demo\cases.jsonl -> insuredatagate-0.2.0\examples\insurance-demo
+copying examples\insurance-demo\gold.jsonl -> insuredatagate-0.2.0\examples\insurance-demo
+copying examples\insurance-demo\manifest.json -> insuredatagate-0.2.0\examples\insurance-demo
+copying examples\insurance-demo-v2\cases.jsonl -> insuredatagate-0.2.0\examples\insurance-demo-v2
+copying examples\insurance-demo-v2\gold.jsonl -> insuredatagate-0.2.0\examples\insurance-demo-v2
+copying examples\insurance-demo-v2\manifest.json -> insuredatagate-0.2.0\examples\insurance-demo-v2
+copying examples\insurance-demo-v2\sources\rules.txt -> insuredatagate-0.2.0\examples\insurance-demo-v2\sources
+copying examples\insurance-demo\sources\rules.txt -> insuredatagate-0.2.0\examples\insurance-demo\sources
+copying scripts\check_distribution.py -> insuredatagate-0.2.0\scripts
+copying scripts\check_report_browser.py -> insuredatagate-0.2.0\scripts
+copying src\insuredatagate\__init__.py -> insuredatagate-0.2.0\src\insuredatagate
+copying src\insuredatagate\__main__.py -> insuredatagate-0.2.0\src\insuredatagate
+copying src\insuredatagate\cli.py -> insuredatagate-0.2.0\src\insuredatagate
+copying src\insuredatagate\comparison.py -> insuredatagate-0.2.0\src\insuredatagate
+copying src\insuredatagate\reporting.py -> insuredatagate-0.2.0\src\insuredatagate
+copying src\insuredatagate\validator.py -> insuredatagate-0.2.0\src\insuredatagate
+copying src\insuredatagate.egg-info\PKG-INFO -> insuredatagate-0.2.0\src\insuredatagate.egg-info
+copying src\insuredatagate.egg-info\SOURCES.txt -> insuredatagate-0.2.0\src\insuredatagate.egg-info
+copying src\insuredatagate.egg-info\dependency_links.txt -> insuredatagate-0.2.0\src\insuredatagate.egg-info
+copying src\insuredatagate.egg-info\entry_points.txt -> insuredatagate-0.2.0\src\insuredatagate.egg-info
+copying src\insuredatagate.egg-info\top_level.txt -> insuredatagate-0.2.0\src\insuredatagate.egg-info
+copying tests\__init__.py -> insuredatagate-0.2.0\tests
+copying tests\helpers.py -> insuredatagate-0.2.0\tests
+copying tests\test_cli.py -> insuredatagate-0.2.0\tests
+copying tests\test_comparison.py -> insuredatagate-0.2.0\tests
+copying tests\test_filesystem.py -> insuredatagate-0.2.0\tests
+copying tests\test_release_commands.py -> insuredatagate-0.2.0\tests
+copying tests\test_release_safety.py -> insuredatagate-0.2.0\tests
+copying tests\test_reporting.py -> insuredatagate-0.2.0\tests
+copying tests\test_reporting_review.py -> insuredatagate-0.2.0\tests
+copying tests\test_validator.py -> insuredatagate-0.2.0\tests
+Writing insuredatagate-0.2.0\setup.cfg
+Creating tar archive
+removing 'insuredatagate-0.2.0' (and everything under it)
+running bdist_wheel
+running build
+running build_py
+running egg_info
+writing src\insuredatagate.egg-info\PKG-INFO
+writing dependency_links to src\insuredatagate.egg-info\dependency_links.txt
+writing entry points to src\insuredatagate.egg-info\entry_points.txt
+writing top-level names to src\insuredatagate.egg-info\top_level.txt
+reading manifest file 'src\insuredatagate.egg-info\SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+warning: no previously-included files matching '*.py[cod]' found anywhere in distribution
+adding license file 'LICENSE'
+writing manifest file 'src\insuredatagate.egg-info\SOURCES.txt'
+installing to build\bdist.win-amd64\wheel
+running install
+running install_lib
+creating build\bdist.win-amd64\wheel
+creating build\bdist.win-amd64\wheel\insuredatagate
+copying build\lib\insuredatagate\cli.py -> build\bdist.win-amd64\wheel\.\insuredatagate
+copying build\lib\insuredatagate\comparison.py -> build\bdist.win-amd64\wheel\.\insuredatagate
+copying build\lib\insuredatagate\reporting.py -> build\bdist.win-amd64\wheel\.\insuredatagate
+copying build\lib\insuredatagate\validator.py -> build\bdist.win-amd64\wheel\.\insuredatagate
+copying build\lib\insuredatagate\__init__.py -> build\bdist.win-amd64\wheel\.\insuredatagate
+copying build\lib\insuredatagate\__main__.py -> build\bdist.win-amd64\wheel\.\insuredatagate
+running install_egg_info
+Copying src\insuredatagate.egg-info to build\bdist.win-amd64\wheel\.\insuredatagate-0.2.0-py3.12.egg-info
+running install_scripts
+creating build\bdist.win-amd64\wheel\insuredatagate-0.2.0.dist-info\WHEEL
+creating '<project>\\dist\\.tmp-hpxpw56x\\insuredatagate-0.2.0-py3-none-any.whl' and adding 'build\\bdist.win-amd64\\wheel' to it
+adding 'insuredatagate/__init__.py'
+adding 'insuredatagate/__main__.py'
+adding 'insuredatagate/cli.py'
+adding 'insuredatagate/comparison.py'
+adding 'insuredatagate/reporting.py'
+adding 'insuredatagate/validator.py'
+adding 'insuredatagate-0.2.0.dist-info/licenses/LICENSE'
+adding 'insuredatagate-0.2.0.dist-info/METADATA'
+adding 'insuredatagate-0.2.0.dist-info/WHEEL'
+adding 'insuredatagate-0.2.0.dist-info/entry_points.txt'
+adding 'insuredatagate-0.2.0.dist-info/top_level.txt'
+adding 'insuredatagate-0.2.0.dist-info/RECORD'
+removing build\bdist.win-amd64\wheel
+PASS: wheel/sdist contents, isolated offline wheel install, entrypoints, demo, gold-free export, comparison, offline HTML, output preservation

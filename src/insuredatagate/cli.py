@@ -6,6 +6,8 @@ from pathlib import Path
 import sys
 
 from . import __version__
+from .comparison import compare
+from .reporting import render_html
 from .validator import read_snapshot, verify
 
 
@@ -29,21 +31,35 @@ def main(argv: list[str] | None = None) -> int:
     commands = parser.add_subparsers(dest="command", required=True)
     check = commands.add_parser("check", help="Validate and report PASS or BLOCK")
     check.add_argument("manifest", type=Path)
-    check.add_argument("--json", action="store_true", help="Print the JSON report")
-    check.add_argument("--report", type=Path, help="Create a new JSON report file")
+    comparison = commands.add_parser("compare", help="Compare two verified dataset releases")
+    comparison.add_argument("baseline", type=Path)
+    comparison.add_argument("candidate", type=Path)
+    for command in (check, comparison):
+        command.add_argument("--json", action="store_true", help="Print the JSON report")
+        formats = command.add_mutually_exclusive_group()
+        formats.add_argument("--report", type=Path, help="Create a new JSON report file")
+        formats.add_argument("--html", type=Path, help="Create an offline HTML review")
     export = commands.add_parser("export-inputs", help="Export validated inputs without gold")
     export.add_argument("manifest", type=Path)
     export.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
-    report = verify(args.manifest)
+    report = compare(args.baseline, args.candidate) if args.command == "compare" else verify(args.manifest)
 
     try:
-        if args.command == "check":
+        if args.command in ("check", "compare"):
             serialized = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
             if args.report is not None:
                 _write_new(args.report, serialized)
+            if args.html is not None:
+                _write_new(args.html, render_html(report))
             if args.json:
                 print(json.dumps(report, ensure_ascii=True, indent=2))
+            elif args.command == "compare":
+                change = {True: "changed", False: "unchanged", None: "unavailable"}[report["content_changed"]]
+                review = "required" if report["review_required"] else "not indicated"
+                print(f"{report['status']}: content {change}; change review {review}")
+                for issue in report["issues"]:
+                    print(f"  {issue['code']} at {issue['location']}: {issue['message']}")
             else:
                 print(f"{report['status']}: {report['counts']['cases']} cases; {len(report['issues'])} issue(s)")
                 for issue in report["issues"]:

@@ -1,0 +1,7 @@
+Synthetic demonstration rules, version 1
+
+This fictional dataset describes a made-up document intake workflow. It is not a real policy and provides no legal, coverage, or payout advice.
+
+For this exercise only, a fictional packet is marked complete when it lists a form code and a received date. If either item is absent, request the missing item. These invented rules do not describe any insurer or jurisdiction.
+
+Fictional revision note for dataset 0.2.0: completeness means both checklist items are explicitly listed; this clarification introduces no real insurance rule.

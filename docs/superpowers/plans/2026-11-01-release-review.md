@@ -52,6 +52,7 @@ Files: __init__.py, pyproject.toml, README, VALIDATION, CHANGELOG, check_distrib
 - [ ] 0.2 version·명령·계약·정확한 구현/검증 상태 정리.
 - [ ] 신규 wheel/sdist 내용·소스 일치·격리 설치·실제 새 명령 확인.
 - [ ] 새 내부 독립 리뷰의 재현된 결함을 red/green으로 수정, 전체 suite와 실제 CI 확인.
+- [ ] 선택적 hash 고정 Playwright 환경으로 Linux Chromium CI의 5상태×2화면 회귀를 실행한다. CLI 실행 의존성에는 포함하지 않는다.
 - [ ] 비교 기준의 달성·미달을 기록하고 공개 main/local/remote SHA 일치·clean tree 확인.
 
 Self-review: 세 모듈의 인터페이스와 소유권은 분리되어 있고 CLI만 통합을 소유한다. 성능/모델/인증/프로덕션 기능을 이 계획에 추가하지 않는다. 새 기능 수로 전체 프로젝트 우열을 주장하지 않는다.

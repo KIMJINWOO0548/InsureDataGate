@@ -1,0 +1,6 @@
+Command: python -m unittest tests.test_reporting_review
+Result: exit 1; 5 tests run, 2 failures.
+Expected failures:
+- Findings summary link and focusable #issues heading absent.
+- Added/removed/modified change-entry summary absent.
+Existing version/approval and partial-count tests passed. This is the independent RED run before renderer changes.

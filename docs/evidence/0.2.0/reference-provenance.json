@@ -1,0 +1,46 @@
+{
+  "recorded_as": "primary-source excerpts read through connected GitHub; no external assets copied",
+  "references": [
+    {
+      "name": "dvc_diff",
+      "url": "https://github.com/treeverse/dvc/blob/main/dvc/commands/diff.py",
+      "blob_sha": "a869b432c76b73ed761ba8cb599db41a33c95dd7",
+      "scope": "lines 1-130"
+    },
+    {
+      "name": "dvc_license",
+      "url": "https://github.com/treeverse/dvc/blob/main/LICENSE",
+      "blob_sha": "c8413d4d91986ad37e6b83bbc5a8a3c92070419d",
+      "scope": "license header only"
+    },
+    {
+      "name": "gx_license",
+      "url": "https://github.com/fivetran/great_expectations/blob/develop/LICENSE",
+      "blob_sha": "8dada3edaf50dbc082c9a125058f25def75e625a",
+      "scope": "license header only"
+    },
+    {
+      "name": "gh_docs_license",
+      "url": "https://github.com/github/docs/blob/main/LICENSE",
+      "blob_sha": "9238c8f9388066fe7cb3b308de35104bb3c9596b",
+      "scope": "license header only"
+    },
+    {
+      "name": "gh_docs_code_license",
+      "url": "https://github.com/github/docs/blob/main/LICENSE-CODE",
+      "blob_sha": "6bc46813523b6b375bd5c31e2b8c2d5a6a4f55e9",
+      "scope": "license header only"
+    }
+  ],
+  "documentation": [
+    {
+      "url": "https://docs.greatexpectations.io/docs/0.18/reference/learn/terms/data_docs/",
+      "version": "0.18.21",
+      "access": "web open"
+    },
+    {
+      "url": "https://docs.github.com/en/actions/how-tos/monitor-workflows/use-workflow-run-logs",
+      "access": "web open"
+    }
+  ]
+}

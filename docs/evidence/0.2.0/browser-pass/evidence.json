@@ -1,0 +1,5974 @@
+{
+  "status": "pass",
+  "contract": "docs/QUALITY_UPGRADE.md#html-contract (HTML contract and design)",
+  "targetViewports": [
+    "375x812",
+    "390x844",
+    "844x390",
+    "1440x900"
+  ],
+  "accessibility": {
+    "status": "pass",
+    "evidence": "All 24 DOM checks: lang/captions/th scopes, native Tab/Enter skip-to-main and issue-to-findings, visible outlines, issue target >=44px, sampled contrast >=4.5; no static alerts; reduced-motion context."
+  },
+  "responsive": {
+    "status": "pass",
+    "evidence": "Six states at four target sizes including 375px and landscape have scrollWidth <= clientWidth; actual full-page captures retained."
+  },
+  "contentStates": {
+    "loading": {
+      "status": "not-applicable",
+      "reason": "Static offline result document has no asynchronous loading state."
+    },
+    "permission": {
+      "status": "not-applicable",
+      "reason": "Static offline review has no authentication or permission action; unreadable input is a BLOCK result."
+    },
+    "success": {
+      "status": "pass",
+      "evidence": "PASS changed and malicious-metadata verifier reports; actual DOM gate state and offline resource checks passed. See observations and screenshots."
+    },
+    "empty": {
+      "status": "pass",
+      "evidence": "unchanged comparison without content/version changes; actual DOM gate state and offline resource checks passed. See observations and screenshots."
+    },
+    "error": {
+      "status": "pass",
+      "evidence": "missing manifest BLOCK verifier; actual DOM gate state and offline resource checks passed. See observations and screenshots."
+    },
+    "partial": {
+      "status": "pass",
+      "evidence": "PASS baseline and missing candidate, changes unavailable; actual DOM gate state and offline resource checks passed. See observations and screenshots."
+    }
+  },
+  "renderedEvidence": [
+    {
+      "viewport": "375x812",
+      "artifact": "changed-375x812.png",
+      "observation": "Actual offline chrome full-page changed report, gate PASS."
+    },
+    {
+      "viewport": "390x844",
+      "artifact": "changed-390x844.png",
+      "observation": "Actual offline chrome full-page changed report, gate PASS."
+    },
+    {
+      "viewport": "844x390",
+      "artifact": "changed-844x390.png",
+      "observation": "Actual offline chrome full-page changed report, gate PASS."
+    },
+    {
+      "viewport": "1440x900",
+      "artifact": "changed-1440x900.png",
+      "observation": "Actual offline chrome full-page changed report, gate PASS."
+    },
+    {
+      "viewport": "375x812",
+      "artifact": "unchanged-375x812.png",
+      "observation": "Actual offline chrome full-page unchanged report, gate PASS."
+    },
+    {
+      "viewport": "390x844",
+      "artifact": "unchanged-390x844.png",
+      "observation": "Actual offline chrome full-page unchanged report, gate PASS."
+    },
+    {
+      "viewport": "844x390",
+      "artifact": "unchanged-844x390.png",
+      "observation": "Actual offline chrome full-page unchanged report, gate PASS."
+    },
+    {
+      "viewport": "1440x900",
+      "artifact": "unchanged-1440x900.png",
+      "observation": "Actual offline chrome full-page unchanged report, gate PASS."
+    },
+    {
+      "viewport": "375x812",
+      "artifact": "partial-375x812.png",
+      "observation": "Actual offline chrome full-page partial report, gate BLOCK."
+    },
+    {
+      "viewport": "390x844",
+      "artifact": "partial-390x844.png",
+      "observation": "Actual offline chrome full-page partial report, gate BLOCK."
+    },
+    {
+      "viewport": "844x390",
+      "artifact": "partial-844x390.png",
+      "observation": "Actual offline chrome full-page partial report, gate BLOCK."
+    },
+    {
+      "viewport": "1440x900",
+      "artifact": "partial-1440x900.png",
+      "observation": "Actual offline chrome full-page partial report, gate BLOCK."
+    },
+    {
+      "viewport": "375x812",
+      "artifact": "blocked-375x812.png",
+      "observation": "Actual offline chrome full-page blocked report, gate BLOCK."
+    },
+    {
+      "viewport": "390x844",
+      "artifact": "blocked-390x844.png",
+      "observation": "Actual offline chrome full-page blocked report, gate BLOCK."
+    },
+    {
+      "viewport": "844x390",
+      "artifact": "blocked-844x390.png",
+      "observation": "Actual offline chrome full-page blocked report, gate BLOCK."
+    },
+    {
+      "viewport": "1440x900",
+      "artifact": "blocked-1440x900.png",
+      "observation": "Actual offline chrome full-page blocked report, gate BLOCK."
+    },
+    {
+      "viewport": "375x812",
+      "artifact": "long-malicious-375x812.png",
+      "observation": "Actual offline chrome full-page long-malicious report, gate PASS."
+    },
+    {
+      "viewport": "390x844",
+      "artifact": "long-malicious-390x844.png",
+      "observation": "Actual offline chrome full-page long-malicious report, gate PASS."
+    },
+    {
+      "viewport": "844x390",
+      "artifact": "long-malicious-844x390.png",
+      "observation": "Actual offline chrome full-page long-malicious report, gate PASS."
+    },
+    {
+      "viewport": "1440x900",
+      "artifact": "long-malicious-1440x900.png",
+      "observation": "Actual offline chrome full-page long-malicious report, gate PASS."
+    },
+    {
+      "viewport": "375x812",
+      "artifact": "version-reused-375x812.png",
+      "observation": "Actual offline chrome full-page version-reused report, gate BLOCK."
+    },
+    {
+      "viewport": "390x844",
+      "artifact": "version-reused-390x844.png",
+      "observation": "Actual offline chrome full-page version-reused report, gate BLOCK."
+    },
+    {
+      "viewport": "844x390",
+      "artifact": "version-reused-844x390.png",
+      "observation": "Actual offline chrome full-page version-reused report, gate BLOCK."
+    },
+    {
+      "viewport": "1440x900",
+      "artifact": "version-reused-1440x900.png",
+      "observation": "Actual offline chrome full-page version-reused report, gate BLOCK."
+    }
+  ],
+  "observations": [
+    {
+      "state": "changed",
+      "viewport": "375x812",
+      "artifact": "changed-375x812.png",
+      "metrics": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "PASS",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status pass",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "review",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true
+    },
+    {
+      "state": "changed",
+      "viewport": "390x844",
+      "artifact": "changed-390x844.png",
+      "metrics": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "PASS",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status pass",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "review",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true
+    },
+    {
+      "state": "changed",
+      "viewport": "844x390",
+      "artifact": "changed-844x390.png",
+      "metrics": {
+        "scrollWidth": 844,
+        "clientWidth": 844,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "PASS",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status pass",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "review",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true
+    },
+    {
+      "state": "changed",
+      "viewport": "1440x900",
+      "artifact": "changed-1440x900.png",
+      "metrics": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "PASS",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status pass",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "review",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true
+    },
+    {
+      "state": "unchanged",
+      "viewport": "375x812",
+      "artifact": "unchanged-375x812.png",
+      "metrics": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "PASS",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status pass",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true
+    },
+    {
+      "state": "unchanged",
+      "viewport": "390x844",
+      "artifact": "unchanged-390x844.png",
+      "metrics": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "PASS",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status pass",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true
+    },
+    {
+      "state": "unchanged",
+      "viewport": "844x390",
+      "artifact": "unchanged-844x390.png",
+      "metrics": {
+        "scrollWidth": 844,
+        "clientWidth": 844,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "PASS",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status pass",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true
+    },
+    {
+      "state": "unchanged",
+      "viewport": "1440x900",
+      "artifact": "unchanged-1440x900.png",
+      "metrics": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "PASS",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status pass",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true
+    },
+    {
+      "state": "partial",
+      "viewport": "375x812",
+      "artifact": "partial-375x812.png",
+      "metrics": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "BLOCK",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status block",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "p",
+            "className": "review",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "a",
+            "className": "issue-link",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "notice",
+            "ratio": 13.860870881067564
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true,
+      "issueFocus": {
+        "target": true,
+        "outline": 3,
+        "height": 44,
+        "visible": true
+      },
+      "findingsFocused": true
+    },
+    {
+      "state": "partial",
+      "viewport": "390x844",
+      "artifact": "partial-390x844.png",
+      "metrics": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "BLOCK",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status block",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "p",
+            "className": "review",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "a",
+            "className": "issue-link",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "notice",
+            "ratio": 13.860870881067564
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true,
+      "issueFocus": {
+        "target": true,
+        "outline": 3,
+        "height": 44,
+        "visible": true
+      },
+      "findingsFocused": true
+    },
+    {
+      "state": "partial",
+      "viewport": "844x390",
+      "artifact": "partial-844x390.png",
+      "metrics": {
+        "scrollWidth": 844,
+        "clientWidth": 844,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "BLOCK",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status block",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "p",
+            "className": "review",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "a",
+            "className": "issue-link",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "notice",
+            "ratio": 13.860870881067564
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true,
+      "issueFocus": {
+        "target": true,
+        "outline": 3,
+        "height": 44,
+        "visible": true
+      },
+      "findingsFocused": true
+    },
+    {
+      "state": "partial",
+      "viewport": "1440x900",
+      "artifact": "partial-1440x900.png",
+      "metrics": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "BLOCK",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status block",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "p",
+            "className": "review",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "a",
+            "className": "issue-link",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "notice",
+            "ratio": 13.860870881067564
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true,
+      "issueFocus": {
+        "target": true,
+        "outline": 3,
+        "height": 44,
+        "visible": true
+      },
+      "findingsFocused": true
+    },
+    {
+      "state": "blocked",
+      "viewport": "375x812",
+      "artifact": "blocked-375x812.png",
+      "metrics": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "BLOCK",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status block",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "a",
+            "className": "issue-link",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true,
+      "issueFocus": {
+        "target": true,
+        "outline": 3,
+        "height": 44,
+        "visible": true
+      },
+      "findingsFocused": true
+    },
+    {
+      "state": "blocked",
+      "viewport": "390x844",
+      "artifact": "blocked-390x844.png",
+      "metrics": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "BLOCK",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status block",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "a",
+            "className": "issue-link",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true,
+      "issueFocus": {
+        "target": true,
+        "outline": 3,
+        "height": 44,
+        "visible": true
+      },
+      "findingsFocused": true
+    },
+    {
+      "state": "blocked",
+      "viewport": "844x390",
+      "artifact": "blocked-844x390.png",
+      "metrics": {
+        "scrollWidth": 844,
+        "clientWidth": 844,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "BLOCK",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status block",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "a",
+            "className": "issue-link",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true,
+      "issueFocus": {
+        "target": true,
+        "outline": 3,
+        "height": 44,
+        "visible": true
+      },
+      "findingsFocused": true
+    },
+    {
+      "state": "blocked",
+      "viewport": "1440x900",
+      "artifact": "blocked-1440x900.png",
+      "metrics": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "BLOCK",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status block",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "a",
+            "className": "issue-link",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true,
+      "issueFocus": {
+        "target": true,
+        "outline": 3,
+        "height": 44,
+        "visible": true
+      },
+      "findingsFocused": true
+    },
+    {
+      "state": "long-malicious",
+      "viewport": "375x812",
+      "artifact": "long-malicious-375x812.png",
+      "metrics": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "PASS",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status pass",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true
+    },
+    {
+      "state": "long-malicious",
+      "viewport": "390x844",
+      "artifact": "long-malicious-390x844.png",
+      "metrics": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "PASS",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status pass",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true
+    },
+    {
+      "state": "long-malicious",
+      "viewport": "844x390",
+      "artifact": "long-malicious-844x390.png",
+      "metrics": {
+        "scrollWidth": 844,
+        "clientWidth": 844,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "PASS",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status pass",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true
+    },
+    {
+      "state": "long-malicious",
+      "viewport": "1440x900",
+      "artifact": "long-malicious-1440x900.png",
+      "metrics": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "PASS",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status pass",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "empty",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true
+    },
+    {
+      "state": "version-reused",
+      "viewport": "375x812",
+      "artifact": "version-reused-375x812.png",
+      "metrics": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "BLOCK",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status block",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "p",
+            "className": "review",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "a",
+            "className": "issue-link",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true,
+      "issueFocus": {
+        "target": true,
+        "outline": 3,
+        "height": 44,
+        "visible": true
+      },
+      "findingsFocused": true
+    },
+    {
+      "state": "version-reused",
+      "viewport": "390x844",
+      "artifact": "version-reused-390x844.png",
+      "metrics": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "BLOCK",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status block",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "p",
+            "className": "review",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "a",
+            "className": "issue-link",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true,
+      "issueFocus": {
+        "target": true,
+        "outline": 3,
+        "height": 44,
+        "visible": true
+      },
+      "findingsFocused": true
+    },
+    {
+      "state": "version-reused",
+      "viewport": "844x390",
+      "artifact": "version-reused-844x390.png",
+      "metrics": {
+        "scrollWidth": 844,
+        "clientWidth": 844,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "BLOCK",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status block",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "p",
+            "className": "review",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "a",
+            "className": "issue-link",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true,
+      "issueFocus": {
+        "target": true,
+        "outline": 3,
+        "height": 44,
+        "visible": true
+      },
+      "findingsFocused": true
+    },
+    {
+      "state": "version-reused",
+      "viewport": "1440x900",
+      "artifact": "version-reused-1440x900.png",
+      "metrics": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "lang": "en",
+        "forbidden": 0,
+        "resources": [],
+        "xss": false,
+        "missingScopes": 0,
+        "missingCaptions": 0,
+        "status": "BLOCK",
+        "contrasts": [
+          {
+            "element": "div",
+            "className": "eyebrow",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h1",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "p",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "span",
+            "className": "status block",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "p",
+            "className": "review",
+            "ratio": 6.1971493180949935
+          },
+          {
+            "element": "a",
+            "className": "issue-link",
+            "ratio": 5.489645587140635
+          },
+          {
+            "element": "p",
+            "className": "meta",
+            "ratio": 5.6027114292966935
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "dt",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "dd",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "h2",
+            "className": "",
+            "ratio": 12.92080189921666
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "th",
+            "className": "",
+            "ratio": 6.2125248380348514
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "td",
+            "className": "hash",
+            "ratio": 14.3271349487096
+          },
+          {
+            "element": "footer",
+            "className": "",
+            "ratio": 5.6027114292966935
+          }
+        ]
+      },
+      "httpRequests": [],
+      "status": "pass",
+      "skipFocus": {
+        "skip": true,
+        "outline": 3,
+        "style": "solid",
+        "visible": true
+      },
+      "mainFocused": true,
+      "issueFocus": {
+        "target": true,
+        "outline": 3,
+        "height": 44,
+        "visible": true
+      },
+      "findingsFocused": true
+    }
+  ],
+  "versions": {
+    "playwright": "1.64.1",
+    "pyee": "14.0.0",
+    "greenlet": "3.5.6",
+    "typing_extensions": "4.16.0",
+    "python": "3.12.10",
+    "browser": "156.0.8078.48",
+    "channel": "chrome"
+  },
+  "sourceHashes": {
+    "src\\insuredatagate\\reporting.py": "74d902098823cae6096f7d5f8a0b8d6c74720daee516efcc2674c26c445df631",
+    "scripts\\check_report_browser.py": "66c5d8f0634b81e91e0f6194a600d74e375f36de1b46d0702ebb413b8ce7eebc"
+  },
+  "exitCode": 0
+}
