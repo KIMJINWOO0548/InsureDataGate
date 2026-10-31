@@ -98,6 +98,47 @@ def _keys(value, fields):
     return type(value) is dict and set(value) == set(fields.split())
 
 
+def _jsonl_lines(raw: bytes) -> list[bytes]:
+    lines = raw.split(b"\n")
+    if lines[-1:] == [b""]:
+        lines.pop()
+    return lines
+
+
+def read_snapshot(manifest_path: Path, report: dict) -> dict:
+    """Reread a PASS report's exact bytes for internal export/comparison use.
+
+    shortcut: checked rereads are not atomic filesystem snapshots; use immutable
+    storage if hostile concurrent replacement becomes a requirement.
+    """
+    try:
+        if report["status"] != "PASS":
+            raise ValueError("A verified report is required")
+        path = Path(manifest_path)
+        raw = safe_read(path, SMALL_LIMIT)
+        if hashlib.sha256(raw).hexdigest() != report["manifest_sha256"]:
+            raise ValueError("Manifest changed")
+        manifest = strict_json(raw)
+        observed = {item["path"]: item["sha256"] for item in report["files"]}
+        refs = [(source, SMALL_LIMIT, "source") for source in manifest["sources"]]
+        refs += [(manifest[role], RECORD_LIMIT, role) for role in ("cases", "gold")]
+        if set(observed) != {ref["path"] for ref, _, _ in refs}:
+            raise ValueError("File set changed")
+        result = {"manifest": manifest}
+        for ref, limit, role in refs:
+            if not portable_path(ref["path"]):
+                raise ValueError("Invalid path")
+            content = safe_read(path.parent / ref["path"], limit)
+            digest = hashlib.sha256(content).hexdigest()
+            if digest != ref["sha256"] or digest != observed[ref["path"]]:
+                raise ValueError("Referenced file changed")
+            if role != "source":
+                result[role] = [strict_json(line) for line in _jsonl_lines(content)]
+        return result
+    except (KeyError, TypeError, ValueError, OSError, RuntimeError):
+        raise ValueError("Verified dataset snapshot changed or became unreadable") from None
+
+
 def verify(manifest_path: Path) -> dict:
     """Return a deterministic, redacted report; never modify dataset files."""
     report = {
@@ -209,9 +250,7 @@ def verify(manifest_path: Path) -> dict:
             except (UnicodeError, ValueError):
                 issue("INVALID_UTF8", location, "Source must contain UTF-8 text without a BOM.")
             continue
-        lines = file_raw.split(b"\n")
-        if lines[-1:] == [b""]:
-            lines.pop()
+        lines = _jsonl_lines(file_raw)
         if not 1 <= len(lines) <= 10000:
             issue("RECORD_COUNT", location, "JSONL requires between one and 10000 records.")
             continue

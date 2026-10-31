@@ -1,18 +1,24 @@
 """Command line validation and gold-free model input export."""
 
 import argparse
-import hashlib
 import json
 from pathlib import Path
 import sys
 
 from . import __version__
-from .validator import safe_read, strict_json, verify
+from .validator import read_snapshot, verify
 
 
 def _write_new(path: Path, content: str) -> None:
-    with path.open("x", encoding="utf-8", newline="\n") as output:
-        output.write(content)
+    created = False
+    try:
+        with path.open("x", encoding="utf-8", newline="\n") as output:
+            created = True
+            output.write(content)
+    except BaseException:
+        if created:
+            path.unlink(missing_ok=True)
+        raise
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -48,17 +54,7 @@ def main(argv: list[str] | None = None) -> int:
             print("BLOCK: validation failed; no inputs exported.", file=sys.stderr)
             return 1
         try:
-            manifest_bytes = safe_read(args.manifest, 1024 * 1024)
-            if hashlib.sha256(manifest_bytes).hexdigest() != report["manifest_sha256"]:
-                raise ValueError("Manifest changed")
-            manifest = strict_json(manifest_bytes)
-            case_bytes = safe_read(args.manifest.parent / manifest["cases"]["path"], 10 * 1024 * 1024)
-            if hashlib.sha256(case_bytes).hexdigest() != manifest["cases"]["sha256"]:
-                raise ValueError("Cases changed")
-            lines = case_bytes.split(b"\n")
-            if lines[-1:] == [b""]:
-                lines.pop()
-            rows = [strict_json(line) for line in lines]
+            rows = read_snapshot(args.manifest, report)["cases"]
         except (ValueError, OSError):
             print("BLOCK: dataset changed or became unreadable; recheck before export.", file=sys.stderr)
             return 1
