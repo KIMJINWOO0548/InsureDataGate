@@ -1,0 +1,27 @@
+test_export_accepts_carriage_return_json_whitespace (tests.test_cli.CliTests.test_export_accepts_carriage_return_json_whitespace) ... FAIL
+test_json_stdout_supports_legacy_encoding (tests.test_cli.CliTests.test_json_stdout_supports_legacy_encoding) ... ERROR
+
+======================================================================
+ERROR: test_json_stdout_supports_legacy_encoding (tests.test_cli.CliTests.test_json_stdout_supports_legacy_encoding)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_cli.py", line 154, in test_json_stdout_supports_legacy_encoding
+    code = cli.main(["check", str(self.data.path), "--json"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<project>\src\insuredatagate\cli.py", line 40, in main
+    print(serialized, end="")
+UnicodeEncodeError: 'cp949' codec can't encode character '\U0001f600' in position 141: illegal multibyte sequence
+
+======================================================================
+FAIL: test_export_accepts_carriage_return_json_whitespace (tests.test_cli.CliTests.test_export_accepts_carriage_return_json_whitespace)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_cli.py", line 144, in test_export_accepts_carriage_return_json_whitespace
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : BLOCK: dataset changed or became unreadable; recheck before export.
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.223s
+
+FAILED (failures=1, errors=1)

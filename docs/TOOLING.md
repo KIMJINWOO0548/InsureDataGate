@@ -4,7 +4,7 @@
 
 | 도구 / 스킬 | 실제 역할 |
 | --- | --- |
-| GitHub MCP | 연결 계정 로그인 확인 |
+| GitHub MCP | 연결 계정 로그인 확인, Linux/Windows 실제 Actions 로그를 읽어 통과·건너뛰기와 파일 경계 검사 확인 |
 | GitHub CLI / Git | 새 저장소 생성, 요청에 따라 공개 전환, 단계별 commit/push, Actions 조회 |
 | Context7 MCP | setuptools 공식 문서에서 src 레이아웃·console entrypoint·build backend 확인 |
 | Plugin Management MCP | Superpowers 플러그인의 설치·활성 상태 검색 확인 |
@@ -17,3 +17,5 @@
 Router 실행은 조정자 모델 자체를 변경하지 않는다. 검증기 구현은 GPT-6.1 Sol/medium, 문서·예제는 GPT-6 Luna/high가 담당했다. 독립 내부 리뷰는 GPT-6 Astra/low에 배정했다. 최초 독립 테스트는 Router 요청 이전에 시작한 작업이므로 소급해서 자동 라우팅으로 표시하지 않는다. 모델 선정과 병렬 실행을 관찰했지만 속도 향상을 비교 측정하지 않았다.
 
 계획 보강은 사용자의 추가 요청에 따라 초기 계약·red 테스트·일부 구현 뒤에 이뤄졌다. [계획서](superpowers/plans/2026-11-01-insuredatagate.md)와 [검증 기록](../VALIDATION.md)은 이 순서를 보존한다. 별도의 기획 승인 대기는 추가하지 않고 사용자가 이미 승인한 구현을 계속했다.
+
+포장 설정은 [setuptools 공식 quickstart](https://setuptools.pypa.io/en/latest/userguide/quickstart.html)와 [build backend 문서](https://setuptools.pypa.io/en/latest/build_meta.html)를 Context7으로 조회했다. 새 외부 패키지 설치 없이 기존 빌드 도구를 읽어 사용했고, 새 가상환경에는 이 프로젝트의 로컬 wheel만 설치했다.

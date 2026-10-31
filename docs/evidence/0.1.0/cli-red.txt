@@ -1,0 +1,148 @@
+test_blocked_export_creates_nothing (tests.test_cli.CliTests.test_blocked_export_creates_nothing) ... ok
+test_changed_cases_between_verify_and_export_block (tests.test_cli.CliTests.test_changed_cases_between_verify_and_export_block) ... ERROR
+test_changed_manifest_between_verify_and_export_block (tests.test_cli.CliTests.test_changed_manifest_between_verify_and_export_block) ... ERROR
+test_check_json_and_report_are_identical (tests.test_cli.CliTests.test_check_json_and_report_are_identical) ... FAIL
+test_existing_outputs_preserved (tests.test_cli.CliTests.test_existing_outputs_preserved) ...
+  test_existing_outputs_preserved (tests.test_cli.CliTests.test_existing_outputs_preserved) (command='check') ... FAIL
+  test_existing_outputs_preserved (tests.test_cli.CliTests.test_existing_outputs_preserved) (command='export-inputs') ... FAIL
+test_export_only_allowlisted_fields (tests.test_cli.CliTests.test_export_only_allowlisted_fields) ... FAIL
+test_human_summary (tests.test_cli.CliTests.test_human_summary) ... FAIL
+test_invalid_dataset_blocks_without_raw_data (tests.test_cli.CliTests.test_invalid_dataset_blocks_without_raw_data) ... ERROR
+test_missing_and_malformed_manifest_block (tests.test_cli.CliTests.test_missing_and_malformed_manifest_block) ...
+  test_missing_and_malformed_manifest_block (tests.test_cli.CliTests.test_missing_and_malformed_manifest_block) (raw=None) ... ERROR
+  test_missing_and_malformed_manifest_block (tests.test_cli.CliTests.test_missing_and_malformed_manifest_block) (raw=b'{"SECRET_INVALID_DATA":') ... ERROR
+test_missing_parent_output_error (tests.test_cli.CliTests.test_missing_parent_output_error) ... FAIL
+test_version_and_usage (tests.test_cli.CliTests.test_version_and_usage) ... FAIL
+
+======================================================================
+ERROR: test_changed_cases_between_verify_and_export_block (tests.test_cli.CliTests.test_changed_cases_between_verify_and_export_block)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_cli.py", line 108, in test_changed_cases_between_verify_and_export_block
+    from insuredatagate import cli
+ImportError: cannot import name 'cli' from 'insuredatagate' (unknown location)
+
+======================================================================
+ERROR: test_changed_manifest_between_verify_and_export_block (tests.test_cli.CliTests.test_changed_manifest_between_verify_and_export_block)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_cli.py", line 124, in test_changed_manifest_between_verify_and_export_block
+    from insuredatagate import cli
+ImportError: cannot import name 'cli' from 'insuredatagate' (unknown location)
+
+======================================================================
+ERROR: test_invalid_dataset_blocks_without_raw_data (tests.test_cli.CliTests.test_invalid_dataset_blocks_without_raw_data)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_cli.py", line 52, in test_invalid_dataset_blocks_without_raw_data
+    self.assertEqual(json.loads(result.stdout)["status"], "BLOCK")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python312\Lib\json\decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python312\Lib\json\decoder.py", line 356, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+======================================================================
+ERROR: test_missing_and_malformed_manifest_block (tests.test_cli.CliTests.test_missing_and_malformed_manifest_block) (raw=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_cli.py", line 98, in test_missing_and_malformed_manifest_block
+    self.assertEqual(json.loads(result.stdout)["status"], "BLOCK")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python312\Lib\json\decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python312\Lib\json\decoder.py", line 356, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+======================================================================
+ERROR: test_missing_and_malformed_manifest_block (tests.test_cli.CliTests.test_missing_and_malformed_manifest_block) (raw=b'{"SECRET_INVALID_DATA":')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_cli.py", line 98, in test_missing_and_malformed_manifest_block
+    self.assertEqual(json.loads(result.stdout)["status"], "BLOCK")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python312\Lib\json\decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>\AppData\Local\Programs\Python\Python312\Lib\json\decoder.py", line 356, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+======================================================================
+FAIL: test_check_json_and_report_are_identical (tests.test_cli.CliTests.test_check_json_and_report_are_identical)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_cli.py", line 36, in test_check_json_and_report_are_identical
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : <home>\AppData\Local\Programs\Python\Python312\python.exe: No module named insuredatagate.__main__; 'insuredatagate' is a package and cannot be directly executed
+
+
+======================================================================
+FAIL: test_existing_outputs_preserved (tests.test_cli.CliTests.test_existing_outputs_preserved) (command='check')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_cli.py", line 81, in test_existing_outputs_preserved
+    self.assertEqual(result.returncode, 2, result.stderr)
+AssertionError: 1 != 2 : <home>\AppData\Local\Programs\Python\Python312\python.exe: No module named insuredatagate.__main__; 'insuredatagate' is a package and cannot be directly executed
+
+
+======================================================================
+FAIL: test_existing_outputs_preserved (tests.test_cli.CliTests.test_existing_outputs_preserved) (command='export-inputs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_cli.py", line 81, in test_existing_outputs_preserved
+    self.assertEqual(result.returncode, 2, result.stderr)
+AssertionError: 1 != 2 : <home>\AppData\Local\Programs\Python\Python312\python.exe: No module named insuredatagate.__main__; 'insuredatagate' is a package and cannot be directly executed
+
+
+======================================================================
+FAIL: test_export_only_allowlisted_fields (tests.test_cli.CliTests.test_export_only_allowlisted_fields)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_cli.py", line 59, in test_export_only_allowlisted_fields
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : <home>\AppData\Local\Programs\Python\Python312\python.exe: No module named insuredatagate.__main__; 'insuredatagate' is a package and cannot be directly executed
+
+
+======================================================================
+FAIL: test_human_summary (tests.test_cli.CliTests.test_human_summary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_cli.py", line 43, in test_human_summary
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : <home>\AppData\Local\Programs\Python\Python312\python.exe: No module named insuredatagate.__main__; 'insuredatagate' is a package and cannot be directly executed
+
+
+======================================================================
+FAIL: test_missing_parent_output_error (tests.test_cli.CliTests.test_missing_parent_output_error)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_cli.py", line 86, in test_missing_parent_output_error
+    self.assertEqual(result.returncode, 2)
+AssertionError: 1 != 2
+
+======================================================================
+FAIL: test_version_and_usage (tests.test_cli.CliTests.test_version_and_usage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_cli.py", line 103, in test_version_and_usage
+    self.assertEqual(version.returncode, 0)
+AssertionError: 1 != 0
+
+----------------------------------------------------------------------
+Ran 11 tests in 2.047s
+
+FAILED (failures=7, errors=5)

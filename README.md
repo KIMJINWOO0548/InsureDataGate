@@ -1,5 +1,7 @@
 # InsureDataGate
 
+[![Verify](https://github.com/KIMJINWOO0548/InsureDataGate/actions/workflows/ci.yml/badge.svg)](https://github.com/KIMJINWOO0548/InsureDataGate/actions/workflows/ci.yml)
+
 **An offline, standard-library-only gate for synthetic insurance AI evaluation datasets.**
 
 InsureDataGate checks a versioned manifest, declared source rights, file hashes, separation of cases from gold answers, review declarations, and train/validation/test isolation. It exports only allowlisted model inputs after the complete local check passes.

@@ -1,0 +1,44 @@
+{
+  "repo": "https://github.com/KIMJINWOO0548/InsureDataGate",
+  "branch": "main",
+  "head_sha": "ac01d9c873cc35979a004b52e7d3dae03bfab8f9",
+  "url": "https://github.com/KIMJINWOO0548/InsureDataGate/actions/runs/41215644275",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "Linux 3.11",
+      "conclusion": "success"
+    },
+    {
+      "name": "Linux 3.12",
+      "conclusion": "success"
+    },
+    {
+      "name": "Linux 3.13",
+      "conclusion": "success"
+    },
+    {
+      "name": "Linux 3.14",
+      "conclusion": "success"
+    },
+    {
+      "name": "Windows 3.12",
+      "conclusion": "success"
+    },
+    {
+      "name": "package",
+      "conclusion": "success"
+    }
+  ],
+  "linux312": {
+    "run": 58,
+    "passed": 57,
+    "skipped": 1,
+    "reason": "Windows-only junction"
+  },
+  "windows312": {
+    "run": 58,
+    "passed": 58,
+    "skipped": 0
+  }
+}

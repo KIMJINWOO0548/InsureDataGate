@@ -22,10 +22,15 @@ def main() -> None:
     wheel = output / build_meta.build_wheel(str(output))
     with zipfile.ZipFile(wheel) as archive:
         wheel_names = archive.namelist()
+        for name in ("validator.py", "cli.py", "__main__.py", "__init__.py"):
+            assert archive.read("insuredatagate/" + name) == (root / "src" / "insuredatagate" / name).read_bytes()
+        metadata = archive.read("insuredatagate-0.1.0.dist-info/METADATA")
+        assert b"Requires-Dist:" not in metadata
     with tarfile.open(sdist) as archive:
         source_names = ["/".join(item.name.split("/")[1:]) for item in archive.getmembers() if item.isfile()]
     assert {"insuredatagate/validator.py", "insuredatagate/cli.py", "insuredatagate/__main__.py"} <= set(wheel_names)
     assert {"examples/insurance-demo/manifest.json", "docs/CONTRACT.md", "tests/test_cli.py", "scripts/check_distribution.py"} <= set(source_names)
+    assert {"VALIDATION.md", "CHANGELOG.md"} <= set(source_names)
     for name in wheel_names + source_names:
         assert not any(part in {".git", ".venv", ".runtime", "reports", "__pycache__"} for part in name.split("/")), name
     with tempfile.TemporaryDirectory(prefix="insuredatagate-wheel-") as scratch:

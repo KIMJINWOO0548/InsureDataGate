@@ -63,4 +63,4 @@ Schema-invalid inputs may stop early; collect useful independent semantic issues
 
 ## Completion gates
 
-Independent red tests, full passing tests, successful sample check, split-leakage and tampering demonstrations, model export gold-absence, safe output refusal, wheel/sdist and isolated wheel installation checks, CI configuration with actual remote run distinguished from local evidence, docs/license/provenance, and clean Git tree pushed to the user's new private repository. Runtime data, environments, credentials and generated distributions stay untracked. Progress pushes are milestone commits, not an unattended scheduler.
+Independent red tests, full passing tests, successful sample check, split-leakage and tampering demonstrations, model export gold-absence, safe output refusal, wheel/sdist and isolated wheel installation checks, CI configuration with actual remote run distinguished from local evidence, docs/license/provenance, and clean Git tree pushed to the user's new public repository. Runtime data, environments, credentials and generated distributions stay untracked. Progress pushes are milestone commits, not an unattended scheduler.

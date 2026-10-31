@@ -8,7 +8,7 @@
       "source_id": "fictional-rules-v1",
       "path": "sources/rules.txt",
       "sha256": "e6e0988dbf34bb18fee2dc53b7f2c8a2fa7fbd114acd50a838c3a9e34f59770e",
-      "license": "CC0-1.0",
+      "license": "Apache-2.0",
       "status": "APPROVED",
       "approved_by": "fictional-demo-curator"
     }

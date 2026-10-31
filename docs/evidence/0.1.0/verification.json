@@ -1,0 +1,65 @@
+{
+  "started_utc": "20261031T154134Z",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "checks": [
+    {
+      "name": "full-unittest",
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "distribution",
+      "command": [
+        "python",
+        "scripts/check_distribution.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "demo",
+      "command": [
+        "python",
+        "-m",
+        "insuredatagate",
+        "check",
+        "examples/insurance-demo/manifest.json",
+        "--json"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "source_sha256": {
+    ".gitattributes": "9e43c3101c22b65fbd68305b97b6cdcfe2c5c40ad54fca0c6fe7da209e9601c3",
+    ".github/workflows/ci.yml": "633b423447eb2ddbe31906079914622c26233ea97602bcca19dfab8653746bc3",
+    "examples/insurance-demo/cases.jsonl": "9922ca3d2959790776a8f45d5c1dc5b230effe1681c9a572a2ef5d8dbaaa27e3",
+    "examples/insurance-demo/gold.jsonl": "85a2636558f38f57d947500f095ed0f1027c8b642d2777c87e4ce896fc837a88",
+    "examples/insurance-demo/manifest.json": "87874030aa0cc5c8626acb0c0d5956d518ae400adb4fbe0d1ef64446b1504f0c",
+    "examples/insurance-demo/sources/rules.txt": "e6e0988dbf34bb18fee2dc53b7f2c8a2fa7fbd114acd50a838c3a9e34f59770e",
+    "MANIFEST.in": "9e8be0f5ca46f448786f3cf41fa32e89e49a8eacffbefbe06fe233387612e674",
+    "pyproject.toml": "9ea20409143663cefe7168238299591000be2eb1678d8ccee85508fee531ade9",
+    "scripts/check_distribution.py": "4048c3fb28154242dd07721cb915fbfe4df4ba6ac4fccfeca7ae3d2d490f2e22",
+    "src/insuredatagate/__init__.py": "549f25146981180e04cfc6c3cfe315ffb0785a3c721e4e5ed52055d9f1b0130c",
+    "src/insuredatagate/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/insuredatagate/cli.py": "272fa810ed4f4be6fef0b235f3a70cdc5a534edb6d15fd70e65049958afb6ca2",
+    "src/insuredatagate/validator.py": "cf00004f78097c9cb00810970eac8b740d6bd339ce3531637b15ab2cc47f2e5c",
+    "src/insuredatagate.egg-info/dependency_links.txt": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "src/insuredatagate.egg-info/entry_points.txt": "eac4b51602685363a44c62002e3d14964bd7d29a2a931edde83eb7503acb1465",
+    "src/insuredatagate.egg-info/PKG-INFO": "0d28aeae722751131648cda21b8a2154cfb36a0ac491fe05ee18965d95f58357",
+    "src/insuredatagate.egg-info/SOURCES.txt": "f993b022804629a540b7fdfee3d52a4c463a19e95b395f7b1dbe38a5b8183ba8",
+    "src/insuredatagate.egg-info/top_level.txt": "9480b8596c0d274be6f732ddd40710f2bfe360935131516516ac5736e4621cd4",
+    "tests/__init__.py": "b1f8c38fa4f63e077bf861cb63c3b9aa00b13ccd21291dc91465cef76fa1e13a",
+    "tests/helpers.py": "325e81beb6d542ada9110fc0174b8fb6caface391d53ceae2252ef79ea7553b7",
+    "tests/test_cli.py": "227538a04d80e7ea0c3db3ea6a379075724344dd483256c7714c92b12358accb",
+    "tests/test_filesystem.py": "881875d058784e9e90c19bedba937ade7acadfeacbc77b2b0ff23405f3b39255",
+    "tests/test_validator.py": "828335a4b5164a137c6a220132adaf881765ff2ffa84cfdbea061163fdefd030"
+  }
+}

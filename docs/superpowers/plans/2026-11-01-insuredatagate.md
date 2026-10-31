@@ -53,11 +53,11 @@ Consumes Task 1 report and safe read/parser. Produces `main(argv: list[str] | No
 
 Consumes Tasks 1–2. Produces wheel/sdist, examples, documentation and CI.
 
-- [ ] Validate sample six-case manifest and gold-free export via actual CLI.
-- [ ] Build with existing installed setuptools backend; create fresh venv and install only this local wheel with no index/dependencies. Run installed console outside checkout.
-- [ ] Inspect archive contents: source, docs/demo in sdist; no environments, credentials, runtime reports in either archive.
-- [ ] Add pinned Actions matrix on Linux Python 3.11–3.14 and Windows 3.12; push, read actual remote results, fix failures.
-- [ ] Perform fresh independent internal review using Ponytail principles; reproduce actionable findings before fixes. This is not external human review.
-- [ ] Record actual commands/exits/versions/failures/skips in VALIDATION.md and concise evidence; update this plan, commit/push, verify clean tree and matching remote HEAD.
+- [x] Validate sample six-case manifest and gold-free export via actual CLI.
+- [x] Build with existing installed setuptools backend; create fresh venv and install only this local wheel with no index/dependencies. Run installed console outside checkout.
+- [x] Inspect archive contents: source, docs/demo in sdist; no environments, credentials, runtime reports in either archive.
+- [x] Add pinned Actions matrix on Linux Python 3.11–3.14 and Windows 3.12; push, read actual remote results, fix failures.
+- [x] Perform fresh independent internal review using Ponytail principles; reproduce actionable findings before fixes. This is not external human review.
+- [x] Record actual commands/exits/versions/failures/skips in VALIDATION.md and concise evidence; update this plan, commit/push, verify clean tree and matching remote HEAD.
 
 Self-review: R01–R12 map to the three tasks; helper names match Task 2 imports. Platform-specific symlink skips must stay explicit and Linux CI must exercise real links. No unimplemented future subsystems are required for 0.1 completion.

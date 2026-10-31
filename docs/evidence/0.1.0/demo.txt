@@ -1,0 +1,33 @@
+{
+  "schema_version": "insuredatagate.report.v1",
+  "status": "PASS",
+  "dataset_id": "fictional-document-window",
+  "version": "0.1.0",
+  "manifest_sha256": "87874030aa0cc5c8626acb0c0d5956d518ae400adb4fbe0d1ef64446b1504f0c",
+  "files": [
+    {
+      "path": "cases.jsonl",
+      "sha256": "9922ca3d2959790776a8f45d5c1dc5b230effe1681c9a572a2ef5d8dbaaa27e3",
+      "bytes": 1643
+    },
+    {
+      "path": "gold.jsonl",
+      "sha256": "85a2636558f38f57d947500f095ed0f1027c8b642d2777c87e4ce896fc837a88",
+      "bytes": 872
+    },
+    {
+      "path": "sources/rules.txt",
+      "sha256": "e6e0988dbf34bb18fee2dc53b7f2c8a2fa7fbd114acd50a838c3a9e34f59770e",
+      "bytes": 414
+    }
+  ],
+  "counts": {
+    "sources": 1,
+    "cases": 6,
+    "gold": 6,
+    "train": 2,
+    "validation": 2,
+    "test": 2
+  },
+  "issues": []
+}
