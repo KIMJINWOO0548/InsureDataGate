@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools==84.2.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "insuredatagate"
+version = "0.1.0"
+description = "Offline release checks for synthetic insurance AI datasets"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dependencies = []
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.scripts]
+insuredatagate = "insuredatagate.cli:main"
+
+[project.urls]
+Repository = "https://github.com/KIMJINWOO0548/InsureDataGate"
+Issues = "https://github.com/KIMJINWOO0548/InsureDataGate/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
