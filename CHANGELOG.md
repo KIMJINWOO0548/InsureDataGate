@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 — 2026-11-01
+
+- Add explicit review.v1 case/gold dossiers and both-snapshot declared source impact without changing comparison.v1 JSON.
+- Add the review CLI with the same no-overwrite and offline reporting boundaries.
+- Replace unchanged count tiles with compact inventory, prioritize BLOCK recovery, and put full hashes in native disclosures.
+- Connect case/source references and native fragment filters; one URL state prevents a stale target from overriding a selected filter.
+- Group each linked case's baseline/candidate split into one row; retain raw input/gold/source-body exclusion and separate human review from local PASS.
+- Actual native visual/keyboard checks and final CI are recorded separately in VALIDATION.md; prior 0.2 completion is preserved below.
+
 ## 0.2.0 — 2026-11-01
 
 - Compare validated releases using semantic hashes and sorted ID/field-only differences; block changed content that reuses a version.

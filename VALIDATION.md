@@ -1,5 +1,27 @@
 # Verification record
 
+## 0.3.0 — grouped review and recovery workspace
+
+2026-11-01 KST. This resumes the user's additional UI/function request after 0.2 completion. The implementation scope is fixed; no new feature or redesign round is planned.
+
+| Check | Observed result |
+| --- | --- |
+| Final local unit suite | 112 run, 109 passed, three local symlink permission skips; exit 0. Includes unchanged comparison.v1 golden digest/schema and redacted review.v1 contracts |
+| Independent code review | One selected-filter/stale-anchor defect identified; independent RED then native single-fragment state implemented. Earlier focused review: 23 passed. Actual linked-target → new filter sequence passed in Chrome |
+| Actual Chrome review flow | 8 states × 4 viewports = 32 PASS, 132 additional interaction captures. Native Tab/Enter, source↔case links, selected rail/filter, empty filter groups, full hash disclosure, first useful mobile content, no overflow/external resources/raw bodies; sampled contrast minimum 5.2879:1 |
+| Actual capture review | Fresh 0.3 desktop, 375px, source-only, partial, version reuse, malicious metadata and source-linked captures inspected; no blocking visual/flow issue found. Internal AI-assisted assessment, not external expert/user acceptance |
+| Latest verifier disclosure | Added after that capture: file fingerprints start in closed details. Independent RED and final unit suite PASS; final rendered verifier gate remains for remote CI because local browser control was reserved again |
+| Packaging | Local 0.3 wheel/sdist, all seven runtime modules match source, zero runtime dependencies, no-index/no-deps fresh installation outside checkout, old commands and new review JSON/HTML passed |
+| Core checkpoint 88d0bbc | [Actual run 41229903162](https://github.com/KIMJINWOO0548/InsureDataGate/actions/runs/41229903162): seven jobs succeeded. This checkpoint contains the relationship API; it is not proof of the later UI |
+| Current complete 0.3 CI | Pending the actual UI commit/run; will be recorded from real job logs and rendered artifact, not configuration |
+
+Local final unit log: `reports/runs/20261031T183727Z-v030-unit-final-f1c668/unittest.txt`. Local package: `reports/runs/20261031T184033Z-v030-package-9b5073/build.txt`. Latest full Chrome run before the verifier-only disclosure: `reports/runs/20261031T183359Z-browser-c7960b81/evidence.json`. Its review HTML equals the current generated review HTML after platform newline normalization; original source hashes remain frozen in that record. README screenshots are actual first-viewport PNGs from that run.
+
+Environment failures are separate: three attempts failed before any browser observation with Windows socketpair error 10014 (`20261031T182744Z-browser-de0e3c1a`, `20261031T183727Z-browser-4bd1ca34`, `20261031T183814Z-browser-ea55a1e8`). One intervening ordinary standalone attempt succeeded. No test assertions were retried inside a run, no socket helper was executed, and no global/runtime/security configuration changed. Prior REDs, a temporary CLI name collision and the old version assertion failure are retained in local records; they are not counted as passes.
+
+The original demo and v2 data are byte-unchanged. Case/source relationships are declared references from the same checked snapshots, not causal proof, authenticated approval or insurance accuracy. Accessibility checks do not establish full WCAG certification, screen-reader coverage or external user preference. No local server was launched; completed temporary headless sessions were closed by the runner.
+
+
 ## 0.2.0 — release comparison and offline review
 
 2026-11-01 KST. Implementation, local validation and the actual seven-job source checkpoint CI are complete. Final documentation-tip CI and local/remote SHA agreement are recorded separately after the evidence commit.

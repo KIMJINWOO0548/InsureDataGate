@@ -24,7 +24,7 @@ def main() -> None:
     wheel = output / build_meta.build_wheel(str(output))
     with zipfile.ZipFile(wheel) as archive:
         wheel_names = archive.namelist()
-        for name in ("validator.py", "cli.py", "comparison.py", "reporting.py", "__main__.py", "__init__.py"):
+        for name in ("validator.py", "cli.py", "comparison.py", "reporting.py", "guidance.py", "__main__.py", "__init__.py"):
             assert archive.read("insuredatagate/" + name) == (root / "src" / "insuredatagate" / name).read_bytes()
         metadata = archive.read(f"insuredatagate-{version}.dist-info/METADATA")
         assert b"Requires-Dist:" not in metadata
@@ -73,6 +73,13 @@ def main() -> None:
         validation = temp / "validation.html"
         run(cli, "check", manifest, "--html", validation)
         assert validation.read_bytes() == (root / "docs/examples/validation-review.html").read_bytes()
+        review = json.loads(run(cli, "review", manifest, candidate, "--json").stdout)
+        assert review["schema_version"] == "insuredatagate.review.v1"
+        assert review["review"]["available"] and review["review"]["summary"]["direct_case_count"] == 1
+        workspace = temp / "workspace.html"
+        run(cli, "review", manifest, candidate, "--html", workspace)
+        assert workspace.read_bytes() == (root / "docs/examples/review-workspace.html").read_bytes()
+        assert b"case-0" in workspace.read_bytes() and b"source-0" in workspace.read_bytes()
     print("PASS: wheel/sdist contents, isolated offline wheel install, entrypoints, demo, gold-free export, comparison, offline HTML, output preservation")
 
 

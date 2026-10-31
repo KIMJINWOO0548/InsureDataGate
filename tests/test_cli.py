@@ -100,7 +100,7 @@ class CliTests(unittest.TestCase):
     def test_version_and_usage(self):
         version = self.run_cli("--version")
         self.assertEqual(version.returncode, 0)
-        self.assertIn("0.2.0", version.stdout)
+        self.assertIn("0.3.0", version.stdout)
         self.assertEqual(self.run_cli().returncode, 2)
 
     def test_changed_cases_between_verify_and_export_block(self):

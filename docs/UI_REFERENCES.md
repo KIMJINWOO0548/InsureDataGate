@@ -1,5 +1,22 @@
 # UI 참조와 적용 — 0.2
 
+## 0.3 추가 요구와 실제 화면 대조
+
+0.2 완료 뒤 새 사용자 요구로 검토 흐름을 다시 설계했다. 감독자의 VISUAL_REDESIGN_AUDIT / PENDING_INSURE_UI_FOLLOWUP을 먼저 읽었으며, 이 자료를 최신 실행 감사로 바꾸어 쓰지 않았다.
+
+- **GitHub Files changed:** 공식 [검토 문서](https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/reviewing-proposed-changes-in-a-pull-request)의 실제 [이미지](https://docs.github.com/assets/cb-109516/images/help/pull_requests/diff-settings-menu.png)를 정적 파일로 직접 열었다. 항목 탐색과 선택된 변경 단위를 본문에 연결하는 구조를 채택했다. 원문 diff, viewed/승인 상태, merge 버튼, 서비스 CSS·아이콘은 복제하지 않았다.
+- **Linear inbox:** 공식 [2024-03-27 화면](https://linear.app/changelog/page/8)의 실제 [inbox PNG](https://webassets.linear.app/images/ornj730p/production/07674ddb4de363e709275146e817e5dc485a9a75-3312x1792.png)를 내려받아 열었다. 정렬된 행, 작은 문맥 영역, 선택 항목에 집중하는 계층을 대조했다. [2026-03-12 공식 설명](https://linear.app/now/behind-the-latest-design-refresh)도 확인했지만, 2024 화면을 최신 앱 실행 화면이라고 부르지 않는다. 이미지·사진·로고·아이콘·제품 CSS를 앱이나 저장소 자산으로 복제하지 않았다. Linear 자료를 오픈소스 라이선스로 오인하지 않는다.
+- **Product Design:** index/audit/user-context와 design-audit-framework를 실제 읽고 preflight를 실행했다. 저장 context가 없었다. 사용자 과제, 정보 구조, 복구, 값 정렬, 접근성 한계를 분리해 기존 캡처와 새 캡처를 검토했다. source 이미지를 두고 제작한 faithful clone이 아니라 기존 제품 코드의 업무 흐름 개선이다.
+- **UI/UX Pro Max:** `progressive disclosure filtering data table error recovery --domain ux -n 3`을 실행했다. 확인한 결과는 Feedback/Error Recovery, Responsive/Table Handling/Web, Accessibility/Error Messages다. 구체 복구와 좁은 화면의 행 재구성을 채택했고, 정적 결과 문서에 불필요한 aria-live/자동 alert는 채택하지 않았다.
+
+적용 위치는 `comparison.review`, `reporting._review_workspace/_review_index/_recovery/_integrity`, `guidance.recovery`와 CLI `review`다. 무변화 여섯 타일을 접힌 inventory로, 같은 case의 input/gold 필드를 하나의 직접 검토 단위로, source 영향은 양쪽 split을 나란히 읽는 행으로 바꾸었다. source-only 항목은 큰 반복 상자 대신 간결한 연결 행이다. native fragment 필터와 entity anchor는 하나의 URL 상태를 쓰므로 이전 대상이 다른 필터를 침범하지 않는다.
+
+추가 이미지의 원본·SHA 기록, 실제 UIPro 결과와 preflight는 로컬 `reports/runs/20261031T175659Z-v030-design-9e4509`에 보존한다. 공식 이미지의 첫 web fetch는 내부 오류, auto=format URL은 AVIF였으므로 같은 공식 원본 PNG를 확인했다. 접근 차단이나 보안정책을 우회하지 않았다. 새 앱·로그인 탭·사용자 브라우저는 조작하지 않았다. 독립 headless 검증은 사용자에게 화면 제어를 배정받은 뒤 수행했다.
+
+새 화면의 실제 검증과 한계는 [REVIEW_WORKSPACE.md](REVIEW_WORKSPACE.md), [VALIDATION.md](../VALIDATION.md)에 기록한다. 출처 패턴의 채택과 내부 시각 검토를 사용자 선호·시장 경쟁력·외부 전문가 인증으로 바꾸어 말하지 않는다.
+
+---
+
 2026-11-01 KST. 합성 보험 평가 데이터를 배포하기 전 검증·변경·차단 사유를 읽는 **정적 결과 문서**가 대상이다. 감독자의 비중복 조사 메모로 후보를 선정하고, 소유 작업자가 UI/UX Pro Max를 실제 읽어 UX 검색을 실행한 뒤 아래 1차 문서·공개 소스·라이선스를 재확인했다. 초기 구현이 이 자료에서 출발했다고 소급 주장하지 않는다.
 
 | 확인한 참조 | 채택한 정보 구조와 실제 적용 | 제외한 요소와 이유 | 출처·권리 범위 |

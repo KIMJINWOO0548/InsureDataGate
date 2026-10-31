@@ -6,7 +6,7 @@ from pathlib import Path
 import sys
 
 from . import __version__
-from .comparison import compare
+from .comparison import compare, review
 from .reporting import render_html
 from .validator import read_snapshot, verify
 
@@ -34,7 +34,10 @@ def main(argv: list[str] | None = None) -> int:
     comparison = commands.add_parser("compare", help="Compare two verified dataset releases")
     comparison.add_argument("baseline", type=Path)
     comparison.add_argument("candidate", type=Path)
-    for command in (check, comparison):
+    workspace = commands.add_parser("review", help="Review grouped case changes and verified source references")
+    workspace.add_argument("baseline", type=Path)
+    workspace.add_argument("candidate", type=Path)
+    for command in (check, comparison, workspace):
         command.add_argument("--json", action="store_true", help="Print the JSON report")
         formats = command.add_mutually_exclusive_group()
         formats.add_argument("--report", type=Path, help="Create a new JSON report file")
@@ -43,10 +46,13 @@ def main(argv: list[str] | None = None) -> int:
     export.add_argument("manifest", type=Path)
     export.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
-    report = compare(args.baseline, args.candidate) if args.command == "compare" else verify(args.manifest)
+    if args.command in ("compare", "review"):
+        report = (review if args.command == "review" else compare)(args.baseline, args.candidate)
+    else:
+        report = verify(args.manifest)
 
     try:
-        if args.command in ("check", "compare"):
+        if args.command in ("check", "compare", "review"):
             serialized = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
             if args.report is not None:
                 _write_new(args.report, serialized)
@@ -54,10 +60,10 @@ def main(argv: list[str] | None = None) -> int:
                 _write_new(args.html, render_html(report))
             if args.json:
                 print(json.dumps(report, ensure_ascii=True, indent=2))
-            elif args.command == "compare":
+            elif args.command in ("compare", "review"):
                 change = {True: "changed", False: "unchanged", None: "unavailable"}[report["content_changed"]]
-                review = "required" if report["review_required"] else "not indicated"
-                print(f"{report['status']}: content {change}; change review {review}")
+                review_state = "required" if report["review_required"] else "not indicated"
+                print(f"{report['status']}: content {change}; change review {review_state}")
                 for issue in report["issues"]:
                     print(f"  {issue['code']} at {issue['location']}: {issue['message']}")
             else:
