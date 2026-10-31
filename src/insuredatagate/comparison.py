@@ -43,8 +43,8 @@ def _changes(baseline: dict, candidate: dict) -> dict:
     return changes
 
 
-def compare(baseline_path: Path, candidate_path: Path) -> dict:
-    """Compare only PASS snapshots; expose field names, never their values."""
+def _compare(baseline_path: Path, candidate_path: Path) -> tuple[dict, dict]:
+    """Retain the checked projections for callers needing relationship data."""
     result = {
         "schema_version": "insuredatagate.comparison.v1",
         "status": "BLOCK",
@@ -97,4 +97,74 @@ def compare(baseline_path: Path, candidate_path: Path) -> dict:
                     "message": "Changed content requires a distinct dataset version.",
                 })
     result["issues"].sort(key=lambda issue: (issue["code"], issue["location"], issue["message"]))
+    return result, projections
+
+
+def compare(baseline_path: Path, candidate_path: Path) -> dict:
+    """Compare only PASS snapshots; expose field names, never their values."""
+    return _compare(baseline_path, candidate_path)[0]
+
+
+def review(baseline_path: Path, candidate_path: Path) -> dict:
+    """Add declared case/source relationships from the same checked snapshots."""
+    result, projections = _compare(baseline_path, candidate_path)
+    result["schema_version"] = "insuredatagate.review.v1"
+    result["review"] = {"available": False, "cases": None, "sources": None, "summary": None}
+    if result["changes"] is None:
+        return result
+
+    changes = result["changes"]
+    before = {case["case_id"]: case for case in projections["baseline"]["cases"]}
+    after = {case["case_id"]: case for case in projections["candidate"]["cases"]}
+    case_fields = {item["case_id"]: item["fields"] for item in changes["cases_changed"]}
+    gold_fields = {item["case_id"]: item["fields"] for item in changes["gold_changed"]}
+    source_fields = {item["source_id"]: item["fields"] for item in changes["sources_changed"]}
+    changed_sources = set(changes["sources_added"]) | set(changes["sources_removed"]) | source_fields.keys()
+    direct_cases = set(changes["cases_added"]) | set(changes["cases_removed"]) | case_fields.keys() | gold_fields.keys()
+
+    # These are declared references, not evidence of semantic or causal impact.
+    relations = {side: {} for side in ("baseline", "candidate")}
+    for side, cases in (("baseline", before), ("candidate", after)):
+        for identity, case in cases.items():
+            for source_id in case["source_ids"]:
+                relations[side].setdefault(source_id, []).append({"case_id": identity, "split": case["split"]})
+    sources = []
+    affected_cases = set()
+    for source_id in sorted(changed_sources):
+        linked = {side: relations[side].get(source_id, []) for side in relations}
+        affected = sorted({case["case_id"] for cases in linked.values() for case in cases})
+        affected_cases.update(affected)
+        sources.append({
+            "source_id": source_id,
+            "status": "added" if source_id in changes["sources_added"] else
+                      "removed" if source_id in changes["sources_removed"] else "modified",
+            "fields": source_fields.get(source_id, []),
+            "cases": linked,
+            "affected_case_ids": affected,
+        })
+
+    cases = []
+    for identity in sorted(direct_cases | affected_cases):
+        old, new = before.get(identity), after.get(identity)
+        old_sources = old["source_ids"] if old else []
+        new_sources = new["source_ids"] if new else []
+        added_or_removed = old is None or new is None
+        cases.append({
+            "case_id": identity,
+            "status": "added" if old is None else "removed" if new is None else
+                      "modified" if identity in direct_cases else "affected",
+            "fields": {
+                "case": [] if added_or_removed else case_fields.get(identity, []),
+                "gold": [] if added_or_removed else gold_fields.get(identity, []),
+            },
+            "sources": {"baseline": old_sources, "candidate": new_sources,
+                        "changed": sorted((set(old_sources) | set(new_sources)) & changed_sources)},
+            "splits": {"baseline": old["split"] if old else None,
+                       "candidate": new["split"] if new else None},
+        })
+    result["review"] = {
+        "available": True, "cases": cases, "sources": sources,
+        "summary": {"case_count": len(cases), "direct_case_count": len(direct_cases),
+                    "source_count": len(sources), "source_only_case_count": len(affected_cases - direct_cases)},
+    }
     return result
