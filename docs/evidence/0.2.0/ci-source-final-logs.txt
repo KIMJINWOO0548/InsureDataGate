@@ -1,0 +1,21 @@
+Job 124606288023
+2026-10-31T17:28:32.4381987Z test_manifest_parent_symlink_blocks (test_filesystem.FilesystemTests.test_manifest_parent_symlink_blocks) ... ok
+2026-10-31T17:28:32.4382865Z test_windows_source_directory_junction_blocks (test_filesystem.FilesystemTests.test_windows_source_directory_junction_blocks) ... skipped 'Windows junction check'
+2026-10-31T17:28:33.2759554Z test_symlink_manifest_blocks_when_platform_allows_creation (test_validator.ValidatorTests.test_symlink_manifest_blocks_when_platform_allows_creation) ... ok
+2026-10-31T17:28:33.2770173Z test_symlink_source_blocks_when_platform_allows_creation (test_validator.ValidatorTests.test_symlink_source_blocks_when_platform_allows_creation) ... ok
+2026-10-31T17:28:33.2870798Z Ran 84 tests in 1.304s
+2026-10-31T17:28:33.2870982Z OK (skipped=1)
+
+Job 124606288106
+2026-10-31T17:28:40.2763759Z test_manifest_parent_symlink_blocks (test_filesystem.FilesystemTests.test_manifest_parent_symlink_blocks) ... ok
+2026-10-31T17:28:40.3096442Z test_windows_source_directory_junction_blocks (test_filesystem.FilesystemTests.test_windows_source_directory_junction_blocks) ... ok
+2026-10-31T17:28:43.4078814Z test_symlink_manifest_blocks_when_platform_allows_creation (test_validator.ValidatorTests.test_symlink_manifest_blocks_when_platform_allows_creation) ... ok
+2026-10-31T17:28:43.4195946Z test_symlink_source_blocks_when_platform_allows_creation (test_validator.ValidatorTests.test_symlink_source_blocks_when_platform_allows_creation) ... ok
+2026-10-31T17:28:43.5373342Z Ran 84 tests in 4.907s
+2026-10-31T17:28:43.5373561Z OK
+
+Job 124606287781
+2026-10-31T17:29:02.2176637Z PASS: /home/runner/work/InsureDataGate/InsureDataGate/reports/runs/20261031T172851Z-browser-cd19d672/evidence.json
+
+Job 124606287995
+2026-10-31T17:28:36.5463544Z PASS: wheel/sdist contents, isolated offline wheel install, entrypoints, demo, gold-free export, comparison, offline HTML, output preservation

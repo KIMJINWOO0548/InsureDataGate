@@ -9,7 +9,7 @@
 - Preserve the original demo and add a separate synthetic release candidate; extend installation self-checks to comparison and HTML.
 - Preserve original JSONL record numbers after malformed earlier lines so findings identify the actual row to fix.
 
-Rendered verification and final CI are tracked in VALIDATION.md separately from implementation.
+Final source verification: 84 tests (local 81 passed/three environment skips; CI Windows 84 passed), 24 real browser observations, isolated wheel install, seven successful CI jobs. Initial 83-test and historical 58/60-test records remain distinct in VALIDATION.md.
 
 ### Post-0.1 safety checkpoint — 96b0ffd
 

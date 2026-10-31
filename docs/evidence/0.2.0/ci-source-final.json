@@ -1,0 +1,90 @@
+{
+  "verified_utc": "2026-10-31T17:37:09.975Z",
+  "repository": "https://github.com/KIMJINWOO0548/InsureDataGate",
+  "branch": "main",
+  "source_head": "f26ecf7fd921934816a09386a58959e151a8f57f",
+  "run_id": 41224689759,
+  "url": "https://github.com/KIMJINWOO0548/InsureDataGate/actions/runs/41224689759",
+  "observed_via": "GitHub MCP workflow jobs, decoded original job logs and artifact metadata",
+  "jobs": [
+    {
+      "id": 124606287781,
+      "name": "browser",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 124606287965,
+      "name": "tests (ubuntu-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 124606287995,
+      "name": "package",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 124606288023,
+      "name": "tests (ubuntu-latest, 3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 124606288042,
+      "name": "tests (ubuntu-latest, 3.13)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 124606288106,
+      "name": "tests (windows-latest, 3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 124606288126,
+      "name": "tests (ubuntu-latest, 3.14)",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "unit_results": {
+    "linux_312": {
+      "run": 84,
+      "passed": 83,
+      "skipped": 1,
+      "skip_reason": "Windows-only junction check",
+      "real_symlink_tests": 3
+    },
+    "windows_312": {
+      "run": 84,
+      "passed": 84,
+      "skipped": 0
+    }
+  },
+  "package_result": "PASS: wheel/sdist contents, isolated offline wheel install, entrypoints, demo, gold-free export, comparison, offline HTML, output preservation",
+  "artifacts": [
+    {
+      "id": 13051011892,
+      "name": "offline-review-browser",
+      "size_in_bytes": 2820495,
+      "url": "https://api.github.com/repos/KIMJINWOO0548/InsureDataGate/actions/artifacts/13051011892",
+      "archive_download_url": "https://api.github.com/repos/KIMJINWOO0548/InsureDataGate/actions/artifacts/13051011892/zip",
+      "expired": false,
+      "created_at": "2026-10-31T17:29:04Z",
+      "expires_at": "2026-11-14T17:29:02Z",
+      "updated_at": "2026-10-31T17:29:04Z",
+      "digest": "sha256:8eeeceecfa08711276667111819faf172a4c12e4610919c1176ebaa576b606ef",
+      "workflow_run": {
+        "id": 41224689759,
+        "repository_id": 1440965163,
+        "head_repository_id": 1440965163,
+        "head_branch": "main",
+        "head_sha": "f26ecf7fd921934816a09386a58959e151a8f57f"
+      }
+    }
+  ],
+  "decoded_log_summary": "ci-source-final-logs.txt"
+}

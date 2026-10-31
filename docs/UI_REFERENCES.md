@@ -18,6 +18,6 @@
 
 ## 검증과 경계
 
-HTML 단위 회귀, 실제 Chrome의 PASS/BLOCK/동일/변경/partial/악성 metadata/버전 재사용 경로, 좁고 넓은 화면·375px·가로 화면, Tab/Enter·이슈 이동·대비·넘침·본문 비노출을 검증한다. 실제 결과와 CI는 [VALIDATION.md](../VALIDATION.md), 계획은 [release-review plan](superpowers/plans/2026-11-01-release-review.md)에 기록한다. 명시된 원문·정답 경계와 외부 리소스 없는 CSP를 유지한다.
+HTML 단위 회귀, 실제 Chrome의 PASS/BLOCK/동일/변경/partial/악성 metadata/버전 재사용 경로, 좁고 넓은 화면·375px·가로 화면, Tab/Enter·이슈 이동·대비·넘침·본문 비노출을 실제로 검증했다. Chrome 24건과 원격 Chromium 24건이 통과했으며 실제 결과와 CI는 [VALIDATION.md](../VALIDATION.md), 계획은 [release-review plan](superpowers/plans/2026-11-01-release-review.md)에 기록한다. 명시된 원문·정답 경계와 외부 리소스 없는 CSP를 유지한다.
 
 외부 코드·CSS·로고·아이콘·폰트·스크린샷·템플릿을 복사하지 않았다. 저장소의 화면은 우리 합성 예제를 실제 렌더링한 것이다. 출처는 설계 검토 근거이며 독립 전문가 검수나 인기 순위·규제 준수 인증이 아니다. 보안정책상 거절된 경로를 우회하거나 브라우저 잠금을 해제하지 않았다.

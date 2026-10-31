@@ -1,0 +1,104 @@
+{
+  "recorded_utc": "2026-10-31T17:38:17.202763+00:00",
+  "version": "0.2.0",
+  "unit_tests": {
+    "command": "python -m unittest discover -s tests -v",
+    "exit_code": 0,
+    "run": 84,
+    "passed": 81,
+    "skipped": 3,
+    "skip_reason": "local account symlink creation permissions",
+    "log": "full-unittest-final.txt"
+  },
+  "browser": {
+    "command": "python scripts/check_report_browser.py",
+    "exit_code": 0,
+    "observations": 24,
+    "viewports": [
+      "375x812",
+      "390x844",
+      "844x390",
+      "1440x900"
+    ],
+    "channel": "chrome",
+    "version": "156.0.8078.48",
+    "evidence": "browser-pass/evidence.json",
+    "ci_initial": {
+      "source_head": "ba58892084ee311fa57b235226ba1132ea062e2c",
+      "observations": 24,
+      "channel": "chromium",
+      "version": "156.0.8078.4",
+      "evidence": "browser-ci/evidence.json"
+    },
+    "ci_final": {
+      "source_head": "f26ecf7fd921934816a09386a58959e151a8f57f",
+      "run_id": 41224689759,
+      "observations": 24,
+      "channel": "chromium",
+      "evidence": "browser-ci-final/evidence.json",
+      "screenshots": "browser-ci-final/*.png (24 actual final-source CI captures)"
+    }
+  },
+  "source_sha256": {
+    ".gitattributes": "9e43c3101c22b65fbd68305b97b6cdcfe2c5c40ad54fca0c6fe7da209e9601c3",
+    ".github/workflows/ci.yml": "1cf39f084a71aa9b2a00f65a2b53d98eb99ace8c10b9a3281f351cf58ccd9dbc",
+    "MANIFEST.in": "25eade3c8331773b02cdfc9405090fa21c504680cda16abf424debcfba8b222e",
+    "examples/insurance-demo-v2/README.md": "206ecff78fa5815a80495217e2a239460b01c9afb899196661992137c31d0f44",
+    "examples/insurance-demo-v2/cases.jsonl": "d559739e3aad6a6e67b478e6065f5c68735ce6050b4b3357382706ec70bc6309",
+    "examples/insurance-demo-v2/gold.jsonl": "6d5ac990425906d2e1ab60495071edb6c16c87cf7462224af2689f30d25d068b",
+    "examples/insurance-demo-v2/manifest.json": "abf78528dd4787bbae2bffa39f90faa5a79214c7e881e3ac15ae4068e001a861",
+    "examples/insurance-demo-v2/sources/rules.txt": "71f9cfcdd4856aa5a1336e1c791c5f71acf1d4feb996957b2d3b0f837240d73a",
+    "examples/insurance-demo/cases.jsonl": "9922ca3d2959790776a8f45d5c1dc5b230effe1681c9a572a2ef5d8dbaaa27e3",
+    "examples/insurance-demo/gold.jsonl": "85a2636558f38f57d947500f095ed0f1027c8b642d2777c87e4ce896fc837a88",
+    "examples/insurance-demo/manifest.json": "87874030aa0cc5c8626acb0c0d5956d518ae400adb4fbe0d1ef64446b1504f0c",
+    "examples/insurance-demo/sources/rules.txt": "e6e0988dbf34bb18fee2dc53b7f2c8a2fa7fbd114acd50a838c3a9e34f59770e",
+    "pyproject.toml": "c10820427ff4cb25c9ff6ccbeaf5be4f568d4f13857a220afeeab5c850f98bed",
+    "requirements-browser.lock": "ea1b57314281bf73d3551ef55f0e66e1f5616e35afd9a4f0cb7f6ca1e65f7be8",
+    "requirements-build.lock": "a4cc1f591aa8ef95884cc6c5e643caefdb7e4178ca84f1999918975feef39a19",
+    "scripts/check_distribution.py": "f6fc3f7ea8221cc9931aef7fbbf42b195395f1121251b3e11598ab52ffaef345",
+    "scripts/check_report_browser.py": "66c5d8f0634b81e91e0f6194a600d74e375f36de1b46d0702ebb413b8ce7eebc",
+    "src/insuredatagate/__init__.py": "d379c480d91937c3e2ef642fcf4e0baf3e63f1d85627f54ad5d98bb1d3abfb20",
+    "src/insuredatagate/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/insuredatagate/cli.py": "c496ab8d4de934f3a08e255960875a324ce667a685d531e80d54dc39fe82adf3",
+    "src/insuredatagate/comparison.py": "33d608231dced5e3ba51ad982df3fe4c04c1caec637713cf30a7b0cda2f95973",
+    "src/insuredatagate/reporting.py": "74d902098823cae6096f7d5f8a0b8d6c74720daee516efcc2674c26c445df631",
+    "src/insuredatagate/validator.py": "fcd0a8765719bdbe1cf1628f8a8e308078d62e4c7527abc2fe8ec7e4fea446cd",
+    "tests/__init__.py": "b1f8c38fa4f63e077bf861cb63c3b9aa00b13ccd21291dc91465cef76fa1e13a",
+    "tests/helpers.py": "325e81beb6d542ada9110fc0174b8fb6caface391d53ceae2252ef79ea7553b7",
+    "tests/test_cli.py": "a5c232aab3599133ba4d5c60652266db2ec27db012dc294997cd3b1a53a581fc",
+    "tests/test_comparison.py": "ef6ef973e238cc6ff3beea2219ce8de78b3f73bf93997f148728ec5ea5a047ce",
+    "tests/test_diagnostics.py": "9760ffe12d822cb70fc9c09b25b689120c17f39cf75ad29afb025a45259d0b51",
+    "tests/test_filesystem.py": "881875d058784e9e90c19bedba937ade7acadfeacbc77b2b0ff23405f3b39255",
+    "tests/test_release_commands.py": "68fed258207295b05db0e5133fc4ee608fa000ae38796c9111715a2ea67ea356",
+    "tests/test_release_safety.py": "746ef81fd1aecbcca8055836a504ec7436ed8abf449088d3933c12abc35ada6e",
+    "tests/test_reporting.py": "929bea28ac3af59282099f82c49a494b666321a5a20ef568dc42f0e7b5a9e838",
+    "tests/test_reporting_review.py": "580353145d053fdf301b21838c85849f046380cf4ed9bf48c38d45a4dafa3a1f",
+    "tests/test_validator.py": "828335a4b5164a137c6a220132adaf881765ff2ffa84cfdbea061163fdefd030"
+  },
+  "distribution": {
+    "command": "python scripts/check_distribution.py",
+    "exit_code": 0,
+    "environment": "project-local build environment; setuptools 84.2.1 from requirements-build.lock",
+    "evidence": "distribution-final.txt",
+    "checks": [
+      "wheel and sdist",
+      "wheel/source byte match",
+      "zero runtime Requires-Dist",
+      "no-index/no-deps install in new venv",
+      "console and module entrypoints outside checkout",
+      "comparison and HTML",
+      "gold-free export",
+      "existing output unchanged",
+      "committed HTML examples equal installed CLI output"
+    ]
+  },
+  "phase": "final local checks after JSONL diagnostic regression",
+  "source_head": "f26ecf7fd921934816a09386a58959e151a8f57f",
+  "diagnostic_regression": {
+    "red": "diagnostics-red.txt",
+    "new_test_methods": 1,
+    "subcases": 2,
+    "meaning": "original JSONL line 2 retained after a malformed line 1 in cases and gold",
+    "green": "full-unittest-final.txt"
+  }
+}
