@@ -1,0 +1,14 @@
+test_filter_and_dossier_navigation_share_one_fragment_state (tests.test_reporting_workspace.WorkspaceTests.test_filter_and_dossier_navigation_share_one_fragment_state) ... FAIL
+
+======================================================================
+FAIL: test_filter_and_dossier_navigation_share_one_fragment_state (tests.test_reporting_workspace.WorkspaceTests.test_filter_and_dossier_navigation_share_one_fragment_state)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_reporting_workspace.py", line 32, in test_filter_and_dossier_navigation_share_one_fragment_state
+    self.assertIn("#view-" + view, links)
+AssertionError: '#view-all' not found in ['#main', '#direct-cases', '#affected-cases', '#changed-sources', '#inventory', '#integrity', '#source-0', '#source-0', '#source-0', '#source-0', '#source-0', '#case-0', '#case-1', '#case-0', '#case-1', '#case-0']
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=1)

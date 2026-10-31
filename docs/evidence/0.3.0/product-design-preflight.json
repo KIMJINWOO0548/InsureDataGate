@@ -1,0 +1,11 @@
+{
+  "plugin": "product-design",
+  "state_dir": "<user-home>\\.codex\\state\\plugins\\product-design",
+  "user_context": {
+    "path": "<user-home>\\.codex\\state\\plugins\\product-design\\user-context.md",
+    "exists": false,
+    "status": "missing",
+    "entries": [],
+    "unresolved_categories": []
+  }
+}

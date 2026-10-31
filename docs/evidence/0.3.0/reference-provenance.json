@@ -1,0 +1,10 @@
+{
+  "source_page": "https://linear.app/changelog/page/8",
+  "section": "Welcome to the new Linear / New inbox, 2024-03-27",
+  "image_url": "https://webassets.linear.app/images/ornj730p/production/07674ddb4de363e709275146e817e5dc485a9a75-3312x1792.png",
+  "content_type": "image/png",
+  "sha256": "79995a626638379bcfcd435820fc013babe5e2adc6b6574e3e41c143b9dfa272",
+  "research_only": true,
+  "product_asset_copy": false,
+  "fetch_note": "Web image open failed internally; first urllib URL auto=format returned AVIF, so exact official original PNG was fetched."
+}

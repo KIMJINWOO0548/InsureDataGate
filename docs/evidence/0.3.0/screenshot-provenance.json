@@ -1,0 +1,10 @@
+{
+  "capture_run": "reports\\runs\\20261031T183359Z-browser-c7960b81",
+  "current_review_html_equal_after_platform_newline_normalization": true,
+  "normalized_html_sha256": "9633d4506b832c1a0c4661d44da3500bbf9c81b8a3af27966693d1f3da417854",
+  "screenshots": {
+    "docs/images/release-review-desktop.png": "changed-1440x900-viewport.png",
+    "docs/images/release-review-mobile.png": "changed-375x812-viewport.png"
+  },
+  "remaining_visual_gate": "final verifier file fingerprint disclosure: remote CI capture; local browser now reserved to supervisor"
+}

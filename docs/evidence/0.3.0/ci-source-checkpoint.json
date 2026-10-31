@@ -1,0 +1,141 @@
+{
+  "recorded_utc": "2026-10-31T18:49:35.303074+00:00",
+  "run_id": 41230803157,
+  "source_head": "358f7206c98e2df86491ee0070b89178a76ad77e",
+  "url": "https://github.com/KIMJINWOO0548/InsureDataGate/actions/runs/41230803157",
+  "status": "completed",
+  "conclusion": "success",
+  "observed_via": "GitHub CLI JSON, safe workflow log view and extracted official run artifact; GitHub MCP transport failed for this query",
+  "jobs": [
+    {
+      "databaseId": 124624434863,
+      "name": "package",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/KIMJINWOO0548/InsureDataGate/actions/runs/41230803157/job/124624434863"
+    },
+    {
+      "databaseId": 124624434973,
+      "name": "tests (ubuntu-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/KIMJINWOO0548/InsureDataGate/actions/runs/41230803157/job/124624434973"
+    },
+    {
+      "databaseId": 124624434992,
+      "name": "tests (ubuntu-latest, 3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/KIMJINWOO0548/InsureDataGate/actions/runs/41230803157/job/124624434992"
+    },
+    {
+      "databaseId": 124624435009,
+      "name": "tests (ubuntu-latest, 3.13)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/KIMJINWOO0548/InsureDataGate/actions/runs/41230803157/job/124624435009"
+    },
+    {
+      "databaseId": 124624435083,
+      "name": "tests (windows-latest, 3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/KIMJINWOO0548/InsureDataGate/actions/runs/41230803157/job/124624435083"
+    },
+    {
+      "databaseId": 124624435120,
+      "name": "browser",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/KIMJINWOO0548/InsureDataGate/actions/runs/41230803157/job/124624435120"
+    },
+    {
+      "databaseId": 124624435235,
+      "name": "tests (ubuntu-latest, 3.14)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/KIMJINWOO0548/InsureDataGate/actions/runs/41230803157/job/124624435235"
+    }
+  ],
+  "unit_linux_312": {
+    "run": 112,
+    "passed": 111,
+    "skipped": 1,
+    "reason": "Windows-only junction test",
+    "real_symlink_passes": 3
+  },
+  "unit_windows_312": {
+    "run": 112,
+    "passed": 112,
+    "skipped": 0,
+    "real_symlink_passes": 3,
+    "junction_pass": true
+  },
+  "browser": {
+    "base_observations": 32,
+    "interaction_captures": 132,
+    "status": "pass",
+    "evidence": "browser-ci/evidence.json"
+  },
+  "artifact": {
+    "id": 13053925881,
+    "node_id": "MDg6QXJ0aWZhY3QxMzA1MzkyNTg4MQ==",
+    "name": "offline-review-browser",
+    "size_in_bytes": 26601930,
+    "url": "https://api.github.com/repos/KIMJINWOO0548/InsureDataGate/actions/artifacts/13053925881",
+    "archive_download_url": "https://api.github.com/repos/KIMJINWOO0548/InsureDataGate/actions/artifacts/13053925881/zip",
+    "expired": false,
+    "digest": "sha256:cea7a4376f5c4397c692d62f0a7e15b5fe442d8403d8bf6837c5b9bfc81b74d2",
+    "created_at": "2026-10-31T18:44:53Z",
+    "updated_at": "2026-10-31T18:44:53Z",
+    "expires_at": "2026-11-14T18:44:50Z",
+    "workflow_run": {
+      "id": 41230803157,
+      "repository_id": 1440965163,
+      "head_repository_id": 1440965163,
+      "head_branch": "main",
+      "head_sha": "358f7206c98e2df86491ee0070b89178a76ad77e"
+    }
+  },
+  "artifact_digest_origin": "GitHub API metadata; no independent ZIP digest computation claimed",
+  "decoded_logs": {
+    "linux_312": {
+      "job": 124624434992,
+      "sha256": "4901512f76f8166a15ea3d3222d89b6478d8995a9894512710781f5f205c010c",
+      "summary": [
+        "tests (ubuntu-latest, 3.12)\tIndependent contract and process tests\t2026-10-31T18:43:43.2235829Z test_manifest_parent_symlink_blocks (test_filesystem.FilesystemTests.test_manifest_parent_symlink_blocks) ... ok",
+        "tests (ubuntu-latest, 3.12)\tIndependent contract and process tests\t2026-10-31T18:43:43.2237465Z test_windows_source_directory_junction_blocks (test_filesystem.FilesystemTests.test_windows_source_directory_junction_blocks) ... skipped 'Windows junction check'",
+        "tests (ubuntu-latest, 3.12)\tIndependent contract and process tests\t2026-10-31T18:43:45.1057297Z test_symlink_manifest_blocks_when_platform_allows_creation (test_validator.ValidatorTests.test_symlink_manifest_blocks_when_platform_allows_creation) ... ok",
+        "tests (ubuntu-latest, 3.12)\tIndependent contract and process tests\t2026-10-31T18:43:45.1075009Z test_symlink_source_blocks_when_platform_allows_creation (test_validator.ValidatorTests.test_symlink_source_blocks_when_platform_allows_creation) ... ok",
+        "tests (ubuntu-latest, 3.12)\tIndependent contract and process tests\t2026-10-31T18:43:45.1253203Z Ran 112 tests in 2.613s",
+        "tests (ubuntu-latest, 3.12)\tIndependent contract and process tests\t2026-10-31T18:43:45.1253673Z OK (skipped=1)"
+      ]
+    },
+    "windows_312": {
+      "job": 124624435083,
+      "sha256": "89a01aae379410570d491aa97bf0e139941da8f63370e880d02f61a7e7703461",
+      "summary": [
+        "tests (windows-latest, 3.12)\tIndependent contract and process tests\t2026-10-31T18:44:05.9467906Z test_manifest_parent_symlink_blocks (test_filesystem.FilesystemTests.test_manifest_parent_symlink_blocks) ... ok",
+        "tests (windows-latest, 3.12)\tIndependent contract and process tests\t2026-10-31T18:44:05.9861105Z test_windows_source_directory_junction_blocks (test_filesystem.FilesystemTests.test_windows_source_directory_junction_blocks) ... ok",
+        "tests (windows-latest, 3.12)\tIndependent contract and process tests\t2026-10-31T18:44:10.9015826Z test_symlink_manifest_blocks_when_platform_allows_creation (test_validator.ValidatorTests.test_symlink_manifest_blocks_when_platform_allows_creation) ... ok",
+        "tests (windows-latest, 3.12)\tIndependent contract and process tests\t2026-10-31T18:44:10.9150471Z test_symlink_source_blocks_when_platform_allows_creation (test_validator.ValidatorTests.test_symlink_source_blocks_when_platform_allows_creation) ... ok",
+        "tests (windows-latest, 3.12)\tIndependent contract and process tests\t2026-10-31T18:44:11.0732510Z Ran 112 tests in 8.726s",
+        "tests (windows-latest, 3.12)\tIndependent contract and process tests\t2026-10-31T18:44:11.0732963Z OK"
+      ]
+    },
+    "browser": {
+      "job": 124624435120,
+      "sha256": "fdcadb7a71a483559551c67e286fe00839bbad48f74972563a2aee4d4f0733c9",
+      "summary": [
+        "browser\tVerify eight review states and native review interactions\t2026-10-31T18:44:50.0380592Z PASS: /home/runner/work/InsureDataGate/InsureDataGate/reports/runs/20261031T184414Z-browser-ce46a7e1/evidence.json"
+      ]
+    },
+    "package": {
+      "job": 124624434863,
+      "sha256": "c5148e974b9d151cf93780b9cea5f500c1d445061677822e7414a3bc8fc1fd5b",
+      "summary": [
+        "package\tBuild, inspect and install offline into a disposable environment\t2026-10-31T18:43:47.3458188Z PASS: wheel/sdist contents, isolated offline wheel install, entrypoints, demo, gold-free export, comparison, offline HTML, output preservation"
+      ]
+    }
+  }
+}

@@ -1,0 +1,50 @@
+test_existing_outputs_remain_byte_exact_and_formats_exclusive (tests.test_review_commands.ReviewCommandTests.test_existing_outputs_remain_byte_exact_and_formats_exclusive) ... ok
+test_real_html_has_offline_review_entities_without_raw_values (tests.test_review_commands.ReviewCommandTests.test_real_html_has_offline_review_entities_without_raw_values) ... FAIL
+test_review_groups_changes_and_writes_equal_redacted_json (tests.test_review_commands.ReviewCommandTests.test_review_groups_changes_and_writes_equal_redacted_json) ... FAIL
+test_unreadable_side_blocks_without_invented_relationship_counts (tests.test_review_commands.ReviewCommandTests.test_unreadable_side_blocks_without_invented_relationship_counts) ... FAIL
+test_version_reuse_blocks_but_keeps_verified_dossier (tests.test_review_commands.ReviewCommandTests.test_version_reuse_blocks_but_keeps_verified_dossier) ... FAIL
+
+======================================================================
+FAIL: test_real_html_has_offline_review_entities_without_raw_values (tests.test_review_commands.ReviewCommandTests.test_real_html_has_offline_review_entities_without_raw_values)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_review_commands.py", line 60, in test_real_html_has_offline_review_entities_without_raw_values
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 2 != 0 : usage: insuredatagate [-h] [--version] {check,compare,export-inputs} ...
+insuredatagate: error: argument command: invalid choice: 'review' (choose from check, compare, export-inputs)
+
+
+======================================================================
+FAIL: test_review_groups_changes_and_writes_equal_redacted_json (tests.test_review_commands.ReviewCommandTests.test_review_groups_changes_and_writes_equal_redacted_json)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_review_commands.py", line 40, in test_review_groups_changes_and_writes_equal_redacted_json
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 2 != 0 : usage: insuredatagate [-h] [--version] {check,compare,export-inputs} ...
+insuredatagate: error: argument command: invalid choice: 'review' (choose from check, compare, export-inputs)
+
+
+======================================================================
+FAIL: test_unreadable_side_blocks_without_invented_relationship_counts (tests.test_review_commands.ReviewCommandTests.test_unreadable_side_blocks_without_invented_relationship_counts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_review_commands.py", line 70, in test_unreadable_side_blocks_without_invented_relationship_counts
+    self.assertEqual(result.returncode, 1, result.stderr)
+AssertionError: 2 != 1 : usage: insuredatagate [-h] [--version] {check,compare,export-inputs} ...
+insuredatagate: error: argument command: invalid choice: 'review' (choose from check, compare, export-inputs)
+
+
+======================================================================
+FAIL: test_version_reuse_blocks_but_keeps_verified_dossier (tests.test_review_commands.ReviewCommandTests.test_version_reuse_blocks_but_keeps_verified_dossier)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_review_commands.py", line 79, in test_version_reuse_blocks_but_keeps_verified_dossier
+    self.assertEqual(result.returncode, 1, result.stderr)
+AssertionError: 2 != 1 : usage: insuredatagate [-h] [--version] {check,compare,export-inputs} ...
+insuredatagate: error: argument command: invalid choice: 'review' (choose from check, compare, export-inputs)
+
+
+----------------------------------------------------------------------
+Ran 5 tests in 2.098s
+
+FAILED (failures=4)

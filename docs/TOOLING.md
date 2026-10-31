@@ -2,6 +2,10 @@
 
 ## 0.3 재개 작업
 
+최종 source CI 조회에서 GitHub MCP transport 연결이 실패해 GitHub CLI로 확인했다. 원시 API 로그의 ANSI 출력은 CLI가 거부했으며 허용 플래그를 사용하지 않았다. 표준 `gh run view --log`의 안전한 출력으로 원본 테스트 요약을 읽고, 공식 Actions artifact를 내려받아 source hash와 실제 결과를 대조했다.
+
+선택적 ECC 정적 증거 검사기와 문서 갱신을 묶은 shell 명령은 프로세스 시작 전에 `blocked by policy`로 거부됐다. 검사기는 SKIPPED이며 다른 실행 파일·경로·권한으로 재시도하지 않았다. 문서는 승인된 파일 편집 도구로 정리하고 실제 CI/캡처 결과와 이 미실행을 분리한다.
+
 - Auto Model Router plan/decide가 관계 보고서·HTML·검증 harness에 Sol/medium, 독립 코드/실제 캡처 검토에 Astra/low를 추천했고 해당 model-specific leaf를 실제 실행했다. 조정자 모델은 전환하지 않았다. `.runtime/model-routing-v030.jsonl`에는 완료된 배정만 기록했으며, 초기 HTML은 필터 결함을 조정자가 수정했으므로 reworked로 구분한다. 명령 JSON 경로 전달 오류와 보수적 route fallback도 숨기지 않고 로컬 실행 이력에 보존한다.
 - Superpowers의 설계·계획·독립 RED/GREEN·완료 전 검증 원칙과 Ponytail full을 적용했다. 새 서버·JS·실행 의존성·사용자 승인 시스템 대신 기존 snapshot과 native HTML을 재사용했다.
 - Product Design audit framework와 실제 UI/UX Pro Max 검색, GitHub/Linear 공식 화면의 정적 이미지 대조는 [UI_REFERENCES.md](UI_REFERENCES.md)에 기록했다. 저장 사용자 context 없음도 실제 preflight 결과다.

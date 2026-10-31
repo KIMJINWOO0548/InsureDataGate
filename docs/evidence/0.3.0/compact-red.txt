@@ -1,0 +1,14 @@
+test_source_only_cases_use_compact_linked_rows_and_entity_navigation (tests.test_reporting_workspace.WorkspaceTests.test_source_only_cases_use_compact_linked_rows_and_entity_navigation) ... FAIL
+
+======================================================================
+FAIL: test_source_only_cases_use_compact_linked_rows_and_entity_navigation (tests.test_reporting_workspace.WorkspaceTests.test_source_only_cases_use_compact_linked_rows_and_entity_navigation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_reporting_workspace.py", line 85, in test_source_only_cases_use_compact_linked_rows_and_entity_navigation
+    self.assertEqual(len(compact), 1)
+AssertionError: 0 != 1
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=1)

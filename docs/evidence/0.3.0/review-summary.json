@@ -1,0 +1,22 @@
+{
+  "review_type": "Internal AI-assisted source and actual-capture review",
+  "external_human_review": false,
+  "source_finding": {
+    "trigger": "Follow a source anchor and then select another radio filter",
+    "problem": "The stale target group remained visible outside the selected scope",
+    "resolution": "One native fragment state drives filters and dossier navigation",
+    "evidence": ["filter-red.txt", "filter-green.txt", "browser-ci/evidence.json"]
+  },
+  "capture_steps": [
+    {"step": 1, "task": "Identify dataset, release versions and local gate", "health": "Clear context; human review remains separate from PASS"},
+    {"step": 2, "task": "Start mobile review", "health": "375px first viewport shows first case, input/gold change types, split and source link"},
+    {"step": 3, "task": "Follow case/source relationships", "health": "Both-side split memberships align in one row; source-only cases use compact rows"},
+    {"step": 4, "task": "Filter after following an entity", "health": "Selected All/entity and subsequent Cases filter are consistent in real keyboard checks"},
+    {"step": 5, "task": "Resolve blocked or partial checks", "health": "Cause/recovery precede unavailable review details; version reuse retains verified dossier"},
+    {"step": 6, "task": "Inspect full fingerprints", "health": "Native disclosures retain full values; final verifier disclosure inspected in exact-source CI capture"}
+  ],
+  "reference_review": "Actual published GitHub Files changed and Linear inbox PNGs inspected; assets not copied into the product",
+  "low_priority_feedback_addressed": ["All items clarifies mixed case/source units", "Mobile section heading and item count share one row"],
+  "limits": ["No market superiority or beauty score claimed", "No external user acceptance or expert certification", "Screenshots alone do not prove full assistive-technology support", "Large-dataset navigation efficiency not independently benchmarked"],
+  "scope_freeze": "Latest user instruction: finish the existing 0.3 work; no new feature or redesign rounds"
+}

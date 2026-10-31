@@ -30,10 +30,10 @@ Ownership: reporting.py, test_reporting_workspace.py and necessary presentation-
 
 - [x] Read the two supervisor records, apply Product Design audit framework and targeted UIPro query; inspect actual primary-source reference images without browser manipulation and document reuse limits.
 - [x] Add guidance and review CLI, meaningful regressions, 0.3 version/contract/docs; regenerate real HTML examples and preserve original demo.
-- [ ] Full suite, build/install and exact comparison.v1 compatibility checks; focused commit/push without accidentally launching reserved browser CI.
+- [x] Full suite, build/install and exact comparison.v1 compatibility checks; focused commit/push after the independent screen lease was allocated.
 
 ## 4. Fresh visual gate — waits for screen allocation
 
 - [x] Update optional harness for real filters, source/case navigation, first viewport priorities and full hash disclosures.
-- [ ] After allocation only, capture/inspect desktop, 375/390, error/partial/long values and keyboard; compare current renders with actual references and fix concrete defects.
-- [ ] Final package, focused commits/pushes, actual exact-tip CI, clean local/remote SHA and completion evidence. Explicitly retain any still-unresolved user requirement.
+- [x] After allocation only, capture/inspect desktop, 375/390, error/partial/long values and keyboard; compare current renders with actual references and fix concrete defects.
+- [x] Source package, focused commits/pushes and seven-job source CI verified. Final evidence-commit CI, clean local/remote SHA and final distribution hashes are recorded separately after this plan is committed, avoiding a self-referential SHA.

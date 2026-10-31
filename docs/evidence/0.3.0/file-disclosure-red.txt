@@ -1,0 +1,14 @@
+test_validator_file_hashes_start_in_a_closed_disclosure (tests.test_reporting_workspace.WorkspaceTests.test_validator_file_hashes_start_in_a_closed_disclosure) ... FAIL
+
+======================================================================
+FAIL: test_validator_file_hashes_start_in_a_closed_disclosure (tests.test_reporting_workspace.WorkspaceTests.test_validator_file_hashes_start_in_a_closed_disclosure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_reporting_workspace.py", line 96, in test_validator_file_hashes_start_in_a_closed_disclosure
+    self.assertEqual(len(details), 1)
+AssertionError: 0 != 1
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)

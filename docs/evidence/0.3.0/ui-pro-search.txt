@@ -1,0 +1,36 @@
+## UI Pro Max Search Results
+**Domain:** ux | **Query:** progressive disclosure filtering data table error recovery
+**Source:** ux-guidelines.csv | **Found:** 3 results
+
+### Result 1
+- **Category:** Feedback
+- **Issue:** Error Recovery
+- **Platform:** All
+- **Description:** Help users recover from errors
+- **Do:** Provide clear next steps
+- **Don't:** Error without recovery path
+- **Code Example Good:** Try again button + help link
+- **Code Example Bad:** Error message only
+- **Severity:** Medium
+
+### Result 2
+- **Category:** Responsive
+- **Issue:** Table Handling
+- **Platform:** Web
+- **Description:** Tables can overflow on mobile
+- **Do:** Use horizontal scroll or card layout
+- **Don't:** Wide tables breaking layout
+- **Code Example Good:** overflow-x-auto wrapper
+- **Code Example Bad:** Table overflows viewport
+- **Severity:** Medium
+
+### Result 3
+- **Category:** Accessibility
+- **Issue:** Error Messages
+- **Platform:** All
+- **Description:** Error messages must be announced
+- **Do:** Use aria-live or role=alert for errors
+- **Don't:** Visual-only error indication
+- **Code Example Good:** role='alert'
+- **Code Example Bad:** Red border only
+- **Severity:** High

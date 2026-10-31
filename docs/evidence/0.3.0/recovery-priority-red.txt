@@ -1,0 +1,14 @@
+test_unreadable_file_recovery_precedes_downstream_empty_split (tests.test_reporting_workspace.WorkspaceTests.test_unreadable_file_recovery_precedes_downstream_empty_split) ... FAIL
+
+======================================================================
+FAIL: test_unreadable_file_recovery_precedes_downstream_empty_split (tests.test_reporting_workspace.WorkspaceTests.test_unreadable_file_recovery_precedes_downstream_empty_split)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<project>\tests\test_reporting_workspace.py", line 104, in test_unreadable_file_recovery_precedes_downstream_empty_split
+    self.assertLess(doc.index("Restore a readable local snapshot"), doc.index("Restore the intended split coverage"))
+AssertionError: 9297 not less than 8888
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)

@@ -1,0 +1,19 @@
+test_guidance (unittest.loader._FailedTest.test_guidance) ... ERROR
+
+======================================================================
+ERROR: test_guidance (unittest.loader._FailedTest.test_guidance)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_guidance
+Traceback (most recent call last):
+  File "<user-home>\AppData\Local\Programs\Python\Python312\Lib\unittest\loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "<project>\tests\test_guidance.py", line 5, in <module>
+    from insuredatagate.guidance import recovery
+ModuleNotFoundError: No module named 'insuredatagate.guidance'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)
