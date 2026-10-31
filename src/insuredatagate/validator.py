@@ -260,7 +260,7 @@ def verify(manifest_path: Path) -> dict:
                 row = strict_json(line)
                 if type(row) is not dict:
                     raise ValueError("Object required")
-                rows.append(row)
+                rows.append((index, row))
             except ValueError:
                 issue("INVALID_JSONL", f"{role}[{index}]", "Each line must be one strict UTF-8 JSON object.")
         report["counts"][role] = len(lines)
@@ -269,7 +269,7 @@ def verify(manifest_path: Path) -> dict:
     cases = {}
     groups = {}
     inputs = {}
-    for index, case in enumerate(records.get("cases", []), 1):
+    for index, case in records.get("cases", []):
         location = f"cases[{index}]"
         if not _keys(case, "case_id group_id split source_ids input created_by"):
             issue("SCHEMA", location, "Case fields must match schema v1 exactly.")
@@ -299,7 +299,7 @@ def verify(manifest_path: Path) -> dict:
         if not report["counts"][split]:
             issue("EMPTY_SPLIT", f"counts.{split}", "Every split requires at least one case.")
     gold_ids = set()
-    for index, gold in enumerate(records.get("gold", []), 1):
+    for index, gold in records.get("gold", []):
         location = f"gold[{index}]"
         if not _keys(gold, "case_id expected review_status reviewed_by"):
             issue("SCHEMA", location, "Gold fields must match schema v1 exactly.")

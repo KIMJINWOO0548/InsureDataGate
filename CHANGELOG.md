@@ -7,6 +7,7 @@
 - Add native issue-summary navigation and change-entry totals informed by UI/UX Pro Max, GX Data Docs, DVC diff and GitHub Actions; keep all visual assets original.
 - Reread all verified references before export/comparison; discard newly created outputs after ordinary write/close/interrupt failures.
 - Preserve the original demo and add a separate synthetic release candidate; extend installation self-checks to comparison and HTML.
+- Preserve original JSONL record numbers after malformed earlier lines so findings identify the actual row to fix.
 
 Rendered verification and final CI are tracked in VALIDATION.md separately from implementation.
 
