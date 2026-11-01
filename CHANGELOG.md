@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — synthetic disclosure example
+
+- Add one synthetic disclosure extraction dataset with baseline/candidate releases using the unchanged manifest.v1 and package/CLI contracts.
+- Cover period, currency, amount unit, consolidation scope and missing-field handling; document the single training-case/source-note revision and unchanged validation/test records.
+- Add five acceptance tests for both-domain validation, precise release comparison, exact allowlist export/output preservation, tampered-gold refusal and dataset identity separation.
+- Keep runtime source, original insurance datasets and historical portfolio/UI evidence unchanged. This local increment does not claim extraction accuracy, authenticated review, investment advice, new remote CI or deployment.
+
 ## 0.3.0 — 2026-11-01
 
 - Add explicit review.v1 case/gold dossiers and both-snapshot declared source impact without changing comparison.v1 JSON.

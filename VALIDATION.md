@@ -1,5 +1,22 @@
 # Verification record
 
+## Local disclosure example increment — 2026-11-01 UTC
+
+Base: `85ca41899d06bf6c791e069ed5fa81823b525ee2`; local branch `improve/synthetic-disclosure-flow`. This is a data/example and regression-test increment; runtime source, package version/dependencies, manifest/report contracts, original insurance datasets and historical HTML/images/evidence are byte-unchanged.
+
+| Check | Observed local result |
+| --- | --- |
+| Linux/Python 3.12.14 baseline | 112 tests run, 111 passed, one Windows-only directory-junction skip; insurance demo check and comparison exit 0 |
+| New acceptance tests before fixtures existed | Five methods run; three failures and three subtest/errors, exit 1. Missing disclosure fixtures were the expected RED; no runtime defect is claimed |
+| New acceptance tests with fixtures | Five passed, exit 0: existing manifest/report schemas; both-domain PASS; exact changed fields and unchanged validation/test records; CLI check→compare→allowlisted export; output preservation; tampered gold refusal; cross-dataset comparison refusal |
+| Full regression | 117 run, 116 passed, one Windows-only junction skip; exit 0. Existing tests were not removed or weakened |
+| Actual CLI workflow | Both disclosure releases PASS with six cases/two per split; comparison PASS with review required; offline review HTML generated; export contains exactly case_id/input/source_ids |
+| Distribution | Hash-pinned setuptools 84.2.1 in an isolated project venv; wheel/sdist build, zero runtime dependencies, isolated no-index/no-deps install and existing insurance/package checks passed. Additional isolated wheel commands passed the disclosure check/compare/export; sdist contains byte-identical new fixture files and guide |
+| Preservation | 212 tracked runtime/package/lock, insurance fixture and historical UI/evidence files compared byte-for-byte with main; all unchanged |
+| New original UI capture | **Unverified/blocked.** Browser navigation to the copied local baseline HTML via file:// returned ERR_BLOCKED_BY_ADMINISTRATOR. Subsequent set_content renders are excluded from deliverables by coordinator instruction; no new browser UI verification is claimed. Original HTML and historical source captures remain unchanged |
+
+Exact baseline/RED/GREEN/final commands, exit codes, generated reports and attempted-browser logs are in the ignored `reports/runs/20261101T144200Z-disclosure-first-increment/` and external restoration evidence package. Browser/runtime configuration was not changed. No remote push, PR, CI execution, merge, package publication or deployment occurred in this increment; older CI records below remain historical. Windows, other Python versions, full browser regression, extraction accuracy, semantic leakage detection, real issuer applicability, authenticated review and regulatory/investment claims were not verified.
+
 ## 0.3.0 — grouped review and recovery workspace
 
 2026-11-01 KST. This resumes the user's additional UI/function request after 0.2 completion. The implementation scope is fixed; no new feature or redesign round is planned.

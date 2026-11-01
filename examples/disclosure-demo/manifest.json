@@ -1,0 +1,24 @@
+{
+  "schema_version": "insuredatagate.manifest.v1",
+  "dataset_id": "fictional-disclosure-extraction",
+  "version": "0.1.0",
+  "synthetic": true,
+  "sources": [
+    {
+      "source_id": "fictional-extraction-guide",
+      "path": "sources/extraction-guide.txt",
+      "sha256": "61b61a6cf53c1c3fbb2f0ff2e01ee9a78e6aee124b2043db62317b029aee9a40",
+      "license": "Apache-2.0",
+      "status": "APPROVED",
+      "approved_by": "fictional-disclosure-curator"
+    }
+  ],
+  "cases": {
+    "path": "cases.jsonl",
+    "sha256": "e31cf8369298a6b15de6e014d2db08df421ad347b7081fd16e8f5a8e8e6eff5b"
+  },
+  "gold": {
+    "path": "gold.jsonl",
+    "sha256": "a125dd15ed2d3001d03f206589cf15e5b71379e65a497fa413f13d33c01d7db9"
+  }
+}

@@ -1,0 +1,6 @@
+{"case_id":"disclosure-train-period","expected":"{\"period_start\":\"2025-01-01\",\"period_end\":\"2025-12-31\"}","review_status":"APPROVED","reviewed_by":"fictional-disclosure-reviewer"}
+{"case_id":"disclosure-train-unit","expected":"{\"currency\":\"KRW\",\"amount_unit\":\"KRW millions\"}","review_status":"APPROVED","reviewed_by":"fictional-disclosure-reviewer"}
+{"case_id":"disclosure-validation-scope","expected":"{\"scope\":\"consolidated\"}","review_status":"APPROVED","reviewed_by":"fictional-disclosure-reviewer"}
+{"case_id":"disclosure-validation-value","expected":"{\"revenue\":\"95\",\"currency\":\"USD\",\"amount_unit\":\"thousands\"}","review_status":"APPROVED","reviewed_by":"fictional-disclosure-reviewer"}
+{"case_id":"disclosure-test-missing-unit","expected":"{\"amount_unit\":null}","review_status":"APPROVED","reviewed_by":"fictional-disclosure-reviewer"}
+{"case_id":"disclosure-test-separated-periods","expected":"{\"period\":\"2025\",\"revenue\":\"17\",\"currency\":\"KRW\",\"amount_unit\":\"billions\",\"scope\":\"separate\"}","review_status":"APPROVED","reviewed_by":"fictional-disclosure-reviewer"}

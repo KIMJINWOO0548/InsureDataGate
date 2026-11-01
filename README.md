@@ -79,6 +79,8 @@ flowchart LR
 
 [데모 manifest](examples/insurance-demo/manifest.json)는 [출처 규칙](examples/insurance-demo/sources/rules.txt), [사례](examples/insurance-demo/cases.jsonl), [분리된 정답](examples/insurance-demo/gold.jsonl)을 SHA-256으로 고정합니다. 여섯 개의 허구 사례가 train, validation, test에 나뉘어 있습니다. [별도 v2 예제](examples/insurance-demo-v2/manifest.json)는 입력 1건·정답 1건·출처 파일의 명시적 합성 수정본이며 원래 데이터는 보존합니다. 형식 설명은 [docs/FORMAT.md](docs/FORMAT.md), 기존 계약은 [docs/CONTRACT.md](docs/CONTRACT.md), 0.2 확장은 [QUALITY_UPGRADE.md](docs/QUALITY_UPGRADE.md), 새 검토 스키마와 흐름은 [REVIEW_WORKSPACE.md](docs/REVIEW_WORKSPACE.md)를 참고하세요.
 
+[합성 공시 추출 예제](docs/DISCLOSURE_EXAMPLE.md)는 같은 manifest·CLI 계약으로 기간·통화·금액 단위·연결/별도 구분을 다룹니다. 한 데이터셋의 두 릴리스를 검사·비교한 뒤 허용된 모델 입력만 내보내는 예시이며, 실제 공시 분석 정확도·투자 판단·규제 준수 인증을 제공하지 않습니다. 기존 보험 예제는 그대로 보존합니다.
+
 ## 범위와 한계
 
 이 도구는 오프라인 데이터셋 검사기입니다. 네트워크로 출처를 조회하지 않고 라이선스, 승인자, 검토자 신원을 인증하지 않습니다. 의미가 비슷한 문장이나 선언되지 않은 그룹 관계에 의한 누출, 자연어 입력 안에 숨은 정답을 판별하지 못합니다. 보험 인수·지급·청구 판단을 하지 않으며 운영 승인, 법률 자문, 규제 준수 인증을 제공하지 않습니다.
