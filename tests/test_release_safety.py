@@ -56,6 +56,27 @@ class ReleaseSafetyTests(unittest.TestCase):
                 self.assertEqual(code, 130 if mode == "interrupt" else 2)
                 self.assertFalse(output.exists(), "Failed output must not remain as a usable-looking PASS report")
 
+    def test_dangling_output_is_refused_when_exclusive_open_follows_link(self):
+        output = self.root / "dangling-report.json"
+        target = self.root / "must-stay-missing.json"
+        output.symlink_to(target)
+        original_link_target = output.readlink()
+        original_open = Path.open
+
+        def windows_exclusive_open(path, mode="r", *args, **kwargs):
+            # Reproduce the real Windows CI behavior at the filesystem boundary:
+            # exclusive open follows this existing dangling link to a new target.
+            if path == output and mode == "x":
+                return original_open(target, mode, *args, **kwargs)
+            return original_open(path, mode, *args, **kwargs)
+
+        with patch.object(Path, "open", windows_exclusive_open), contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+            code = cli.main(["check", str(self.data.path), "--report", str(output)])
+        self.assertEqual(code, 2)
+        self.assertTrue(output.is_symlink())
+        self.assertEqual(output.readlink(), original_link_target)
+        self.assertFalse(target.exists(), "A refused output must not create its link target")
+
     def test_source_and_gold_changes_after_gate_prevent_export(self):
         for role in ("source", "gold"):
             for mutation in ("append", "delete"):

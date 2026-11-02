@@ -13,6 +13,14 @@ from .validator import read_snapshot, verify
 
 
 def _write_new(path: Path, content: str) -> None:
+    # On Windows, exclusive open can follow a dangling file symlink. Refuse
+    # every existing directory entry without following it before creation.
+    try:
+        path.lstat()
+    except FileNotFoundError:
+        pass
+    else:
+        raise FileExistsError("Output entry already exists")
     created = False
     try:
         with path.open("x", encoding="utf-8", newline="\n") as output:

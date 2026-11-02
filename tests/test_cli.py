@@ -80,6 +80,30 @@ class CliTests(unittest.TestCase):
                 self.assertEqual(result.returncode, 2, result.stderr)
                 self.assertEqual(output.read_bytes(), b"KEEP_EXISTING_BYTES")
 
+    def test_every_output_command_preserves_dangling_symlink_and_missing_target(self):
+        variants = [
+            ("check", self.data.path, "--report"),
+            ("check", self.data.path, "--html"),
+            ("compare", self.data.path, self.data.path, "--report"),
+            ("compare", self.data.path, self.data.path, "--html"),
+            ("review", self.data.path, self.data.path, "--report"),
+            ("review", self.data.path, self.data.path, "--html"),
+            ("review-facts", self.data.path, "--profile", "disclosure-facts.v1", "--report"),
+            ("export-inputs", self.data.path, "--output"),
+        ]
+        for index, args in enumerate(variants):
+            with self.subTest(command=args[0], option=args[-1]):
+                target = self.root / f"missing-target-{index}.txt"
+                link = self.root / f"output-link-{index}.txt"
+                link.symlink_to(target)
+                original_link_target = link.readlink()
+                result = self.run_cli(*args, link)
+                self.assertEqual(result.returncode, 2, result.stderr)
+                self.assertTrue(link.is_symlink())
+                self.assertEqual(link.readlink(), original_link_target)
+                self.assertFalse(target.exists(), "Output refusal must leave the link target missing")
+                self.assertNotIn("Traceback", result.stderr)
+
     def test_missing_parent_output_error(self):
         result = self.run_cli("check", self.data.path, "--report", self.root / "missing" / "report.json")
         self.assertEqual(result.returncode, 2)
