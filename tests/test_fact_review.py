@@ -17,7 +17,7 @@ from tests.helpers import DatasetFixture
 ROOT = Path(__file__).resolve().parents[1]
 CONTEXT = 'Period: 2025 annual. Basis: separate. Currency: USD. Amount unit: millions. '
 MULTI = ('Basis: separate. Amounts in KRW billions. Revenue for 2025: 17; '
-         'revenue for 2024: 16. Extract only the 2025 revenue with its period.')
+         'revenue for 2024: 16. Extract only the 2025 revenue with its period, currency, amount unit and scope.')
 
 
 class FactReviewTests(unittest.TestCase):
@@ -287,6 +287,48 @@ class FactReviewTests(unittest.TestCase):
             with self.subTest(suffix=suffix), tempfile.TemporaryDirectory() as directory:
                 fixture = self.fixture(directory, CONTEXT + 'Revenue: 95. ' + suffix)
                 self.assertEqual(self.field(self.api().review_facts(fixture.path), 'revenue')['status'], 'ABSTAIN')
+
+    def test_target_cannot_accept_arbitrary_contradictory_continuation(self):
+        base = MULTI.split('Extract')[0]
+        tails = (' with the 2024 value instead', ' with its period',
+                 ' with its period, currency, amount unit and scope instead',
+                 ' with Currency: USD')
+        for index, tail in enumerate(tails):
+            with self.subTest(variant=index), tempfile.TemporaryDirectory() as directory:
+                text = base + 'Extract only the 2025 revenue' + tail + '.'
+                fixture = self.fixture(directory, text, {'revenue': '17', 'period': '2025'})
+                self.assertEqual(verify(fixture.path)['status'], 'PASS')
+                report = self.api().review_facts(fixture.path)
+                self.assertEqual(report['cases'][0]['status'], 'ABSTAIN')
+                self.assertEqual(self.field(report, 'revenue')['status'], 'ABSTAIN')
+                self.assertEqual(self.field(report, 'period')['status'], 'ABSTAIN')
+
+    def test_target_accepts_only_bare_or_exact_preserved_request_tail(self):
+        base = MULTI.split('Extract')[0]
+        for tail in ('', ' with its period, currency, amount unit and scope'):
+            with self.subTest(bare=not tail), tempfile.TemporaryDirectory() as directory:
+                text = base + 'Extract only the 2025 revenue' + tail + '.'
+                fixture = self.fixture(directory, text, {'revenue': '17', 'period': '2025'})
+                report = self.api().review_facts(fixture.path)
+                self.assertEqual(report['cases'][0]['status'], 'SUPPORTED')
+
+    def test_embedded_malformed_labels_do_not_require_colons_to_poison_context(self):
+        variants = (('Currency EUR', 'currency', 'USD'), ('Revenue = 12', 'revenue', '95'),
+                    ('Basis separate', 'scope', 'separate'),
+                    ('Amount unit millions', 'amount_unit', 'millions'),
+                    ('Period 2025 annual', 'period', '2025'))
+        for declaration, field, value in variants:
+            for prefix in ('', 'Commentary '):
+                with self.subTest(field=field, embedded=bool(prefix)), tempfile.TemporaryDirectory() as directory:
+                    fixture = self.fixture(directory, CONTEXT + 'Revenue: 95. ' + prefix + declaration + '.',
+                                           {field: value, 'revenue': '95'})
+                    self.assertEqual(verify(fixture.path)['status'], 'PASS')
+                    report = self.api().review_facts(fixture.path)
+                    self.assertEqual(self.field(report, field)['status'], 'ABSTAIN')
+                    self.assertEqual(self.field(report, 'revenue')['status'], 'ABSTAIN')
+        with tempfile.TemporaryDirectory() as directory:
+            fixture = self.fixture(directory, CONTEXT + 'Revenue: 95. Commentary Revenue = 12.', {'scope': 'separate'})
+            self.assertEqual(self.field(self.api().review_facts(fixture.path), 'scope')['status'], 'SUPPORTED')
 
     def test_cli_text_json_report_and_exclusive_output(self):
         manifest = ROOT / 'examples/disclosure-demo-v2/manifest.json'

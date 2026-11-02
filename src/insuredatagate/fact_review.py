@@ -28,6 +28,17 @@ LABELS = (
     ("revenue", r"Revenue\b"),
     ("target", r"Extract\s+only\s+the\b"),
 )
+# Exact fixture requests mention field names but declare no observed facts.
+# Do not exempt arbitrary prose or allow a request prefix to hide declarations.
+REQUEST = re.compile(
+    r"(?:Extract only the reporting period as ISO dates"
+    r"|Extract only currency and amount unit, preserving the stated unit(?: including its currency prefix)?"
+    r"|Extract revenue as written with its currency and unit"
+    r"|Extract the amount unit as null if it is not stated)\Z", re.I,
+)
+DISCOVERY = re.compile(r"(?<!\w)(?:" + "|".join(
+    f"(?P<{kind}>{pattern})" for kind, pattern in LABELS
+) + ")", re.I)
 
 
 def _sha(text: str) -> str:
@@ -64,6 +75,7 @@ def _period(value: str):
 
 def _parse(text: str) -> dict:
     declarations = {kind: [] for kind, _ in LABELS}
+    requests = []
     for match in CLAUSES.finditer(text):
         raw = match[1]
         if not raw.strip():
@@ -71,6 +83,8 @@ def _parse(text: str) -> dict:
         start = match.start(1)
         end = match.end(1) - (len(raw) - len(raw.rstrip()))
         value = _normalized(raw)
+        if REQUEST.fullmatch(value):
+            requests.append((start, end))
         for kind, pattern in LABELS:
             if re.match(pattern, value, re.I):
                 parsed = None
@@ -96,30 +110,30 @@ def _parse(text: str) -> dict:
                     if found and (found[1] is None or _year(found[1])) and _decimal(found[2]):
                         parsed = (found[1], found[2])
                 elif kind == "target":
-                    found = re.fullmatch(r"Extract only the ([0-9]{4}) revenue(?: with\b.*)?", value, re.I)
+                    found = re.fullmatch(
+                        r"Extract only the ([0-9]{4}) revenue"
+                        r"(?: with its period, currency, amount unit and scope)?", value, re.I,
+                    )
                     parsed = found[1] if found and _year(found[1]) else None
                 declarations[kind].append({"value": parsed, "start": start, "end": end})
                 break
     # Discover declarations outside accepted clause starts too. They cannot
     # supply facts, but must not hide a second relevant (malformed) declaration.
-    embedded = (
-        ("period", r"(?:Reporting\s+period|Period)\s*:"),
-        ("scope", r"Basis\s*:"),
-        ("currency", r"Currency\s*:"),
-        ("amount_unit", r"Amount\s+unit\s*:"),
-        ("amounts", r"Amounts\s+in\b"),
-        ("absence", r"The\s+amount\s+unit\s+is\s+absent\b"),
-        ("revenue", r"Revenue(?:\s+for\s+[^:;\n]+)?\s*:"),
-        ("target", r"Extract\s+only\s+the\b"),
-    )
-    for kind, pattern in embedded:
-        for match in re.finditer(r"(?<!\w)" + pattern, text, re.I):
-            if any(item["start"] == match.start() for item in declarations[kind]):
-                continue
-            boundary = re.search(r";|\n|\.(?=\s|\Z)|\Z", text[match.end():])
-            end = match.end() + boundary.start()
-            declarations[kind].append({"value": None, "start": match.start(), "end": end})
-        declarations[kind].sort(key=lambda item: item["start"])
+    # Discovery uses the same labels before validating punctuation everywhere.
+    # Skip only complete known requests/valid targets, whose field-name words
+    # are requests rather than additional observed declarations.
+    requests += [(item["start"], item["end"]) for item in declarations["target"] if item["value"] is not None]
+    for match in DISCOVERY.finditer(text):
+        kind = match.lastgroup
+        if any(start <= match.start() < end for start, end in requests):
+            continue
+        if any(item["start"] == match.start() for item in declarations[kind]):
+            continue
+        boundary = re.search(r";|\n|\.(?=\s|\Z)|\Z", text[match.end():])
+        end = match.end() + boundary.start()
+        declarations[kind].append({"value": None, "start": match.start(), "end": end})
+    for items in declarations.values():
+        items.sort(key=lambda item: item["start"])
     return declarations
 
 

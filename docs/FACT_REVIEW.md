@@ -24,7 +24,11 @@ Labels are case-insensitive; currency codes and unit values follow the grammar
 below. Surrounding/internal whitespace is normalized for comparison only.
 Duplicate or malformed relevant declarations abstain, even beside a valid one.
 Known label/target occurrences embedded after prose are unsupported declarations
-and also prevent that dependency from being supported.
+and also prevent that dependency from being supported, including missing or
+alternative punctuation. Discovery uses the same label vocabulary at every
+location. The exact extraction requests in the preserved fixtures declare no
+facts; their field-name mentions are excluded from declaration discovery only
+when the whole request matches that finite form.
 The parser never treats source text as instructions and performs no URL fetch.
 
 | Declaration | Supported value |
@@ -38,14 +42,16 @@ The parser never treats source text as instructions and performs no URL fetch.
 | `Amounts in CUR UNIT` | Separate currency and unit facts |
 | `The amount unit is absent.` | Explicit null unit only if no positive/malformed unit declaration exists |
 | `Revenue: DECIMAL` or `Revenue for YYYY: DECIMAL` | At most 64 characters: optional sign, ASCII digits, optional fractional digits |
-| `Extract only the YYYY revenue` | Explicit input-derived target; the existing `with ...` continuation is accepted |
+| `Extract only the YYYY revenue` | Explicit input-derived target; optional exact tail `with its period, currency, amount unit and scope` |
 
 Units are lowercase `thousand(s)`, `million(s)` or `billion(s)`. There is no scaling,
 FX, exponent, grouping, float-prefix parsing or date/period inference. Revenue
 requires unique period, currency, unit and scope context plus a unique bound
 amount. Multiple years require exactly one explicit target; expected `period`
 never selects the year. A sole labelled revenue year can supply period context.
-Missing, duplicate, contradictory or unsupported targeting abstains. A currency
+Missing, duplicate, contradictory or unsupported targeting abstains. Only the
+bare target or its exact enumerated optional tail is accepted; all other
+continuations (including arbitrary `with ...` prose) abstain. A currency
 prefix in the whole unit label must agree with independently stated currency;
 contradiction abstains for currency and revenue without discarding the unit label. An explicit
 period alongside a labelled year must agree with that year. Unasserted unrelated
