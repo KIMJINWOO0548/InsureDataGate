@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — opt-in disclosure annotation support
+
+- Add standard-library `review_facts(Path)` and the required-profile `review-facts` CLI with a separate deterministic fact-review.v1 schema.
+- Bind revenue to explicit input targets, preserve whole unit labels, abstain on unsupported/ambiguous context and report hashed Unicode evidence spans without raw values.
+- Preserve existing example bytes, generic gates and gold-free export; add independent parser/snapshot/output tests and installed distribution checks.
+- This finite profile does not certify issuer truth, extraction accuracy, rights or approval. Local verification is recorded in VALIDATION.md.
+
 ## Unreleased — synthetic disclosure example
 
 - Add one synthetic disclosure extraction dataset with baseline/candidate releases using the unchanged manifest.v1 and package/CLI contracts.

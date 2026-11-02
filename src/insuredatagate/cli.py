@@ -7,6 +7,7 @@ import sys
 
 from . import __version__
 from .comparison import compare, review
+from .fact_review import PROFILE, review_facts
 from .reporting import render_html
 from .validator import read_snapshot, verify
 
@@ -42,16 +43,33 @@ def main(argv: list[str] | None = None) -> int:
         formats = command.add_mutually_exclusive_group()
         formats.add_argument("--report", type=Path, help="Create a new JSON report file")
         formats.add_argument("--html", type=Path, help="Create an offline HTML review")
+    facts = commands.add_parser("review-facts", help="Review bounded disclosure annotation support")
+    facts.add_argument("manifest", type=Path)
+    facts.add_argument("--profile", required=True, choices=(PROFILE,))
+    facts.add_argument("--json", action="store_true", help="Print the JSON report")
+    facts.add_argument("--report", type=Path, help="Create a new JSON report file")
     export = commands.add_parser("export-inputs", help="Export validated inputs without gold")
     export.add_argument("manifest", type=Path)
     export.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     if args.command in ("compare", "review"):
         report = (review if args.command == "review" else compare)(args.baseline, args.candidate)
+    elif args.command == "review-facts":
+        report = review_facts(args.manifest)
     else:
         report = verify(args.manifest)
 
     try:
+        if args.command == "review-facts":
+            serialized = json.dumps(report, ensure_ascii=True, indent=2) + "\n"
+            if args.report is not None:
+                _write_new(args.report, serialized)
+            if args.json:
+                print(serialized, end="")
+            else:
+                count = sum(len(case["fields"]) for case in report["cases"])
+                print(f"{report['status']}: {len(report['cases'])} cases; {count} asserted fields; {PROFILE}")
+            return 0 if report["status"] == "SUPPORTED" else 1
         if args.command in ("check", "compare", "review"):
             serialized = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
             if args.report is not None:

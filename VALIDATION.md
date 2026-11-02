@@ -1,5 +1,42 @@
 # Verification record
 
+## Local opt-in disclosure fact review — 2026-11-02 UTC
+
+Base `b33b29de80a83cf81e76cec90b305695a987ab10`; local branch
+`feature/disclosure-fact-review`. Adds the finite standard-library
+`disclosure-facts.v1` profile and `review-facts` CLI; package version remains
+0.3.0. Existing manifest/report/comparison/review and export contracts remain.
+
+- Independent initial RED: 14 methods, 48 failures/subtest failures, exit 1 for
+  the missing API/CLI; design-ruling RED: 18 methods, 63 failures, exit 1.
+  Separate schema fixture RED: one failure. Review-context RED: two methods,
+  six failures for currency-prefix contradiction and embedded label poisoning.
+- Focused GREEN: 22 methods passed, exit 0. Includes both preserved disclosure
+  releases (14 asserted fields each), input-derived wrong-year conflict despite
+  wrong expected period, complete-token adversarial formats, field-local
+  abstention, explicit null, dependency-span Unicode replay, deterministic
+  redaction, every checked-role mutation/deletion and exclusive/symlink output.
+- Full local Linux/Python 3.12.14 unittest: 139 run, 138 passed, one Windows-only
+  directory-junction skip; exit 0. Existing tests were not removed or weakened.
+- Declared distribution self-check: wheel/sdist build with preinstalled pinned
+  setuptools 84.2.1, no runtime dependencies, isolated no-index/no-deps wheel
+  install and old check/compare/review/export checks passed. New installed API
+  path and both disclosure text/JSON/report flows and overwrite refusal passed.
+- All 19 tracked example files are byte-identical to base. Actual check,
+  compare, review JSON and export bytes for both insurance and disclosure
+  domains match a temporary base source snapshot (eight comparisons). Existing
+  HTML bytes and comparison digest tests also pass.
+
+Exact commands, RED/GREEN/full/build logs, hashes and sample redacted fact reports
+are recorded outside source in the task delivery's `InsureDataGate/` folder.
+Independent task review is recorded by the controller, separately from these
+implementer checks. No browser, network, new dependency, remote CI, push, merge,
+package publication, deployment or authenticated/real-model review occurred.
+Finite-grammar annotation support does not establish issuer truth, extraction
+accuracy, financial/legal certification, rights or release approval. Other
+Python versions/Windows were not executed, and checked rereads are not atomic
+against hostile filesystem replacement. See [FACT_REVIEW.md](docs/FACT_REVIEW.md).
+
 ## Local disclosure example increment — 2026-11-01 UTC
 
 Base: `85ca41899d06bf6c791e069ed5fa81823b525ee2`; local branch `improve/synthetic-disclosure-flow`. This is a data/example and regression-test increment; runtime source, package version/dependencies, manifest/report contracts, original insurance datasets and historical HTML/images/evidence are byte-unchanged.

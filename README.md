@@ -102,3 +102,14 @@ py -3.12 -m venv .runtime/browser-env
 배포물 검사는 별도 환경에서 `requirements-build.lock`을 `pip install --require-hashes -r requirements-build.lock`으로 설치한 뒤 `python scripts/check_distribution.py`로 실행합니다. CI에서는 선택적 Playwright 의존성도 hash로 고정하고 고립된 Chromium으로 같은 화면 회귀를 실행합니다. UI 출처·라이선스·채택 범위는 [UI_REFERENCES.md](docs/UI_REFERENCES.md)에 기록했습니다.
 
 [요구사항·인수 기준](docs/REQUIREMENTS.md), [0.1 구현 계획](docs/superpowers/plans/2026-11-01-insuredatagate.md), [0.2 구현 계획](docs/superpowers/plans/2026-11-01-release-review.md), [0.3 구현 계획](docs/superpowers/plans/2026-11-01-review-workspace.md), [실제 검증 기록](VALIDATION.md), [도구 사용 기록](docs/TOOLING.md)을 공개합니다. CaseProof에서 다루는 출처·정답 분리와 증거 원칙을 참고해 독립적으로 작성했으며 기존 API나 DB에 의존하지 않습니다. 코드와 예제는 [Apache-2.0](LICENSE)으로 제공합니다.
+
+### Opt-in disclosure fact review
+
+```bash
+insuredatagate review-facts examples/disclosure-demo/manifest.json --profile disclosure-facts.v1 --json
+```
+
+This finite, offline profile compares asserted annotation fields with explicit
+checked-input declarations. It returns support/conflict/abstention with replayable
+hashed spans and preserves the existing generic validation/export behavior.
+See [the grammar, report and limits](docs/FACT_REVIEW.md).
