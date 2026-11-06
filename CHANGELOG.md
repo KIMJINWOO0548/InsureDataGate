@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased — finding-type navigation
+
+- Group offline HTML findings by code with counts, native detail/return links,
+  and safe numeric anchors; retain each location/reason and all validator/JSON contracts.
+- Add independent red-to-green tests and native keyboard checks in the existing
+  browser runner. Actual results and known Windows limitations are recorded in
+  `replica/20261106/recon.md`; this is not release approval.
+
 ## Unreleased — opt-in disclosure annotation support
 
 - Add standard-library `review_facts(Path)` and the required-profile `review-facts` CLI with a separate deterministic fact-review.v1 schema.

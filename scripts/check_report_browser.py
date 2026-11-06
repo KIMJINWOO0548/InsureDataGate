@@ -193,6 +193,17 @@ def check_interactions(page, report, name, viewport, output, evidence, observati
 
     review = report.get("review", {})
     summary = review.get("summary") or {}
+    issues = [issue for issue in report.get("issues", []) if type(issue) is dict]
+    if issues:
+        require(page.locator('nav.finding-types a').count() == len({issue['code'] for issue in issues}), prefix + ": finding type counts mismatch")
+        target = page.locator('nav.finding-types a').first.get_attribute('href')[1:]
+        keyboard_activate(page, 'nav.finding-types a')
+        require(page.evaluate("target => document.activeElement.id === target && !!document.activeElement.getClientRects().length", target), prefix + ": finding type does not focus visible detail")
+        require(page.locator('#' + target + ' tbody tr').count() == sum(issue['code'] == sorted({item['code'] for item in issues})[0] for issue in issues), prefix + ": grouped finding rows mismatch")
+        keyboard_activate(page, '#' + target + ' a[href="#issues"]')
+        require(page.evaluate("document.activeElement.id === 'issues'"), prefix + ": return to finding types does not focus overview")
+        observation['findingTypeNavigation'] = True
+        overflow()
     if page.locator('nav.filters').count():
         require(page.locator('input[type="radio"]').count() == 0, prefix + ": expected fragment filters")
         require(page.locator('.empty-group:visible').count() == 0, prefix + ": empty groups visible initially")

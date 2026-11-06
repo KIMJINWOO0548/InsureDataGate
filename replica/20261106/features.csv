@@ -1,0 +1,4 @@
+feature,area,priority,original,clone,notes
+Summary before detailed validation findings,review,must,yes,yes,"GX documented summary-to-detail pattern; adapted as issue-code counts and native jump links"
+Raw-value exclusion,privacy,must,no,yes,"Existing IDG allowlisted redaction retained; no claim of equivalent GX defaults"
+Native keyboard return navigation,review,should,no,yes,"App-specific offline detail-to-overview links; no JavaScript"

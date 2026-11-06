@@ -16,6 +16,7 @@ _STYLE = """
 .rail nav{max-height:calc(100vh - 3rem);overflow:auto;padding:0 .3rem}.rail .entity-heading{margin:1.25rem 0 .25rem}.rail .rail-entity{border-left:2px solid transparent;border-radius:3px;padding:.45rem .5rem;font-size:.75rem}.rail-entity code{font-size:.73rem}.filters a{gap:.3rem}.filters a span{font-variant-numeric:tabular-nums}.impact-row span{min-width:0;overflow-wrap:anywhere}.dossier.compact{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:.5rem 1.25rem;background:transparent;border:0;border-bottom:1px solid var(--line);margin:0;padding:.7rem .8rem}.compact h3{font-size:.82rem}.compact-heading{min-width:0}.compact-split{font-size:.75rem;margin:.2rem 0 0}.compact-split small{display:block;color:var(--muted);font-size:.68rem}.compact-links{font-size:.75rem}.compact-links>.meta{display:block}.compact-links .links a{font-size:.78rem}.compact-links code{font-size:inherit}
 body:has(#view-direct:target) .rail .nav-sources,body:has(#view-direct:target) .rail .nav-affected,body:has(#view-affected:target) .rail .nav-direct,body:has(#view-affected:target) .rail .nav-sources,body:has(#view-sources:target) .rail .nav-direct,body:has(#view-sources:target) .rail .nav-affected{display:none}
 @media(max-width:700px){.dossier dl>.relation-row{display:block}.relation-row>dd{padding-top:.5rem}.dossier.compact{display:block;padding:.7rem .5rem}.compact-heading{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem}.compact-split{flex-shrink:0;margin:0}.compact-split small{font-size:.6rem}.compact-links{margin-top:.25rem}.compact-links>.meta{display:inline}.compact-links .links{display:inline-flex;vertical-align:middle;margin-left:.5rem}.filters{justify-content:space-between}}
+.finding-types{display:flex;flex-wrap:wrap;gap:.3rem .75rem;margin:.5rem 0 1rem}.finding-return,.finding-types a{display:inline-flex;align-items:center;min-height:44px}.finding-group{margin:1.5rem 0;scroll-margin-top:1rem}.finding-group:target{outline:2px solid #426a9e;outline-offset:5px}.finding-group h3{font-size:.9rem}
 @media print{html,body{background:white}main{max-width:none;padding:0}.rail,.filters,.filter-state,.skip{display:none}.workspace{display:block}.detail .dossiers>.group{display:block!important}.dossier{break-inside:avoid}a{color:inherit}}
 """
 
@@ -34,10 +35,23 @@ def _status(value):
 
 
 def _issues(issues):
-    rows = "".join(f'<tr><td>{_value(item.get("code"))}</td><td>{_value(item.get("location"))}</td><td>{_value(item.get("message"))}</td></tr>' for item in issues if type(item) is dict)
-    if not rows:
+    groups = {}
+    for item in issues:
+        if type(item) is dict:
+            groups.setdefault(str(item.get("code")), []).append(item)
+    if not groups:
         return '<p class="empty">No issues were recorded.</p>'
-    return '<table><caption>Gate issues</caption><thead><tr><th scope="col">Code</th><th scope="col">Location</th><th scope="col">Reason</th></tr></thead><tbody>' + rows + '</tbody></table>'
+    links = []
+    sections = []
+    for index, (code, entries) in enumerate(sorted(groups.items())):
+        anchor = f"finding-type-{index}"
+        label = f'{_e(code)} · {len(entries)} {"finding" if len(entries) == 1 else "findings"}'
+        links.append(f'<a href="#{anchor}">{label}</a>')
+        rows = "".join(f'<tr><td>{_value(item.get("location"))}</td><td>{_value(item.get("message"))}</td></tr>' for item in entries)
+        sections.append(f'<section class="finding-group" id="{anchor}" tabindex="-1"><h3>{label}</h3><table><caption>Gate issues · {_e(code)}</caption><thead><tr><th scope="col">Location</th><th scope="col">Reason</th></tr></thead><tbody>{rows}</tbody></table><a class="finding-return" href="#issues">Back to finding types ↑</a></section>')
+    count = sum(len(entries) for entries in groups.values())
+    summary = f'{count} {"finding" if count == 1 else "findings"} across {len(groups)} {"issue type" if len(groups) == 1 else "issue types"}'
+    return f'<p class="meta">{summary}. Counts refer to findings, not unique records or severity.</p><nav class="finding-types" aria-label="Finding types">' + ''.join(links) + '</nav>' + ''.join(sections)
 
 
 def _recovery(issues):

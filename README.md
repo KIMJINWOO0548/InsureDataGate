@@ -4,6 +4,10 @@
 
 **Review a release by case, follow changed sources, and resolve blocked checks offline.**
 
+HTML gate findings include issue-type counts and native links to grouped safe
+locations, with a return path to the overview. Counts describe findings, not
+unique records or severity. [Reference, tool and verification record](replica/20261106/recon.md).
+
 InsureDataGate checks a versioned manifest, declared source rights, file hashes, separation of cases from gold answers, review declarations, and train/validation/test isolation. Review case and gold changes together, follow the declared source references from both releases, resolve blocked checks, then export only allowlisted model inputs. The runtime uses the Python standard library with no network calls.
 
 > 모든 예시와 신원은 허구이며 합성 데이터입니다. 실제 고객 정보나 보험금·법률 판단을 위한 도구가 아닙니다.

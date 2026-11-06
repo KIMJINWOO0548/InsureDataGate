@@ -1,0 +1,44 @@
+[
+  {
+    "source_url": "https://docs.greatexpectations.io/docs/core/trigger_actions_based_on_results/choose_a_result_format/",
+    "command": "node <local rea 6.8.0 CLI> capture-browser-scenario scenario.json --format json",
+    "exit_code": 0,
+    "top_keys": [
+      "evidence_id",
+      "subject",
+      "provider",
+      "analysis_profile",
+      "predicate_type",
+      "operation",
+      "parameters",
+      "raw_result",
+      "normalized_result",
+      "confidence",
+      "authority",
+      "environment",
+      "limitations",
+      "relationship_coverage",
+      "locations",
+      "evidence_links"
+    ],
+    "browser": {
+      "mode": "launch",
+      "process_ownership": "provider-owned",
+      "cleanup": "terminated-owned-process",
+      "product": "Chromium",
+      "version": "156.0.8078.80"
+    },
+    "status": null,
+    "error": null,
+    "evidence": {
+      "0-accessibility.txt": "a2084729d50893c0e7d8c52d7c14c185b197923c72ae5c1590a66254b3d39e68",
+      "0-dom.txt": "3d8319b66c59ddafc697fc90c9bb2ea66e744e7234c5e751f3244a64972b8ab5",
+      "0-screenshot.png": "f0cd2ce6e41d687b349d01a73271beb79add25ee72eced0ee4bc6d32e07638de",
+      "1-accessibility.txt": "a2084729d50893c0e7d8c52d7c14c185b197923c72ae5c1590a66254b3d39e68",
+      "1-dom.txt": "a70530059cacde65f5aa6859f604c01d1cbc30ff97bde51db7ff1433c5c65895",
+      "1-screenshot.png": "3b2d61e8321716391e0417ad61b75a67790f4591569153b9210d80a1e63dfab2",
+      "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "content_outcome": "public-docs-observed"
+  }
+]
