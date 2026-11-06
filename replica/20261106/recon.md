@@ -61,3 +61,9 @@ data bytes, approval declarations, publication or production access changed.
 The existing `.runtime/browser-env` environment was reused without installation. `scripts/check_report_browser.py --output reports/runs/reference-browser-20261106 --channel chrome` passed all eight states/four viewports (**32 captures**, exit0), including native keyboard navigation from finding types into details and back, overflow, privacy, CSP and accessibility structure checks. Exact evidence is in that run's `evidence.json`.
 
 The full host unittest run remains **147 tests, 10 errors, 3 skipped**, exit1. All ten errors are Windows symlink privilege 1314 in existing safety fixtures. No assertion failure was hidden, and OS security settings were not changed. The host skip count differs from the sandbox count above; neither run is a whole-suite PASS. Relevant behavior tests are **22/22 PASS**.
+
+## Packaging follow-up
+
+The first GitHub Actions run passed the Windows/Linux test matrix and browser job but failed the distribution job because `docs/examples/*.html` still represented the previous renderer. The three synthetic examples were regenerated from unchanged example inputs, preserving the exact installed-wheel byte comparison in `scripts/check_distribution.py`. Original example bytes remain in Git history. Runtime overwrite protections and the independent behavior tests are unchanged. The initial failure and the follow-up result are reported separately.
+
+Host follow-up: `scripts/check_distribution.py` passed (exit0) using existing setuptools84.2.1/wheel0.46.3. It built wheel/sdist, installed this project's own wheel offline with no dependencies into a disposable environment, and checked entrypoints, synthetic examples, export preservation, disclosure API/CLI and exact HTML bytes. No third-party package or global environment was installed/modified. Log: `reports/runs/ci-examples-20261106/distribution.log`.

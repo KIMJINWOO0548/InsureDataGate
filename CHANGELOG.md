@@ -4,6 +4,8 @@
 
 - Group offline HTML findings by code with counts, native detail/return links,
   and safe numeric anchors; retain each location/reason and all validator/JSON contracts.
+- Regenerate the three checked-in synthetic report examples with the new renderer;
+  preserve byte-for-byte installed-package/example checks and all input fixture bytes.
 - Add independent red-to-green tests and native keyboard checks in the existing
   browser runner. Actual results and known Windows limitations are recorded in
   `replica/20261106/recon.md`; this is not release approval.
