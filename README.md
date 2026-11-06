@@ -2,7 +2,9 @@
 
 [![Verify](https://github.com/KIMJINWOO0548/InsureDataGate/actions/workflows/ci.yml/badge.svg)](https://github.com/KIMJINWOO0548/InsureDataGate/actions/workflows/ci.yml)
 
-**Review a release by case, follow changed sources, and resolve blocked checks offline.**
+**Find release impact by train/validation/test split, inspect each changed case and source, and resolve blocked checks offline.**
+
+The review separates baseline/candidate direct changes from source-only split exposure, with native split filters and complete case/source destinations. Large reports bound the optional directory while preserving every dossier. [Design, comparable measurement plan and remaining gaps](replica/20261106-depth/recon.md); [actual verification and limits](replica/20261106-depth/verification.md).
 
 HTML gate findings include issue-type counts and native links to grouped safe
 locations, with a return path to the overview. Counts describe findings, not

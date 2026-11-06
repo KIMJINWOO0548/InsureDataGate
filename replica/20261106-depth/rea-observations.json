@@ -1,0 +1,59 @@
+{
+  "tool": "REA6.8.0 capture-browser-scenario",
+  "source": "https://greatexpectations.io/expectations/",
+  "detail_url": "https://greatexpectations.io/expectations/expect_column_distinct_values_to_be_in_set",
+  "capture": "phase2/refs/gx-public-rule-detail",
+  "command_exit_code": 0,
+  "completeness": {
+    "status": "complete",
+    "equality_eligible": true,
+    "missing_sections": [],
+    "truncated_sections": []
+  },
+  "steps": [
+    {
+      "step_id": "scenario_start",
+      "action": "goto_start",
+      "status": "completed",
+      "error": null
+    },
+    {
+      "step_id": "catalog_rule_ready",
+      "action": "wait_for",
+      "status": "completed",
+      "error": null
+    },
+    {
+      "step_id": "open_expectation_rule",
+      "action": "click",
+      "status": "completed",
+      "error": null
+    },
+    {
+      "step_id": "expectation_detail_ready",
+      "action": "wait_for",
+      "status": "completed",
+      "error": null
+    }
+  ],
+  "observed": [
+    "public expectation catalog",
+    "native See more navigation",
+    "rule definition and supported backends",
+    "arguments and published sample table",
+    "published passing/failing tabs and result metadata"
+  ],
+  "not_exercised": [
+    "catalog search/filter controls",
+    "example tabs",
+    "live dataset validation",
+    "input upload or submit",
+    "competitor performance"
+  ],
+  "reference_assets_shipped": false,
+  "evidence_sha256": {
+    "3-accessibility.txt": "124bb05f2161c4bc2d5f5795ef26fcc9812681ba8560fbf5d12dba4df16e56fb",
+    "3-screenshot.png": "7cbfb2886fd30a64f5f53368a31e61465f00eaf43e3803587ea31adb5e3aa62a",
+    "summary.json": "24872263b6ac9ec01caf8db58554a7783e80f05250ed7b79cbbf87b0ca10e84b"
+  }
+}

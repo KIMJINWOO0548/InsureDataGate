@@ -56,7 +56,7 @@ class WorkspaceTests(unittest.TestCase):
         doc = render_html(workspace())
         parsed = Tags(doc)
         filters = [attrs for tag, attrs in parsed.tags if tag == "a" and attrs.get("aria-controls") == "dossier-list"]
-        self.assertEqual(len(filters), 4)
+        self.assertEqual(len(filters), 7)
         self.assertIn(":focus-visible", doc)
         self.assertIn("Inventory", doc)
         self.assertNotIn('class="summary"', doc)

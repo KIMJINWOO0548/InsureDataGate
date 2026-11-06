@@ -226,6 +226,19 @@ def check_interactions(page, report, name, viewport, output, evidence, observati
             select("all")
         if name == "source-only":
             require(page.locator('.affected .dossier:visible').count() == 6 and page.locator('.direct:visible').count() == 0, prefix + ": source-only All semantics mismatch")
+        for split in ("train", "validation", "test"):
+            keyboard_activate(page, f'nav.filters a[href="#view-{split}"]')
+            expected = {f"case-{index}" for index, case in enumerate(review["cases"]) if split in case["splits"].values()}
+            observed = set(page.locator('.dossiers>.group:not(.sources)>.dossier:visible').evaluate_all("elements => elements.map(el => el.id)"))
+            require(observed == expected, prefix + ": either-snapshot split filter mismatch")
+            require(page.locator('.sources:visible').count() == 0, prefix + ": split case scope leaked sources")
+            observation.setdefault("splitFilters", {})[split] = {"caseIds": sorted(observed), "expectedCount": len(expected)}
+            overflow()
+        capture("split-test")
+        select("all")
+        page.emulate_media(media="print")
+        require(page.locator('.dossier:visible').count() == summary["case_count"] + summary["source_count"], prefix + ": print omitted dossiers")
+        page.emulate_media(media="screen")
     inventory = page.locator('#inventory')
     require(inventory.get_attribute('open') is None, prefix + ": inventory unexpectedly opened")
     integrity = page.locator('#integrity')

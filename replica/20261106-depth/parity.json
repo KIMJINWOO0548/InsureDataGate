@@ -1,0 +1,85 @@
+{
+  "feature_score": 65.6,
+  "counted": 6,
+  "must_have_done": 3,
+  "must_have_total": 4,
+  "by_area": [
+    {
+      "area": "scale",
+      "score": 0.0,
+      "features": 1
+    },
+    {
+      "area": "validation",
+      "score": 30.0,
+      "features": 2
+    },
+    {
+      "area": "review",
+      "score": 100.0,
+      "features": 2
+    },
+    {
+      "area": "reporting",
+      "score": 100.0,
+      "features": 1
+    }
+  ],
+  "missing": [
+    {
+      "feature": "Metadata based validation rules",
+      "area": "validation",
+      "priority": "must",
+      "clone": "partial",
+      "notes": "Frictionless/GX support broader tabular schemas and expectations; IDG supports bounded synthetic insurance manifest/case/gold contract only"
+    },
+    {
+      "feature": "SQL and distributed dataframe backends",
+      "area": "scale",
+      "priority": "should",
+      "clone": "no",
+      "notes": "GX documented pandas Spark SQL ecosystem; IDG stdlib local JSON/JSONL only"
+    },
+    {
+      "feature": "Arbitrary table data profiling",
+      "area": "validation",
+      "priority": "should",
+      "clone": "no",
+      "notes": "GX public documentation; not implemented in IDG"
+    }
+  ],
+  "skipped": [
+    {
+      "feature": "Authenticated approval workflow",
+      "area": "governance",
+      "priority": "could",
+      "clone": "skip",
+      "notes": "Not established from public observed sources; IDG expressly has declaration-only review"
+    }
+  ],
+  "extras": [
+    {
+      "feature": "Split exposure before and after a release",
+      "area": "investigation",
+      "priority": "must",
+      "clone": "yes",
+      "notes": "Own synthetic evaluation release slice; no claim GX lacks comparable features"
+    },
+    {
+      "feature": "Bounded large report navigation with complete evidence",
+      "area": "scale",
+      "priority": "must",
+      "clone": "yes",
+      "notes": "Own max10000 case contract; all dossiers retained and optional index capped40; actual browser timing separately measured"
+    },
+    {
+      "feature": "Private case and answer body exclusion",
+      "area": "privacy",
+      "priority": "must",
+      "clone": "yes",
+      "notes": "Own metadata allowlist preserved; no claim about GX defaults"
+    }
+  ],
+  "problems": [],
+  "overall": 65.6
+}

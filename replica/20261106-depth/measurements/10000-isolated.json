@@ -1,0 +1,58 @@
+{
+  "scope": "own offline synthetic source-only change; no external product timings",
+  "cases_per_snapshot": 10000,
+  "repeats": 1,
+  "fixture_sha256": {
+    "baseline": "630b7eb7e775af19b981e057b411bca8c06b53f36384f312b679b3c4a4d580dc",
+    "candidate": "d296d7769e2310f370ab358d9e0de9e2ba5c64e0f985e4deb2fc7f0685fa8c10"
+  },
+  "validation": {
+    "seconds": [
+      0.4688575000036508
+    ],
+    "median_seconds": 0.4688575000036508,
+    "peak_python_bytes": 26051809,
+    "timings_include_profiler": false
+  },
+  "review": {
+    "seconds": [
+      1.6695728999911807
+    ],
+    "median_seconds": 1.6695728999911807,
+    "peak_python_bytes": 47296171,
+    "timings_include_profiler": false
+  },
+  "render": {
+    "seconds": [
+      0.11393290001433343
+    ],
+    "median_seconds": 0.11393290001433343,
+    "peak_python_bytes": 55826145,
+    "timings_include_profiler": false,
+    "fresh_process": true,
+    "html_bytes": 5748772,
+    "renderer_sha256": "608037255b532a8562d68780b29ccc759060ed1046b0315e6fcc41454a89a18d",
+    "rail_entities": 21,
+    "entity_target_selectors": 21
+  },
+  "prior_renderer": {
+    "seconds": [
+      0.09439969999948516
+    ],
+    "median_seconds": 0.09439969999948516,
+    "peak_python_bytes": 56613509,
+    "timings_include_profiler": false,
+    "fresh_process": true,
+    "html_bytes": 7743449,
+    "renderer_sha256": "69d11c0f87fc6bdde2f303cfbef0d9887ed2fe1c3c90f89d376a9a97ded943ca",
+    "rail_entities": 10001,
+    "entity_target_selectors": 10001,
+    "revision": "ad5f9d8"
+  },
+  "html_bytes": 5748772,
+  "rail_entities": 21,
+  "entity_target_selectors": 21,
+  "source_only_count": 10000,
+  "private_body_absent": true,
+  "python": "3.12.10"
+}

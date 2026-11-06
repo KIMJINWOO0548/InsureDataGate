@@ -17,7 +17,17 @@ _STYLE = """
 body:has(#view-direct:target) .rail .nav-sources,body:has(#view-direct:target) .rail .nav-affected,body:has(#view-affected:target) .rail .nav-direct,body:has(#view-affected:target) .rail .nav-sources,body:has(#view-sources:target) .rail .nav-direct,body:has(#view-sources:target) .rail .nav-affected{display:none}
 @media(max-width:700px){.dossier dl>.relation-row{display:block}.relation-row>dd{padding-top:.5rem}.dossier.compact{display:block;padding:.7rem .5rem}.compact-heading{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem}.compact-split{flex-shrink:0;margin:0}.compact-split small{font-size:.6rem}.compact-links{margin-top:.25rem}.compact-links>.meta{display:inline}.compact-links .links{display:inline-flex;vertical-align:middle;margin-left:.5rem}.filters{justify-content:space-between}}
 .finding-types{display:flex;flex-wrap:wrap;gap:.3rem .75rem;margin:.5rem 0 1rem}.finding-return,.finding-types a{display:inline-flex;align-items:center;min-height:44px}.finding-group{margin:1.5rem 0;scroll-margin-top:1rem}.finding-group:target{outline:2px solid #426a9e;outline-offset:5px}.finding-group h3{font-size:.9rem}
-@media print{html,body{background:white}main{max-width:none;padding:0}.rail,.filters,.filter-state,.skip{display:none}.workspace{display:block}.detail .dossiers>.group{display:block!important}.dossier{break-inside:avoid}a{color:inherit}}
+
+.exposure{margin:1.2rem 0 1.5rem;padding:1rem;background:#fff;border:1px solid var(--line)}.exposure>p{font-size:.78rem}.exposure details{padding:.35rem 0 0}.exposure details>p{font-size:.78rem}.review-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;margin:1rem 0}.review-stats>div{min-width:0;border-left:2px solid #b7c6d7;padding-left:.65rem}.review-stats dt{color:var(--muted);font-size:.72rem}.review-stats dd{margin:0;font-size:1.3rem;font-weight:650;font-variant-numeric:tabular-nums}.exposure-scroll{overflow-x:auto}.exposure-scroll:focus-visible{outline:3px solid #426a9e;outline-offset:3px}.exposure th,.exposure td{font-variant-numeric:tabular-nums}.exposure a{display:inline-flex;align-items:center;min-height:44px}.rail-limit{font-size:.72rem;color:var(--muted);margin:.5rem 0}.dossier.compact{content-visibility:auto;contain-intrinsic-size:auto 96px}.dossier.compact:target{content-visibility:visible}.impact-row{content-visibility:auto;contain-intrinsic-size:auto 62px}
+@media(max-width:700px){.exposure{padding:.65rem;margin:.6rem 0}.review-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem;margin:.6rem 0}.review-stats dt{font-size:.68rem}.review-stats dd{font-size:1.15rem}.exposure th,.exposure td{font-size:.7rem}.exposure-scroll table{min-width:440px}}
+#view-train:target~.filters a[href="#view-train"]{background:#e9edf2;border-color:#c4ccd6;color:var(--ink);font-weight:650}
+#view-train:target~.dossiers>.group.sources,#view-train:target~.dossiers>.group>.dossier:not(.split-train),#view-train:target~.dossiers>.group:not(.sources):not(:has(>.split-train)){display:none}
+#view-validation:target~.filters a[href="#view-validation"]{background:#e9edf2;border-color:#c4ccd6;color:var(--ink);font-weight:650}
+#view-validation:target~.dossiers>.group.sources,#view-validation:target~.dossiers>.group>.dossier:not(.split-validation),#view-validation:target~.dossiers>.group:not(.sources):not(:has(>.split-validation)){display:none}
+#view-test:target~.filters a[href="#view-test"]{background:#e9edf2;border-color:#c4ccd6;color:var(--ink);font-weight:650}
+#view-test:target~.dossiers>.group.sources,#view-test:target~.dossiers>.group>.dossier:not(.split-test),#view-test:target~.dossiers>.group:not(.sources):not(:has(>.split-test)){display:none}
+
+@media print{html,body{background:white}main{max-width:none;padding:0}.rail,.filters,.filter-state,.skip{display:none}.workspace{display:block}.detail .dossiers>.group,.detail .dossiers>.group>.dossier{display:block!important}.dossier{break-inside:avoid}.dossier.compact,.impact-row{content-visibility:visible}a{color:inherit}}
 """
 
 
@@ -130,19 +140,56 @@ def _fields(values):
 
 
 def _review_index(review):
-    """Build native destinations; CSS selectors use generated numeric IDs only."""
+    """Bound the optional rail; every dossier and native destination stays intact."""
     if not review.get("available"):
         return "", ""
     links, styles = [], []
+    bounded = len(review["cases"]) + len(review["sources"]) > 40
+    if bounded:
+        links.append('<p class="rail-limit">Index preview · up to 20 cases and 20 sources. Full dossier list is preserved; use split filters or your browser’s Find in the All items view.</p>')
     for collection, key, prefix, title in (("cases", "case_id", "case", "Cases"), ("sources", "source_id", "source", "Sources")):
         if review[collection]:
             links.append(f'<p class="rail-label entity-heading">{title}</p>')
         for index, item in enumerate(review[collection]):
+            if bounded and index >= 20:
+                break
             target = f"{prefix}-{index}"
             kind = "sources" if prefix == "source" else "affected" if item["status"] == "affected" else "direct"
             links.append(f'<a class="rail-entity nav-{kind}" href="#{target}"><code>{_e(item[key])}</code></a>')
             styles.append(f'body:has(#{target}:target) .rail-entity[href="#{target}"]' + '{background:#e9edf2;color:var(--ink);font-weight:650;border-color:#b4c2d2}')
     return "".join(links), "".join(styles)
+
+
+def _split_classes(case):
+    return ''.join(f' split-{split}' for split in ("train", "validation", "test")
+                   if split in case["splits"].values())
+
+
+def _exposure(review):
+    """Allowlisted relationship counts; never read case input or gold contents."""
+    cases = review["cases"]
+    gold = sum(bool(case["fields"]["gold"]) for case in cases)
+    moved = sum(case["status"] == "modified" and case["splits"]["baseline"] != case["splits"]["candidate"] for case in cases)
+    lifecycle = sum(case["status"] in ("added", "removed") for case in cases)
+    stats = ''.join(f'<div><dt>{title}</dt><dd>{count}</dd></div>' for title, count in (
+        ("Cases with gold changes", gold), ("Cases moved between splits", moved),
+        ("Cases added or removed", lifecycle), ("Source-only cases", review["summary"]["source_only_case_count"])))
+    rows = []
+    for split in ("train", "validation", "test"):
+        counts = []
+        for side in ("baseline", "candidate"):
+            direct = sum(case["status"] != "affected" and case["splits"][side] == split for case in cases)
+            linked = sum(case["status"] == "affected" and case["splits"][side] == split for case in cases)
+            counts.extend((direct, linked))
+        cells = ''.join(f'<td>{count}</td>' for count in counts)
+        rows.append(f'<tr><th scope="row"><a href="#view-{split}">{split.capitalize()} cases</a></th>{cells}</tr>')
+    return ('<section class="exposure" id="split-exposure" aria-labelledby="exposure-heading">'
+            '<details class="split-membership"><summary id="exposure-heading">Review scope and split membership</summary>'
+            f'<h2>Case review counts</h2><dl class="review-stats">{stats}</dl>'
+            '<p class="meta">Changed and source-linked cases only, not the full dataset. Each snapshot is counted separately. Case counts may overlap and do not establish answer correctness.</p>'
+            '<div class="exposure-scroll" role="region" aria-label="Split exposure" tabindex="0">'
+            '<table><caption>Checked snapshot membership · direct changes / source-only impact</caption><thead><tr><th scope="col">Split</th><th scope="col">Baseline direct</th><th scope="col">Baseline linked</th><th scope="col">Candidate direct</th><th scope="col">Candidate linked</th></tr></thead><tbody>'
+            + ''.join(rows) + '</tbody></table></div><p class="meta">Either snapshot: a split filter includes a case present in that split before or after the change; moved cases can appear in two views. Added and removed cases have one absent side. Gold-change counts cover existing records, not lifecycle additions/removals. Human review remains separate.</p></details></section>')
 
 
 def _review_workspace(review):
@@ -156,7 +203,7 @@ def _review_workspace(review):
         fields, refs, splits = case["fields"], case["sources"], case["splits"]
         if case["status"] == "affected":
             groups["affected"].append(
-                f'<article class="dossier compact" id="{case_anchors[case["case_id"]]}" tabindex="-1">'
+                f'<article class="dossier compact{_split_classes(case)}" id="{case_anchors[case["case_id"]]}" tabindex="-1">'
                 f'<div class="compact-heading"><h3><code>{_e(case["case_id"])}</code></h3>'
                 f'<p class="compact-split"><small>Split · baseline → candidate</small><code>{_value(splits["baseline"])} → {_value(splits["candidate"])}</code></p></div>'
                 '<div class="compact-links"><span class="meta">Changed source</span>' + _links(refs["changed"], source_anchors) + '</div></article>')
@@ -169,7 +216,7 @@ def _review_workspace(review):
         rows += _field_row("Declared references", '<details' + (' open' if "source_ids" in fields["case"] or case["status"] in ("added", "removed") else '') + '><summary>All source links</summary><div class="relation-sides"><div><p class="side-label">Baseline</p>' + _links(refs["baseline"], source_anchors) + '</div><div><p class="side-label">Candidate</p>' + _links(refs["candidate"], source_anchors) + '</div></div></details>')
         group = "affected" if case["status"] == "affected" else "direct"
         kind = "source impact" if group == "affected" else case["status"]
-        groups[group].append(f'<article class="dossier" id="{case_anchors[case["case_id"]]}" tabindex="-1"><div class="dossier-top"><h3><code>{_e(case["case_id"])}</code></h3><span class="change-kind">{_e(kind)}</span></div><dl>{rows}</dl></article>')
+        groups[group].append(f'<article class="dossier{_split_classes(case)}" id="{case_anchors[case["case_id"]]}" tabindex="-1"><div class="dossier-top"><h3><code>{_e(case["case_id"])}</code></h3><span class="change-kind">{_e(kind)}</span></div><dl>{rows}</dl></article>')
     for source in sources:
         splits = {side: {case["case_id"]: case["split"] for case in source["cases"][side]} for side in ("baseline", "candidate")}
         impact = []
@@ -189,15 +236,17 @@ def _review_workspace(review):
     source_word = "source" if summary["source_count"] == 1 else "sources"
     intro = f'<div class="work-intro"><h2>Changes to review</h2><p class="tally"><strong>{_value(summary["direct_case_count"])} {case_word} changed</strong> · <strong>{_value(summary["source_count"])} {source_word} changed</strong></p><p class="meta">{_value(summary["source_only_case_count"])} additional cases linked to changed sources. {_value(summary["case_count"])} unique cases in this review.</p></div>'
     controls, targets = [], []
-    for ident, title, count in (("all", "All items", summary["case_count"] + summary["source_count"]), ("direct", "Cases", summary["direct_case_count"]), ("affected", "Linked", summary["source_only_case_count"]), ("sources", "Sources", summary["source_count"])):
+    split_views = tuple((split, split.capitalize() + " cases", sum(split in case["splits"].values() for case in cases)) for split in ("train", "validation", "test"))
+    for ident, title, count in (("all", "All items", summary["case_count"] + summary["source_count"]), ("direct", "Cases", summary["direct_case_count"]), ("affected", "Linked", summary["source_only_case_count"]), ("sources", "Sources", summary["source_count"]), *split_views):
         targets.append(f'<p class="filter-state" id="view-{ident}" tabindex="-1">Showing {title.lower()} ({_value(count)})</p>')
-        controls.append(f'<a href="#view-{ident}" aria-controls="dossier-list">{title} <span>({_value(count)})</span></a>')
+        short = title.removesuffix(" cases") if ident in ("train", "validation", "test") else title
+        controls.append(f'<a href="#view-{ident}" aria-label="{title} ({_value(count)})" aria-controls="dossier-list">{short} <span>({_value(count)})</span></a>')
     sections = []
     for kind, ident, title, description in (("direct", "direct-cases", "Direct case changes", "Case and gold changes are grouped together; contents remain private."), ("sources", "changed-sources", "Changed sources", "Case membership and split from both checked snapshots; references do not prove causality or correctness."), ("affected", "affected-cases", "Source-only impact", "These cases have no direct field changes. A declared source reference changed.")):
         entries = ''.join(groups[kind]) or '<p class="empty">No changes in this group.</p>'
         empty = " empty-group" if not groups[kind] else ""
         sections.append(f'<section class="group {kind}{empty}" aria-labelledby="{ident}"><div class="section-heading"><h2 id="{ident}" tabindex="-1">{title}</h2><p>{len(groups[kind])} {"item" if len(groups[kind]) == 1 else "items"}</p></div><p>{description}</p>{entries}</section>')
-    return intro + '<div class="filter-scope">' + ''.join(targets) + '<nav class="filters" aria-label="Filter review dossiers">' + ''.join(controls) + '</nav><div class="dossiers" id="dossier-list">' + ''.join(sections) + '</div></div>'
+    return intro + _exposure(review) + '<div class="filter-scope">' + ''.join(targets) + '<nav class="filters" aria-label="Filter review dossiers">' + ''.join(controls) + '</nav><div class="dossiers" id="dossier-list">' + ''.join(sections) + '</div></div>'
 
 
 def render_html(report: dict) -> str:
