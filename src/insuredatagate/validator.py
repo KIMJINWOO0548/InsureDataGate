@@ -106,20 +106,39 @@ def _jsonl_lines(raw: bytes) -> list[bytes]:
 
 
 def read_snapshot(manifest_path: Path, report: dict) -> dict:
-    """Reread a PASS report's exact bytes for internal export/comparison use.
+    """Reread a verified v1 PASS report's bytes and observed input context.
 
     shortcut: checked rereads are not atomic filesystem snapshots; use immutable
     storage if hostile concurrent replacement becomes a requirement.
     """
     try:
-        if report["status"] != "PASS":
+        if (not _keys(report, "schema_version status dataset_id version manifest_sha256 files counts issues")
+                or report["schema_version"] != "insuredatagate.report.v1"
+                or report["status"] != "PASS"
+                or type(report["issues"]) is not list or report["issues"]):
             raise ValueError("A verified report is required")
+        count_fields = ("sources", "cases", "gold", *SPLITS)
+        if (not _keys(report["counts"], " ".join(count_fields))
+                or any(type(value) is not int or value < 0 for value in report["counts"].values())):
+            raise ValueError("Invalid observed counts")
         path = Path(manifest_path)
         raw = safe_read(path, SMALL_LIMIT)
         if hashlib.sha256(raw).hexdigest() != report["manifest_sha256"]:
             raise ValueError("Manifest changed")
         manifest = strict_json(raw)
-        observed = {item["path"]: item["sha256"] for item in report["files"]}
+        if (manifest["schema_version"] != "insuredatagate.manifest.v1"
+                or manifest["dataset_id"] != report["dataset_id"]
+                or manifest["version"] != report["version"]):
+            raise ValueError("Manifest context changed")
+        if type(report["files"]) is not list:
+            raise ValueError("Invalid file inventory")
+        observed = {}
+        for item in report["files"]:
+            if (not _keys(item, "path sha256 bytes") or not portable_path(item["path"])
+                    or type(item["bytes"]) is not int or item["bytes"] < 0
+                    or item["path"] in observed):
+                raise ValueError("Invalid file inventory")
+            observed[item["path"]] = item
         refs = [(source, SMALL_LIMIT, "source") for source in manifest["sources"]]
         refs += [(manifest[role], RECORD_LIMIT, role) for role in ("cases", "gold")]
         if set(observed) != {ref["path"] for ref, _, _ in refs}:
@@ -130,10 +149,17 @@ def read_snapshot(manifest_path: Path, report: dict) -> dict:
                 raise ValueError("Invalid path")
             content = safe_read(path.parent / ref["path"], limit)
             digest = hashlib.sha256(content).hexdigest()
-            if digest != ref["sha256"] or digest != observed[ref["path"]]:
+            item = observed[ref["path"]]
+            if digest != ref["sha256"] or digest != item["sha256"] or len(content) != item["bytes"]:
                 raise ValueError("Referenced file changed")
             if role != "source":
                 result[role] = [strict_json(line) for line in _jsonl_lines(content)]
+        counts = {"sources": len(manifest["sources"]), "cases": len(result["cases"]),
+                  "gold": len(result["gold"]), **{split: 0 for split in SPLITS}}
+        for case in result["cases"]:
+            counts[case["split"]] += 1
+        if counts != report["counts"]:
+            raise ValueError("Observed counts changed")
         return result
     except (KeyError, TypeError, ValueError, OSError, RuntimeError):
         raise ValueError("Verified dataset snapshot changed or became unreadable") from None

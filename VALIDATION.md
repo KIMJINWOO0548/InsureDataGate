@@ -1,5 +1,42 @@
 # Verification record
 
+## Checked-report context integrity — 2026-11-09 UTC
+
+Independent change on accessible remote `improve/competitive-depth-20261106`,
+base `04697076f4cd5f7a019ea27f13daa5d2ca14950a`, branch
+`improve/check-context-integrity-20261109`. Previously inaccessible preservation
+files were not read or restored. Package version 0.3.0, existing JSON schemas,
+fact-review policy profile, renderer/UI and example inputs are unchanged.
+
+The programming API previously accepted mismatched report schema/dataset/version,
+counts and duplicate inventory metadata when the manifest/file hashes matched.
+This is an API/cache integration boundary; no normal-CLI PASS bypass was
+reproduced. The checked reread now requires its known v1 PASS report shape,
+empty issues, matching manifest identity/version, unique complete inventory,
+observed byte sizes and exact integer record/split counts. Errors remain generic;
+downstream metrics are withheld and no export is created for rejected context.
+
+| Check | Actual local result |
+| --- | --- |
+| Baseline Linux/Python 3.12.14 | 151 run, 150 passed, one Windows-only directory-junction skip; exit 0 |
+| Independent context RED | Initial eight methods, 18 failures including subtests; exit 1. Expanded tests against an isolated exact-base source copy: eight methods, 21 failures including subtests; exit 1. A missing inventory item was already rejected; JSON roundtrip/reordered inventory already passed |
+| Context GREEN | Eight methods passed; exit 0. Includes BLOCK/withheld comparison metrics, export refusal and UNAVAILABLE fact review with no raw metadata disclosure |
+| Full regression | 159 run, 158 passed, the same one Windows-only skip; exit 0 |
+| Actual CLI compatibility | 14 byte-for-byte comparisons against the exact base: four check, four allowlisted export, two compare, two review and two disclosure-fact review outputs. All expected PASS/SUPPORTED statuses observed; four existing exports preserved on overwrite refusal |
+| Distribution | Preinstalled setuptools 84.2.1, wheel/sdist build and isolated offline no-index/no-deps wheel install passed; installed entrypoints, existing HTML bytes, gold-free export/output preservation and disclosure fact-review checks passed. No tool download or package publication |
+| Input preservation | All 19 tracked example files remain byte-identical; rejection tests also preserve their temporary inputs and report objects |
+| Read-only code review | Two internal agents reviewed the patch/callers; no blocking issue reported. This is not external human acceptance |
+
+Sanitized evidence is in [check-context.json](docs/evidence/2026-11-09/check-context.json).
+Raw local command logs are ignored under
+`reports/runs/20261109T160017Z-d32a9ac6-check-context/`. Tests use temporary
+synthetic datasets. No source URLs were fetched. Windows, other Python versions,
+new browser execution, real data and authenticated policy execution were not
+tested. The existing schemas identify the checked contract; this change does not
+add a policy-version registry, sign reports, prove their authenticity, rerun every
+validation rule or make checked rereads atomic against concurrent replacement.
+Remote SHA and CI observations are recorded separately after the commit.
+
 ## Local opt-in disclosure fact review — 2026-11-02 UTC
 
 Base `b33b29de80a83cf81e76cec90b305695a987ab10`; local branch

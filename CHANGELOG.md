@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased — checked-report context integrity
+
+- Require the existing v1 PASS report contract and an empty issue list before a
+  checked reread; bind dataset/version metadata, unique complete file inventory,
+  byte sizes and typed record/split counts to the reread inputs.
+- Preserve existing schemas, fact-review profile, normal CLI output and UI.
+  Incompatible report context follows the existing BLOCK/UNAVAILABLE paths and
+  cannot produce an export. This guards API/cache integration mistakes; it does
+  not authenticate a report or rerun every validation policy.
+- Independent RED/GREEN, regression, CLI compatibility and limitations are
+  recorded in `VALIDATION.md` and `docs/evidence/2026-11-09/check-context.json`.
+
 ## Unreleased — finding-type navigation
 
 - Group offline HTML findings by code with counts, native detail/return links,
