@@ -12,7 +12,7 @@ import unittest
 from unittest.mock import patch
 
 from insuredatagate.validator import verify
-from tests.helpers import DatasetFixture
+from tests.helpers import DatasetFixture, create_test_symlink
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTEXT = 'Period: 2025 annual. Basis: separate. Currency: USD. Amount unit: millions. '
@@ -345,11 +345,11 @@ class FactReviewTests(unittest.TestCase):
             self.assertEqual(self.run_cli(*args, '--report', target).returncode, 2)
             self.assertEqual(target.read_bytes(), original)
             link = Path(directory) / 'link.json'
-            link.symlink_to(target)
+            create_test_symlink(link, target)
             self.assertEqual(self.run_cli(*args, '--report', link).returncode, 2)
             self.assertEqual(target.read_bytes(), original)
             dangling = Path(directory) / 'dangling.json'
-            dangling.symlink_to(Path(directory) / 'missing.json')
+            create_test_symlink(dangling, Path(directory) / 'missing.json')
             self.assertEqual(self.run_cli(*args, '--report', dangling).returncode, 2)
             self.assertFalse((Path(directory) / 'missing.json').exists())
 

@@ -12,7 +12,7 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from tests.helpers import DatasetFixture
+from tests.helpers import DatasetFixture, create_test_symlink
 
 
 class CliTests(unittest.TestCase):
@@ -95,7 +95,7 @@ class CliTests(unittest.TestCase):
             with self.subTest(command=args[0], option=args[-1]):
                 target = self.root / f"missing-target-{index}.txt"
                 link = self.root / f"output-link-{index}.txt"
-                link.symlink_to(target)
+                create_test_symlink(link, target)
                 original_link_target = link.readlink()
                 result = self.run_cli(*args, link)
                 self.assertEqual(result.returncode, 2, result.stderr)

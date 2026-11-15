@@ -11,7 +11,7 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from insuredatagate import cli
 from insuredatagate.validator import verify
-from tests.helpers import DatasetFixture
+from tests.helpers import DatasetFixture, create_test_symlink
 
 
 class ReleaseSafetyTests(unittest.TestCase):
@@ -59,7 +59,7 @@ class ReleaseSafetyTests(unittest.TestCase):
     def test_dangling_output_is_refused_when_exclusive_open_follows_link(self):
         output = self.root / "dangling-report.json"
         target = self.root / "must-stay-missing.json"
-        output.symlink_to(target)
+        create_test_symlink(output, target)
         original_link_target = output.readlink()
         original_open = Path.open
 
