@@ -19,3 +19,9 @@ Track case and gold structural completeness internally. Withhold absence claims 
 ## Scope
 
 This does not add authenticated lineage, rights verification or semantic leakage detection. Source/version/declared relationship comparison was already present; this change specifically corrects failure versus unavailable-check reporting. It is not a full per-rule execution ledger. The v1 report envelope and successful report behavior are unchanged.
+
+## Source-reference prerequisites follow-up
+
+A valid declared source ID was previously discarded when its license or reviewer text was invalid, causing unrelated SOURCE_REFERENCE failures. ID registration is now separate from the rights-text check; invalid rights metadata still blocks the dataset. A structurally incomplete source declaration or invalid source ID prevents proof of an unknown reference, so that absence check is CHECK_NOT_RUN at checks.source_references. Duplicate case source references remain independently detectable failures.
+
+Verification: three new tests failed before implementation. After the change, focused 9/9 passed; full unittest ran 172 tests OK with 14 Windows symlink-privilege skips (158 executed without failure). git diff --check passed. Independent follow-up review found no blocking defect and directly reran focused 9/9, full 172 tests OK (14 skips), plus five temporary source-declaration edge scenarios. This is internal review, not rights certification. No source content, declared identity, version, hash or rights approval is repaired automatically.

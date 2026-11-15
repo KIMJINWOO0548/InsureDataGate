@@ -61,3 +61,26 @@ class IncompleteValidationTests(unittest.TestCase):
         self.assertIn('Restore prerequisites', html)
         self.assertNotIn('PRIVATE_GOLD', html)
         self.assertNotIn('RAW_INPUT', html)
+    def test_invalid_rights_metadata_does_not_invalidate_known_source_id(self):
+        self.data.manifest['sources'][0]['license'] = ''
+        self.data.write_manifest()
+        codes = self.codes()
+        self.assertIn('SCHEMA', codes)
+        self.assertNotIn('SOURCE_REFERENCE', codes)
+
+    def test_unreadable_source_declaration_defers_absence_check(self):
+        del self.data.manifest['sources'][0]['path']
+        self.data.write_manifest()
+        codes = self.codes()
+        self.assertIn('SCHEMA', codes)
+        self.assertIn('CHECK_NOT_RUN', codes)
+        self.assertNotIn('SOURCE_REFERENCE', codes)
+
+    def test_duplicate_case_source_reference_still_fails_with_incomplete_sources(self):
+        self.data.cases[0]['source_ids'] *= 2
+        self.data.save()
+        del self.data.manifest['sources'][0]['path']
+        self.data.write_manifest()
+        codes = self.codes()
+        self.assertIn('SOURCE_REFERENCE', codes)
+        self.assertIn('CHECK_NOT_RUN', codes)

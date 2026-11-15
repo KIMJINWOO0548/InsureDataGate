@@ -227,17 +227,21 @@ def verify(manifest_path: Path) -> dict:
     report["counts"]["sources"] = len(sources)
     refs = []
     source_ids = set()
+    sources_complete = True
     for index, source in enumerate(sources, 1):
         location = f"manifest.sources[{index}]"
         if not _keys(source, "source_id path sha256 license status approved_by"):
+            sources_complete = False
             issue("SCHEMA", location, "Source fields must match schema v1 exactly.")
             continue
         if not _id(source["source_id"]) or not _text(source["license"]) or not _text(source["approved_by"]):
             issue("SCHEMA", location, "Source IDs and rights declarations must be valid text.")
-        else:
+        if _id(source["source_id"]):
             if source["source_id"] in source_ids:
                 issue("DUPLICATE_SOURCE", location, "Source IDs must be unique.")
             source_ids.add(source["source_id"])
+        else:
+            sources_complete = False
         if source["status"] != "APPROVED":
             issue("SOURCE_APPROVAL", location, "Source must declare APPROVED status.")
         refs.append((location, source, SMALL_LIMIT, "source"))
@@ -301,6 +305,9 @@ def verify(manifest_path: Path) -> dict:
         report["counts"][role] = len(lines)
         records[role] = rows
 
+    if not sources_complete:
+        issue("CHECK_NOT_RUN", "checks.source_references",
+              "Unknown source references were not checked because source declarations are incomplete or invalid.")
     cases_complete = "cases" in records and len(records["cases"]) == report["counts"]["cases"]
     gold_complete = "gold" in records and len(records["gold"]) == report["counts"]["gold"]
     cases = {}
@@ -320,7 +327,7 @@ def verify(manifest_path: Path) -> dict:
             cases_complete = False
             issue("SCHEMA", location, "Case fields have invalid types or values.")
             continue
-        if len(set(ids)) != len(ids) or not set(ids) <= source_ids:
+        if len(set(ids)) != len(ids) or (sources_complete and not set(ids) <= source_ids):
             issue("SOURCE_REFERENCE", location, "Case source IDs must be unique known sources.")
         if case["case_id"] in cases:
             issue("DUPLICATE_CASE", location, "Case IDs must be unique.")
