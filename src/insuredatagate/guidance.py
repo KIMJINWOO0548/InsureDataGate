@@ -1,6 +1,9 @@
 """Fixed recovery guidance; never interpolate untrusted data into instructions."""
 
 _RECOVERY = {
+    "CHECK_NOT_RUN": ("Restore prerequisites before assessing coverage", (
+        "Resolve the reported read or record-structure failures first, then rerun the complete check. Unchecked coverage is neither a pass nor proof of a missing relationship.",
+    )),
     "VERSION_REUSED": ("Give the changed candidate a distinct version", (
         "Confirm that this content change is intended, then declare a distinct candidate version. Versions are opaque labels; no ordering is required.",
     )),

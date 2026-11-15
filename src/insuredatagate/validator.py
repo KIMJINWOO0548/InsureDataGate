@@ -301,12 +301,15 @@ def verify(manifest_path: Path) -> dict:
         report["counts"][role] = len(lines)
         records[role] = rows
 
+    cases_complete = "cases" in records and len(records["cases"]) == report["counts"]["cases"]
+    gold_complete = "gold" in records and len(records["gold"]) == report["counts"]["gold"]
     cases = {}
     groups = {}
     inputs = {}
     for index, case in records.get("cases", []):
         location = f"cases[{index}]"
         if not _keys(case, "case_id group_id split source_ids input created_by"):
+            cases_complete = False
             issue("SCHEMA", location, "Case fields must match schema v1 exactly.")
             continue
         ids = case["source_ids"]
@@ -314,6 +317,7 @@ def verify(manifest_path: Path) -> dict:
                 or type(case["split"]) is not str or case["split"] not in SPLITS
                 or not _text(case["input"], 10000) or not _text(case["created_by"])
                 or type(ids) is not list or not ids or not all(_id(item) for item in ids)):
+            cases_complete = False
             issue("SCHEMA", location, "Case fields have invalid types or values.")
             continue
         if len(set(ids)) != len(ids) or not set(ids) <= source_ids:
@@ -331,16 +335,21 @@ def verify(manifest_path: Path) -> dict:
             else:
                 seen[key] = split
     for split in SPLITS:
-        if not report["counts"][split]:
+        if cases_complete and not report["counts"][split]:
             issue("EMPTY_SPLIT", f"counts.{split}", "Every split requires at least one case.")
+    if not cases_complete:
+        issue("CHECK_NOT_RUN", "checks.split_coverage",
+              "Complete split coverage was not checked because case records are unavailable or invalid.")
     gold_ids = set()
     for index, gold in records.get("gold", []):
         location = f"gold[{index}]"
         if not _keys(gold, "case_id expected review_status reviewed_by"):
+            gold_complete = False
             issue("SCHEMA", location, "Gold fields must match schema v1 exactly.")
             continue
         if (not _id(gold["case_id"]) or not _text(gold["expected"], 10000)
                 or not _text(gold["reviewed_by"])):
+            gold_complete = False
             issue("SCHEMA", location, "Gold fields have invalid types or values.")
             continue
         if gold["review_status"] != "APPROVED":
@@ -349,10 +358,13 @@ def verify(manifest_path: Path) -> dict:
         if case_id in gold_ids:
             issue("DUPLICATE_GOLD", location, "Gold case IDs must be unique.")
         gold_ids.add(case_id)
-        if case_id not in cases:
+        if case_id not in cases and cases_complete:
             issue("UNMATCHED_GOLD", location, "Gold requires a corresponding case.")
-        elif gold["reviewed_by"].strip().casefold() == cases[case_id]["created_by"].strip().casefold():
+        elif case_id in cases and gold["reviewed_by"].strip().casefold() == cases[case_id]["created_by"].strip().casefold():
             issue("SELF_REVIEW", location, "Reviewer and creator declarations must differ.")
-    if set(cases) - gold_ids:
+    if not cases_complete or not gold_complete:
+        issue("CHECK_NOT_RUN", "checks.case_gold_coverage",
+              "Complete case-to-gold coverage was not checked because prerequisite records are unavailable or invalid.")
+    if cases_complete and gold_complete and set(cases) - gold_ids:
         issue("MISSING_GOLD", "gold", "Every case requires a corresponding gold record.")
     return finish()

@@ -70,3 +70,9 @@ Independent red tests, full passing tests, successful sample check, split-leakag
 0.3 adds the explicit `insuredatagate.review.v1` relationship report and review CLI described in [REVIEW_WORKSPACE.md](REVIEW_WORKSPACE.md). Existing comparison.v1 JSON/digest and manifest.v1 remain unchanged.
 
 Portable paths also reject Windows reserved device basenames, trailing dots/spaces and forbidden Windows filename characters, independent of host OS.
+
+## Incomplete coverage (2026-11-16)
+
+If cases/gold cannot be fully read and structurally validated, dependent absence checks are not presented as proven defects. `CHECK_NOT_RUN` at `checks.split_coverage` or `checks.case_gold_coverage` explains unavailable prerequisites. Overall status remains BLOCK; export and comparison remain blocked. Independently detected failures in available records remain visible. `EMPTY_SPLIT`, `UNMATCHED_GOLD` and `MISSING_GOLD` remain real failures when the records needed to establish absence are available. Report v1 fields are unchanged.
+
+This is scoped coverage reporting, not an exhaustive execution trace of every rule. An invalid manifest may still return early. DRAFT/REJECTED review declarations are recorded failures, not automatic approvals; the checker cannot authenticate reviewers, verify rights, or certify semantic leakage absence.
