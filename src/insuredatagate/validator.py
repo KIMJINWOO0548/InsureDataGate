@@ -55,9 +55,18 @@ def portable_path(value) -> bool:
         type(value) is str
         and bool(value)
         and _unicode_valid(value)
-        and not any(char in value for char in "\\:")
+        and not any(char in value for char in '\\:<>"|?*')
         and not any(ord(char) < 32 or ord(char) == 127 for char in value)
-        and all(part not in ("", ".", "..") for part in value.split("/"))
+        and all(
+            part not in ("", ".", "..")
+            and not part.endswith((".", " "))
+            and part.split(".", 1)[0].rstrip(" ").upper() not in (
+                {"CON", "PRN", "AUX", "NUL", "CONIN$", "CONOUT$"}
+                | {f"{prefix}{digit}" for prefix in ("COM", "LPT")
+                   for digit in "123456789¹²³"}
+            )
+            for part in value.split("/")
+        )
     )
 
 
