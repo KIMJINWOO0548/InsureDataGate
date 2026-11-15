@@ -311,6 +311,7 @@ def verify(manifest_path: Path) -> dict:
     cases_complete = "cases" in records and len(records["cases"]) == report["counts"]["cases"]
     gold_complete = "gold" in records and len(records["gold"]) == report["counts"]["gold"]
     cases = {}
+    creators_by_case = {}
     groups = {}
     inputs = {}
     for index, case in records.get("cases", []):
@@ -333,6 +334,7 @@ def verify(manifest_path: Path) -> dict:
             issue("DUPLICATE_CASE", location, "Case IDs must be unique.")
         else:
             cases[case["case_id"]] = case
+        creators_by_case.setdefault(case["case_id"], set()).add(case["created_by"].strip().casefold())
         split = case["split"]
         report["counts"][split] += 1
         normalized = " ".join(unicodedata.normalize("NFKC", case["input"]).casefold().split())
@@ -367,7 +369,7 @@ def verify(manifest_path: Path) -> dict:
         gold_ids.add(case_id)
         if case_id not in cases and cases_complete:
             issue("UNMATCHED_GOLD", location, "Gold requires a corresponding case.")
-        elif case_id in cases and gold["reviewed_by"].strip().casefold() == cases[case_id]["created_by"].strip().casefold():
+        elif case_id in cases and gold["reviewed_by"].strip().casefold() in creators_by_case[case_id]:
             issue("SELF_REVIEW", location, "Reviewer and creator declarations must differ.")
     if not cases_complete or not gold_complete:
         issue("CHECK_NOT_RUN", "checks.case_gold_coverage",
