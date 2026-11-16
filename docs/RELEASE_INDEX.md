@@ -10,6 +10,8 @@ Invalid inputs or mutation between validation and checked reread return 1 and cr
 
 ## Verification (2026-11-16)
 
+`python -m insuredatagate verify-index MANIFEST INDEX_JSON` independently checks the current dataset and rereads its files before comparing every index field with the reconstructed inventory. Exit 0 means the saved index matches now, not that its author or rights are authenticated. Exit 1 covers invalid datasets, changed snapshots, missing/unreadable indexes, tampered fields, malformed JSON and duplicate keys. JSON object key order and whitespace are irrelevant; array ordering and numeric types must match the generated format. The index is limited to 64 MiB and symlink/reparse components are refused. No input or index is modified and diagnostics omit differing values. An index regenerated alongside maliciously changed data is not independently authentic; this is not a signature or trusted release registry.
+
 - Implementer: four tests failed before the command existed; final focused suite passed 5/5, including deterministic redaction, tampering refusal, existing-output preservation and repinned snapshot identity.
 - Independent reviewer: focused suite 5/5; separate manifest/cases/gold mutation after verification each returned 1 without creating an index or exposing injected private contents.
 - Independent reviewer: `PYTHONPATH=src python -m unittest discover -s tests -q` ran 179 tests, OK with 14 skipped (70.677 seconds). Skips are not passing coverage. No remote CI result is claimed.

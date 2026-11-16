@@ -9,7 +9,7 @@ from . import __version__
 from .comparison import compare, review
 from .fact_review import PROFILE, review_facts
 from .reporting import render_html
-from .validator import read_snapshot, verify
+from .validator import read_snapshot, safe_read, strict_json, verify
 
 
 def _write_new(path: Path, content: str) -> None:
@@ -62,6 +62,9 @@ def main(argv: list[str] | None = None) -> int:
     index = commands.add_parser("release-index", help="Create a redacted checked-snapshot lineage index")
     index.add_argument("manifest", type=Path)
     index.add_argument("--output", type=Path, required=True)
+    index_check = commands.add_parser("verify-index", help="Compare a saved index with the current checked snapshot")
+    index_check.add_argument("manifest", type=Path)
+    index_check.add_argument("index", type=Path)
     args = parser.parse_args(argv)
     if args.command in ("compare", "review"):
         report = (review if args.command == "review" else compare)(args.baseline, args.candidate)
@@ -110,7 +113,7 @@ def main(argv: list[str] | None = None) -> int:
         except (ValueError, OSError):
             print("BLOCK: dataset changed or became unreadable; recheck before export.", file=sys.stderr)
             return 1
-        if args.command == "release-index":
+        if args.command in ("release-index", "verify-index"):
             index = {
                 "schema_version": "insuredatagate.release-index.v1",
                 "dataset_id": report["dataset_id"],
@@ -132,6 +135,19 @@ def main(argv: list[str] | None = None) -> int:
                     "semantic_leakage": "NOT_CHECKED",
                 },
             }
+            if args.command == "verify-index":
+                try:
+                    saved = strict_json(safe_read(args.index, 64 * 1024 * 1024))
+                    # Canonical serialization preserves numeric types (unlike
+                    # Python equality, where True == 1 == 1.0).
+                    matches = json.dumps(saved, sort_keys=True) == json.dumps(index, sort_keys=True)
+                except ValueError:
+                    matches = False
+                if not matches:
+                    print("BLOCK: index is unreadable, invalid or does not match the current checked snapshot.", file=sys.stderr)
+                    return 1
+                print("PASS: index matches the current checked snapshot; no approval certification.")
+                return 0
             _write_new(args.output, json.dumps(index, ensure_ascii=True, indent=2) + "\n")
             print("Created checked-snapshot release index.", file=sys.stderr)
             return 0
