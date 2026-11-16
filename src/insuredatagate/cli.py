@@ -59,6 +59,9 @@ def main(argv: list[str] | None = None) -> int:
     export = commands.add_parser("export-inputs", help="Export validated inputs without gold")
     export.add_argument("manifest", type=Path)
     export.add_argument("--output", type=Path, required=True)
+    index = commands.add_parser("release-index", help="Create a redacted checked-snapshot lineage index")
+    index.add_argument("manifest", type=Path)
+    index.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     if args.command in ("compare", "review"):
         report = (review if args.command == "review" else compare)(args.baseline, args.candidate)
@@ -99,13 +102,39 @@ def main(argv: list[str] | None = None) -> int:
             return 0 if report["status"] == "PASS" else 1
 
         if report["status"] != "PASS":
-            print("BLOCK: validation failed; no inputs exported.", file=sys.stderr)
+            print("BLOCK: validation failed; no release output created.", file=sys.stderr)
             return 1
         try:
-            rows = read_snapshot(args.manifest, report)["cases"]
+            snapshot = read_snapshot(args.manifest, report)
+            rows = snapshot["cases"]
         except (ValueError, OSError):
             print("BLOCK: dataset changed or became unreadable; recheck before export.", file=sys.stderr)
             return 1
+        if args.command == "release-index":
+            index = {
+                "schema_version": "insuredatagate.release-index.v1",
+                "dataset_id": report["dataset_id"],
+                "version": report["version"],
+                "manifest_sha256": report["manifest_sha256"],
+                "files": sorted(report["files"], key=lambda item: item["path"]),
+                "counts": report["counts"],
+                "sources": sorted(({
+                    key: source[key] for key in ("source_id", "path", "sha256", "license", "status")
+                } for source in snapshot["manifest"]["sources"]), key=lambda item: item["source_id"]),
+                "lineage": sorted(({
+                    "case_id": row["case_id"], "group_id": row["group_id"],
+                    "split": row["split"], "source_ids": sorted(row["source_ids"]),
+                } for row in rows), key=lambda item: item["case_id"]),
+                "assurance": {
+                    "snapshot": "LOCAL_CHECKS_PASSED",
+                    "rights": "DECLARATIONS_ONLY",
+                    "reviewer_identity": "NOT_AUTHENTICATED",
+                    "semantic_leakage": "NOT_CHECKED",
+                },
+            }
+            _write_new(args.output, json.dumps(index, ensure_ascii=True, indent=2) + "\n")
+            print("Created checked-snapshot release index.", file=sys.stderr)
+            return 0
         content = "".join(
             json.dumps({key: row[key] for key in ("case_id", "input", "source_ids")}, ensure_ascii=False) + "\n"
             for row in rows

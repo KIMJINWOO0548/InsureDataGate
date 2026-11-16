@@ -1,5 +1,7 @@
 # InsureDataGate
 
+Checked-snapshot inventory: [`release-index`](docs/RELEASE_INDEX.md) records redacted lineage and file hashes without asserting rights certification or semantic-leakage assurance.
+
 [![Verify](https://github.com/KIMJINWOO0548/InsureDataGate/actions/workflows/ci.yml/badge.svg)](https://github.com/KIMJINWOO0548/InsureDataGate/actions/workflows/ci.yml)
 
 **Find release impact by train/validation/test split, inspect each changed case and source, and resolve blocked checks offline.**
