@@ -1,0 +1,79 @@
+<Window x:Class="InsureDataGate.Desktop.ReviewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="InsureDataGate — 데이터 검사" Icon="Assets/insuredatagate.ico" Width="1100" Height="700" MinWidth="650" MinHeight="410"
+        FontFamily="Segoe UI, Malgun Gothic" FontSize="14" Background="#F6F7FB" Language="ko-KR"
+        WindowStartupLocation="CenterScreen" AllowDrop="True" Drop="OnDrop" DragOver="OnDragOver"
+        PreviewKeyDown="OnKey" Closing="OnClosing">
+  <Window.Resources>
+    <Style TargetType="Button">
+      <Setter Property="MinHeight" Value="34"/><Setter Property="Padding" Value="12,3"/>
+      <Setter Property="Margin" Value="0,0,6,4"/><Setter Property="Background" Value="White"/>
+      <Setter Property="BorderBrush" Value="#B8C2D6"/><Setter Property="Foreground" Value="#18243A"/>
+    </Style>
+    <Style TargetType="DataGrid">
+      <Setter Property="AutoGenerateColumns" Value="False"/><Setter Property="IsReadOnly" Value="True"/>
+      <Setter Property="CanUserAddRows" Value="False"/><Setter Property="SelectionMode" Value="Single"/>
+      <Setter Property="HeadersVisibility" Value="Column"/><Setter Property="GridLinesVisibility" Value="Horizontal"/>
+      <Setter Property="HorizontalGridLinesBrush" Value="#E5E8F0"/><Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="RowHeaderWidth" Value="0"/><Setter Property="RowHeight" Value="29"/>
+    </Style>
+    <Style x:Key="RightNumber" TargetType="TextBlock"><Setter Property="TextAlignment" Value="Right"/></Style>
+  </Window.Resources>
+  <DockPanel>
+    <Border DockPanel.Dock="Top" Background="#19263D" Padding="16,10">
+      <TextBlock Text="InsureDataGate  /  데이터 검사" Foreground="White" FontSize="17" FontWeight="SemiBold"/>
+    </Border>
+    <WrapPanel DockPanel.Dock="Top" Margin="16,10,8,4" KeyboardNavigation.TabNavigation="Local">
+      <Button x:Name="OpenManifestButton" Click="OnOpenManifest" ToolTip="Ctrl+O" Content="매니페스트 열기"/>
+      <Button x:Name="OpenReportButton" Click="OnOpenReport" ToolTip="Ctrl+Shift+O" Content="저장 보고서 열기"/>
+      <Button x:Name="SaveButton" Click="OnSaveReport" ToolTip="Ctrl+S" Content="보고서 저장" IsEnabled="False"/>
+      <Button x:Name="CancelButton" Click="OnCancel" ToolTip="Esc" Content="검사 취소" IsEnabled="False"/>
+      <ComboBox x:Name="ZoomSelector" AutomationProperties.Name="글자 배율" Width="83" Height="34"
+                SelectedIndex="0" SelectionChanged="OnZoom" VerticalAlignment="Top">
+        <ComboBoxItem Content="100%"/><ComboBoxItem Content="125%"/><ComboBoxItem Content="150%"/>
+      </ComboBox>
+    </WrapPanel>
+    <Border DockPanel.Dock="Top" Margin="16,0,16,8" Padding="12,9" Background="#EFF1F9" BorderBrush="#C9D2E4" BorderThickness="1">
+      <StackPanel>
+        <TextBlock x:Name="Status" Text="검사할 매니페스트를 열거나 이 창에 놓으세요." FontWeight="SemiBold"
+                   TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite"/>
+        <TextBlock x:Name="Summary" Margin="0,3,0,0" TextWrapping="Wrap" Foreground="#334865"/>
+      </StackPanel>
+    </Border>
+    <TextBlock DockPanel.Dock="Bottom" Margin="16,10" TextWrapping="Wrap" Foreground="#374761"
+               Text="자동 검사는 형식, 파일 해시, 분할과 기록된 선언을 확인합니다. 사용 권리와 정답 정확성은 사람이 검토해야 합니다."/>
+    <Grid Margin="16,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="3*" MinWidth="285"/><ColumnDefinition Width="10"/><ColumnDefinition Width="2*" MinWidth="210"/>
+      </Grid.ColumnDefinitions>
+      <TabControl x:Name="ResultsTabs" SelectionChanged="OnSelection" AutomationProperties.Name="검사 결과 목록" MinWidth="0">
+        <TabItem x:Name="IssuesTab" Header="검사 항목">
+          <DataGrid x:Name="Issues" SelectionChanged="OnSelection" AutomationProperties.Name="검사 항목 목록">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="규칙" Binding="{Binding Code}" Width="*"/>
+              <DataGridTextColumn Header="입력 위치" Binding="{Binding Location}" Width="1.2*"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </TabItem>
+        <TabItem Header="확인한 파일">
+          <DataGrid x:Name="Files" SelectionChanged="OnSelection" AutomationProperties.Name="확인한 파일 목록">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="파일" Binding="{Binding Path}" Width="*"/>
+              <DataGridTextColumn Header="바이트" Binding="{Binding Bytes, StringFormat=N0}" Width="100" ElementStyle="{StaticResource RightNumber}"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </TabItem>
+      </TabControl>
+      <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="Transparent" AutomationProperties.Name="상세 패널 너비"/>
+      <Border Grid.Column="2" BorderBrush="#C9D2E4" BorderThickness="1" Background="White" Padding="12">
+        <DockPanel>
+          <TextBlock DockPanel.Dock="Top" Text="선택한 항목의 근거" FontWeight="SemiBold" Margin="0,0,0,7"/>
+          <TextBox x:Name="Details" Text="목록에서 검사 항목이나 확인한 파일을 선택하세요."
+                   AutomationProperties.Name="선택한 항목의 근거" TextWrapping="Wrap" AcceptsReturn="True"
+                   IsReadOnly="True" VerticalScrollBarVisibility="Auto" BorderThickness="0"/>
+        </DockPanel>
+      </Border>
+    </Grid>
+  </DockPanel>
+</Window>
