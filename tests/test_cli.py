@@ -1,6 +1,7 @@
 """Exercise the user-facing process and exclusive output guarantees."""
 
 import contextlib
+import hashlib
 import io
 import json
 import os
@@ -61,6 +62,21 @@ class CliTests(unittest.TestCase):
         self.assertTrue(all(set(row) == {"case_id", "input", "source_ids"} for row in rows))
         self.assertNotIn("PRIVATE_GOLD_DEMO", output.read_text(encoding="utf-8"))
         self.assertEqual(result.stdout, "")
+
+    def test_export_requires_the_manifest_revision_requested_by_the_caller(self):
+        original_hash = hashlib.sha256(self.data.path.read_bytes()).hexdigest()
+        output = self.root / "pinned-inputs.jsonl"
+        self.data.manifest["version"] = "0.2"
+        self.data.save()
+        result = self.run_cli("export-inputs", self.data.path, "--output", output,
+                              "--expected-manifest-sha256", original_hash)
+        self.assertEqual(result.returncode, 1, result.stderr)
+        self.assertFalse(output.exists())
+        current_hash = hashlib.sha256(self.data.path.read_bytes()).hexdigest()
+        result = self.run_cli("export-inputs", self.data.path, "--output", output,
+                              "--expected-manifest-sha256", current_hash)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertTrue(output.exists())
 
     def test_blocked_export_creates_nothing(self):
         output = self.root / "inputs.jsonl"

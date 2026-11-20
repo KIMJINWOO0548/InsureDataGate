@@ -1,5 +1,7 @@
 # InsureDataGate
 
+[Windows x64 앱](docs/windows-app.md)에서 합성 데이터 매니페스트를 열고, 파일별 검사 결과를 확인해 로컬 보고서로 저장할 수 있습니다.
+
 Checked-snapshot inventory: [`release-index`](docs/RELEASE_INDEX.md) records redacted lineage and file hashes without asserting rights certification or semantic-leakage assurance.
 
 [![Verify](https://github.com/KIMJINWOO0548/InsureDataGate/actions/workflows/ci.yml/badge.svg)](https://github.com/KIMJINWOO0548/InsureDataGate/actions/workflows/ci.yml)
