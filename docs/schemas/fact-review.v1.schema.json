@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:insuredatagate:fact-review:v1",
+  "title": "InsureDataGate bounded disclosure fact review v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "profile",
+    "status",
+    "manifest_sha256",
+    "cases_sha256",
+    "gold_sha256",
+    "cases",
+    "issues"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "insuredatagate.fact-review.v1"
+    },
+    "profile": {
+      "type": "string",
+      "const": "disclosure-facts.v1"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "SUPPORTED",
+        "CONFLICT",
+        "ABSTAIN",
+        "UNAVAILABLE"
+      ]
+    },
+    "manifest_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "cases_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "gold_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/case"
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "VALIDATION_FAILED",
+          "SNAPSHOT_UNAVAILABLE"
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "field",
+        "start",
+        "end",
+        "sha256"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "period",
+            "currency",
+            "amount_unit",
+            "scope",
+            "revenue",
+            "target"
+          ]
+        },
+        "field": {
+          "type": "string",
+          "const": "input"
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "field": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field",
+        "status",
+        "reason",
+        "evidence"
+      ],
+      "properties": {
+        "field": {
+          "type": "string",
+          "enum": [
+            "period_start",
+            "period_end",
+            "period",
+            "currency",
+            "amount_unit",
+            "scope",
+            "revenue"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "SUPPORTED",
+            "CONFLICT",
+            "ABSTAIN"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "MATCH",
+            "MISMATCH",
+            "MISSING_CONTEXT",
+            "AMBIGUOUS_CONTEXT",
+            "UNSUPPORTED_CONTEXT",
+            "UNSUPPORTED_CLAIM"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        }
+      }
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "record_index",
+        "source_ids",
+        "input_sha256",
+        "status",
+        "reasons",
+        "fields"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+        },
+        "record_index": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+          }
+        },
+        "input_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "SUPPORTED",
+            "CONFLICT",
+            "ABSTAIN"
+          ]
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "INVALID_CLAIMS",
+              "UNSUPPORTED_CLAIM"
+            ]
+          }
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/field"
+          }
+        }
+      }
+    }
+  }
+}

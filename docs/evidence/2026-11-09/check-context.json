@@ -1,0 +1,203 @@
+{
+  "record_version": 1,
+  "date_utc": "2026-11-09",
+  "base_ref": "improve/competitive-depth-20261106",
+  "base_sha": "04697076f4cd5f7a019ea27f13daa5d2ca14950a",
+  "work_branch": "improve/check-context-integrity-20261109",
+  "provenance": "Independent change from accessible remote code; no inaccessible preservation files read or restored.",
+  "scope": "Check the existing report.v1 PASS shape and observed context before checked reread consumers use the snapshot.",
+  "contracts": {
+    "report": "insuredatagate.report.v1",
+    "manifest": "insuredatagate.manifest.v1",
+    "fact_profile": "disclosure-facts.v1",
+    "package": "0.3.0",
+    "all_unchanged": true
+  },
+  "runtime": {
+    "platform": "Linux",
+    "python": "3.12.14",
+    "runtime_dependencies_added": 0
+  },
+  "tests": {
+    "baseline": {
+      "run": 151,
+      "passed": 150,
+      "skipped": 1,
+      "exit_code": 0
+    },
+    "initial_red": {
+      "run": 8,
+      "failures_including_subtests": 18,
+      "exit_code": 1
+    },
+    "expanded_red_exact_base": {
+      "run": 8,
+      "failures_including_subtests": 21,
+      "exit_code": 1
+    },
+    "green": {
+      "run": 8,
+      "passed": 8,
+      "exit_code": 0
+    },
+    "final_full": {
+      "run": 159,
+      "passed": 158,
+      "skipped": 1,
+      "skip_reason": "Windows-only directory junction",
+      "exit_code": 0
+    }
+  },
+  "coverage": [
+    "report schema/dataset/version mismatch",
+    "PASS with nonempty or malformed issues",
+    "duplicate or incomplete file inventory",
+    "incorrect or non-integer file byte sizes",
+    "incorrect/missing/extra/non-integer counts",
+    "split counts moved with unchanged total cases",
+    "normal JSON roundtrip and reordered inventory accepted",
+    "comparison/review BLOCK and metrics withheld",
+    "export refusal without output",
+    "fact review UNAVAILABLE with empty cases and no snapshot hash",
+    "report and input preservation; generic diagnostic"
+  ],
+  "cli_compatibility": {
+    "base_sha": "04697076f4cd5f7a019ea27f13daa5d2ca14950a",
+    "runtime": "Linux Python 3.12.14",
+    "comparisons": 14,
+    "results": [
+      {
+        "check": "insurance-demo:check",
+        "status": "PASS",
+        "cases": 6,
+        "base_bytes_equal": true
+      },
+      {
+        "check": "insurance-demo:export",
+        "base_bytes_equal": true,
+        "allowlist_only": true,
+        "overwrite_refused": true
+      },
+      {
+        "check": "insurance-demo-v2:check",
+        "status": "PASS",
+        "cases": 6,
+        "base_bytes_equal": true
+      },
+      {
+        "check": "insurance-demo-v2:export",
+        "base_bytes_equal": true,
+        "allowlist_only": true,
+        "overwrite_refused": true
+      },
+      {
+        "check": "disclosure-demo:check",
+        "status": "PASS",
+        "cases": 6,
+        "base_bytes_equal": true
+      },
+      {
+        "check": "disclosure-demo:export",
+        "base_bytes_equal": true,
+        "allowlist_only": true,
+        "overwrite_refused": true
+      },
+      {
+        "check": "disclosure-demo-v2:check",
+        "status": "PASS",
+        "cases": 6,
+        "base_bytes_equal": true
+      },
+      {
+        "check": "disclosure-demo-v2:export",
+        "base_bytes_equal": true,
+        "allowlist_only": true,
+        "overwrite_refused": true
+      },
+      {
+        "check": "insurance:compare",
+        "status": "PASS",
+        "base_bytes_equal": true
+      },
+      {
+        "check": "insurance:review",
+        "status": "PASS",
+        "base_bytes_equal": true
+      },
+      {
+        "check": "disclosure:compare",
+        "status": "PASS",
+        "base_bytes_equal": true
+      },
+      {
+        "check": "disclosure:review",
+        "status": "PASS",
+        "base_bytes_equal": true
+      },
+      {
+        "check": "disclosure-demo:review-facts",
+        "status": "SUPPORTED",
+        "base_bytes_equal": true
+      },
+      {
+        "check": "disclosure-demo-v2:review-facts",
+        "status": "SUPPORTED",
+        "base_bytes_equal": true
+      }
+    ],
+    "example_files_unchanged": 19,
+    "raw_case_gold_contents_recorded": false
+  },
+  "distribution": {
+    "command": [
+      "python3",
+      "scripts/check_distribution.py"
+    ],
+    "exit_code": 0,
+    "build_backend_preinstalled": "setuptools 84.2.1",
+    "wheel_sdist_contents": true,
+    "isolated_offline_wheel_install": true,
+    "installed_entrypoints": true,
+    "existing_html_bytes_equal": true,
+    "gold_free_export_and_output_preservation": true,
+    "installed_disclosure_fact_review": true,
+    "tool_download": false,
+    "package_publication": false
+  },
+  "input_preservation": {
+    "tracked_example_files_unchanged_from_base": 19,
+    "renderer_schema_profile_and_package_config_changed": false
+  },
+  "internal_review": {
+    "read_only_agents": 2,
+    "blocking_findings": 0,
+    "external_human_acceptance": false
+  },
+  "source_sha256": {
+    "src/insuredatagate/validator.py": "6433fdf69e8d76aeefa2af9f0a04171fb81d7368ecb63cc6786d9127f2a5a2e3",
+    "tests/test_snapshot_context.py": "52522bfc4d8d12034a522791b405ae9badf54747d05df80edb45c7447d6b1d06"
+  },
+  "local_evidence": {
+    "ignored_run_directory": "reports/runs/20261109T160017Z-d32a9ac6-check-context",
+    "file_sha256": {
+      "baseline-unittest.log": "b647885377d28fbfdcf4f119889ca4eaccfeab3f5ff63cf1e57da836af47d804",
+      "context-red.log": "ea0777d36b1ce9cd4eddec66ab7d067183aa9d858cf6ae010baa53b43508c9b8",
+      "context-red-expanded.log": "03b8bcaf42a66e44b37508b4ea034d346860688a0e0bfd039258eee3f9769c4d",
+      "context-green.log": "c521d9a15e004ae13939a99719a7546678b42dea44e591035aa28d7fae9897c9",
+      "full-unittest.log": "219a2f053338e54fb58409784d0bc6f644299522b45b1774fa1af94fb6be99cd",
+      "full-unittest-final.log": "9537e8546bad829324b4d1874ff75c8cb76a98e8616197555db81bdf33ead64e",
+      "distribution.log": "882fe6e46b8db65cde3daab4ac0d4edc7273a43f1c61df6a3519f274b51fa2ff",
+      "cli-compatibility.json": "3fc85315c469b700f274de7bf3a518c5ce3ebae6c7e8ae0e309640cac056e05c"
+    },
+    "raw_case_gold_contents_in_this_record": false
+  },
+  "limitations": [
+    "No normal-CLI PASS bypass reproduced.",
+    "Requires a report produced by trusted verify; does not authenticate reports or prove policy execution.",
+    "Not a second complete validator or a new policy-version registry.",
+    "No atomicity against hostile concurrent filesystem replacement or hardlinks.",
+    "Windows and other Python versions not run.",
+    "New browser execution and real data not run.",
+    "New remote CI not established by this local record."
+  ]
+}

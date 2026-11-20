@@ -55,9 +55,18 @@ def portable_path(value) -> bool:
         type(value) is str
         and bool(value)
         and _unicode_valid(value)
-        and not any(char in value for char in "\\:")
+        and not any(char in value for char in '\\:<>"|?*')
         and not any(ord(char) < 32 or ord(char) == 127 for char in value)
-        and all(part not in ("", ".", "..") for part in value.split("/"))
+        and all(
+            part not in ("", ".", "..")
+            and not part.endswith((".", " "))
+            and part.split(".", 1)[0].rstrip(" ").upper() not in (
+                {"CON", "PRN", "AUX", "NUL", "CONIN$", "CONOUT$"}
+                | {f"{prefix}{digit}" for prefix in ("COM", "LPT")
+                   for digit in "123456789¹²³"}
+            )
+            for part in value.split("/")
+        )
     )
 
 
@@ -106,20 +115,39 @@ def _jsonl_lines(raw: bytes) -> list[bytes]:
 
 
 def read_snapshot(manifest_path: Path, report: dict) -> dict:
-    """Reread a PASS report's exact bytes for internal export/comparison use.
+    """Reread a verified v1 PASS report's bytes and observed input context.
 
     shortcut: checked rereads are not atomic filesystem snapshots; use immutable
     storage if hostile concurrent replacement becomes a requirement.
     """
     try:
-        if report["status"] != "PASS":
+        if (not _keys(report, "schema_version status dataset_id version manifest_sha256 files counts issues")
+                or report["schema_version"] != "insuredatagate.report.v1"
+                or report["status"] != "PASS"
+                or type(report["issues"]) is not list or report["issues"]):
             raise ValueError("A verified report is required")
+        count_fields = ("sources", "cases", "gold", *SPLITS)
+        if (not _keys(report["counts"], " ".join(count_fields))
+                or any(type(value) is not int or value < 0 for value in report["counts"].values())):
+            raise ValueError("Invalid observed counts")
         path = Path(manifest_path)
         raw = safe_read(path, SMALL_LIMIT)
         if hashlib.sha256(raw).hexdigest() != report["manifest_sha256"]:
             raise ValueError("Manifest changed")
         manifest = strict_json(raw)
-        observed = {item["path"]: item["sha256"] for item in report["files"]}
+        if (manifest["schema_version"] != "insuredatagate.manifest.v1"
+                or manifest["dataset_id"] != report["dataset_id"]
+                or manifest["version"] != report["version"]):
+            raise ValueError("Manifest context changed")
+        if type(report["files"]) is not list:
+            raise ValueError("Invalid file inventory")
+        observed = {}
+        for item in report["files"]:
+            if (not _keys(item, "path sha256 bytes") or not portable_path(item["path"])
+                    or type(item["bytes"]) is not int or item["bytes"] < 0
+                    or item["path"] in observed):
+                raise ValueError("Invalid file inventory")
+            observed[item["path"]] = item
         refs = [(source, SMALL_LIMIT, "source") for source in manifest["sources"]]
         refs += [(manifest[role], RECORD_LIMIT, role) for role in ("cases", "gold")]
         if set(observed) != {ref["path"] for ref, _, _ in refs}:
@@ -130,13 +158,24 @@ def read_snapshot(manifest_path: Path, report: dict) -> dict:
                 raise ValueError("Invalid path")
             content = safe_read(path.parent / ref["path"], limit)
             digest = hashlib.sha256(content).hexdigest()
-            if digest != ref["sha256"] or digest != observed[ref["path"]]:
+            item = observed[ref["path"]]
+            if digest != ref["sha256"] or digest != item["sha256"] or len(content) != item["bytes"]:
                 raise ValueError("Referenced file changed")
             if role != "source":
                 result[role] = [strict_json(line) for line in _jsonl_lines(content)]
+        counts = {"sources": len(manifest["sources"]), "cases": len(result["cases"]),
+                  "gold": len(result["gold"]), **{split: 0 for split in SPLITS}}
+        for case in result["cases"]:
+            counts[case["split"]] += 1
+        if counts != report["counts"]:
+            raise ValueError("Observed counts changed")
         return result
     except (KeyError, TypeError, ValueError, OSError, RuntimeError):
         raise ValueError("Verified dataset snapshot changed or became unreadable") from None
+
+
+def _normalize_input(text: str) -> str:
+    return " ".join(unicodedata.normalize("NFKC", text).casefold().split())
 
 
 def verify(manifest_path: Path) -> dict:
@@ -192,17 +231,21 @@ def verify(manifest_path: Path) -> dict:
     report["counts"]["sources"] = len(sources)
     refs = []
     source_ids = set()
+    sources_complete = True
     for index, source in enumerate(sources, 1):
         location = f"manifest.sources[{index}]"
         if not _keys(source, "source_id path sha256 license status approved_by"):
+            sources_complete = False
             issue("SCHEMA", location, "Source fields must match schema v1 exactly.")
             continue
         if not _id(source["source_id"]) or not _text(source["license"]) or not _text(source["approved_by"]):
             issue("SCHEMA", location, "Source IDs and rights declarations must be valid text.")
-        else:
+        if _id(source["source_id"]):
             if source["source_id"] in source_ids:
                 issue("DUPLICATE_SOURCE", location, "Source IDs must be unique.")
             source_ids.add(source["source_id"])
+        else:
+            sources_complete = False
         if source["status"] != "APPROVED":
             issue("SOURCE_APPROVAL", location, "Source must declare APPROVED status.")
         refs.append((location, source, SMALL_LIMIT, "source"))
@@ -266,12 +309,19 @@ def verify(manifest_path: Path) -> dict:
         report["counts"][role] = len(lines)
         records[role] = rows
 
+    if not sources_complete:
+        issue("CHECK_NOT_RUN", "checks.source_references",
+              "Unknown source references were not checked because source declarations are incomplete or invalid.")
+    cases_complete = "cases" in records and len(records["cases"]) == report["counts"]["cases"]
+    gold_complete = "gold" in records and len(records["gold"]) == report["counts"]["gold"]
     cases = {}
+    creators_by_case = {}
     groups = {}
     inputs = {}
     for index, case in records.get("cases", []):
         location = f"cases[{index}]"
         if not _keys(case, "case_id group_id split source_ids input created_by"):
+            cases_complete = False
             issue("SCHEMA", location, "Case fields must match schema v1 exactly.")
             continue
         ids = case["source_ids"]
@@ -279,33 +329,40 @@ def verify(manifest_path: Path) -> dict:
                 or type(case["split"]) is not str or case["split"] not in SPLITS
                 or not _text(case["input"], 10000) or not _text(case["created_by"])
                 or type(ids) is not list or not ids or not all(_id(item) for item in ids)):
+            cases_complete = False
             issue("SCHEMA", location, "Case fields have invalid types or values.")
             continue
-        if len(set(ids)) != len(ids) or not set(ids) <= source_ids:
+        if len(set(ids)) != len(ids) or (sources_complete and not set(ids) <= source_ids):
             issue("SOURCE_REFERENCE", location, "Case source IDs must be unique known sources.")
         if case["case_id"] in cases:
             issue("DUPLICATE_CASE", location, "Case IDs must be unique.")
         else:
             cases[case["case_id"]] = case
+        creators_by_case.setdefault(case["case_id"], set()).add(case["created_by"].strip().casefold())
         split = case["split"]
         report["counts"][split] += 1
-        normalized = " ".join(unicodedata.normalize("NFKC", case["input"]).casefold().split())
+        normalized = _normalize_input(case["input"])
         for seen, key, code in ((groups, case["group_id"], "GROUP_LEAKAGE"), (inputs, normalized, "INPUT_LEAKAGE")):
             if key in seen and seen[key] != split:
                 issue(code, location, "Related cases must remain in one split.")
             else:
                 seen[key] = split
     for split in SPLITS:
-        if not report["counts"][split]:
+        if cases_complete and not report["counts"][split]:
             issue("EMPTY_SPLIT", f"counts.{split}", "Every split requires at least one case.")
+    if not cases_complete:
+        issue("CHECK_NOT_RUN", "checks.split_coverage",
+              "Complete split coverage was not checked because case records are unavailable or invalid.")
     gold_ids = set()
     for index, gold in records.get("gold", []):
         location = f"gold[{index}]"
         if not _keys(gold, "case_id expected review_status reviewed_by"):
+            gold_complete = False
             issue("SCHEMA", location, "Gold fields must match schema v1 exactly.")
             continue
         if (not _id(gold["case_id"]) or not _text(gold["expected"], 10000)
                 or not _text(gold["reviewed_by"])):
+            gold_complete = False
             issue("SCHEMA", location, "Gold fields have invalid types or values.")
             continue
         if gold["review_status"] != "APPROVED":
@@ -314,10 +371,13 @@ def verify(manifest_path: Path) -> dict:
         if case_id in gold_ids:
             issue("DUPLICATE_GOLD", location, "Gold case IDs must be unique.")
         gold_ids.add(case_id)
-        if case_id not in cases:
+        if case_id not in cases and cases_complete:
             issue("UNMATCHED_GOLD", location, "Gold requires a corresponding case.")
-        elif gold["reviewed_by"].strip().casefold() == cases[case_id]["created_by"].strip().casefold():
+        elif case_id in cases and gold["reviewed_by"].strip().casefold() in creators_by_case[case_id]:
             issue("SELF_REVIEW", location, "Reviewer and creator declarations must differ.")
-    if set(cases) - gold_ids:
+    if not cases_complete or not gold_complete:
+        issue("CHECK_NOT_RUN", "checks.case_gold_coverage",
+              "Complete case-to-gold coverage was not checked because prerequisite records are unavailable or invalid.")
+    if cases_complete and gold_complete and set(cases) - gold_ids:
         issue("MISSING_GOLD", "gold", "Every case requires a corresponding gold record.")
     return finish()

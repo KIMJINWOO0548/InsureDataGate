@@ -1,0 +1,9 @@
+SYNTHETIC EXTRACTION GUIDE — no real issuer, filing, security or law is represented.
+All issuer names, dates, amounts, cases and author/reviewer/curator identities are invented.
+Extract only explicitly stated fields from the supplied synthetic disclosure excerpt.
+Keep reporting period, currency, amount unit, and consolidated/separate scope distinct.
+Do not convert a stated amount or guess a missing field. Use JSON null for a requested absent field.
+An expected answer is a JSON object encoded inside the manifest.v1 expected string, not a new schema.
+APPROVED and named reviewers are unauthenticated fictional declarations for testing this offline gate.
+This example does not establish extraction accuracy, authenticated review, legal compliance or investment suitability.
+No recommendations, valuation, order creation or trading are included.

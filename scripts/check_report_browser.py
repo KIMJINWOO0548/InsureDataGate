@@ -193,6 +193,17 @@ def check_interactions(page, report, name, viewport, output, evidence, observati
 
     review = report.get("review", {})
     summary = review.get("summary") or {}
+    issues = [issue for issue in report.get("issues", []) if type(issue) is dict]
+    if issues:
+        require(page.locator('nav.finding-types a').count() == len({issue['code'] for issue in issues}), prefix + ": finding type counts mismatch")
+        target = page.locator('nav.finding-types a').first.get_attribute('href')[1:]
+        keyboard_activate(page, 'nav.finding-types a')
+        require(page.evaluate("target => document.activeElement.id === target && !!document.activeElement.getClientRects().length", target), prefix + ": finding type does not focus visible detail")
+        require(page.locator('#' + target + ' tbody tr').count() == sum(issue['code'] == sorted({item['code'] for item in issues})[0] for issue in issues), prefix + ": grouped finding rows mismatch")
+        keyboard_activate(page, '#' + target + ' a[href="#issues"]')
+        require(page.evaluate("document.activeElement.id === 'issues'"), prefix + ": return to finding types does not focus overview")
+        observation['findingTypeNavigation'] = True
+        overflow()
     if page.locator('nav.filters').count():
         require(page.locator('input[type="radio"]').count() == 0, prefix + ": expected fragment filters")
         require(page.locator('.empty-group:visible').count() == 0, prefix + ": empty groups visible initially")
@@ -215,6 +226,19 @@ def check_interactions(page, report, name, viewport, output, evidence, observati
             select("all")
         if name == "source-only":
             require(page.locator('.affected .dossier:visible').count() == 6 and page.locator('.direct:visible').count() == 0, prefix + ": source-only All semantics mismatch")
+        for split in ("train", "validation", "test"):
+            keyboard_activate(page, f'nav.filters a[href="#view-{split}"]')
+            expected = {f"case-{index}" for index, case in enumerate(review["cases"]) if split in case["splits"].values()}
+            observed = set(page.locator('.dossiers>.group:not(.sources)>.dossier:visible').evaluate_all("elements => elements.map(el => el.id)"))
+            require(observed == expected, prefix + ": either-snapshot split filter mismatch")
+            require(page.locator('.sources:visible').count() == 0, prefix + ": split case scope leaked sources")
+            observation.setdefault("splitFilters", {})[split] = {"caseIds": sorted(observed), "expectedCount": len(expected)}
+            overflow()
+        capture("split-test")
+        select("all")
+        page.emulate_media(media="print")
+        require(page.locator('.dossier:visible').count() == summary["case_count"] + summary["source_count"], prefix + ": print omitted dossiers")
+        page.emulate_media(media="screen")
     inventory = page.locator('#inventory')
     require(inventory.get_attribute('open') is None, prefix + ": inventory unexpectedly opened")
     integrity = page.locator('#integrity')

@@ -79,3 +79,14 @@ class DatasetFixture:
         (self.root / "cases.jsonl").write_bytes(encode_jsonl(self.cases))
         (self.root / "gold.jsonl").write_bytes(encode_jsonl(self.gold))
         self.repin()
+
+
+def create_test_symlink(link: Path, target: Path):
+    """Distinguish unavailable Windows privilege from product/test failures."""
+    import unittest
+    try:
+        link.symlink_to(target)
+    except OSError as error:
+        if getattr(error, "winerror", None) == 1314:
+            raise unittest.SkipTest("Windows symlink privilege unavailable; real-link check NOT_RUN") from error
+        raise

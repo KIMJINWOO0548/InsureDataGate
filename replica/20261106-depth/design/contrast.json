@@ -1,0 +1,52 @@
+[
+  {
+    "fg": "text",
+    "bg": "surface",
+    "size": "normal",
+    "ratio": 15.43,
+    "aa": true,
+    "aaa": true,
+    "fg_hex": "#20252b",
+    "bg_hex": "#ffffff"
+  },
+  {
+    "fg": "muted",
+    "bg": "surface",
+    "size": "normal",
+    "ratio": 5.48,
+    "aa": true,
+    "aaa": false,
+    "fg_hex": "#626a74",
+    "bg_hex": "#ffffff"
+  },
+  {
+    "fg": "link",
+    "bg": "surface",
+    "size": "normal",
+    "ratio": 7.02,
+    "aa": true,
+    "aaa": true,
+    "fg_hex": "#345b87",
+    "bg_hex": "#ffffff"
+  },
+  {
+    "fg": "danger",
+    "bg": "surface",
+    "size": "normal",
+    "ratio": 7.12,
+    "aa": true,
+    "aaa": true,
+    "fg_hex": "#a22c35",
+    "bg_hex": "#ffffff"
+  },
+  {
+    "fg": "focus",
+    "bg": "surface",
+    "size": "ui",
+    "ratio": 5.55,
+    "aa": true,
+    "aaa": true,
+    "fg_hex": "#426a9e",
+    "bg_hex": "#ffffff"
+  }
+]

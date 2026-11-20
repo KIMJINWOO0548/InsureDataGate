@@ -1,0 +1,33 @@
+{
+  "feature_score": 100.0,
+  "counted": 1,
+  "must_have_done": 1,
+  "must_have_total": 1,
+  "by_area": [
+    {
+      "area": "review",
+      "score": 100.0,
+      "features": 1
+    }
+  ],
+  "missing": [],
+  "skipped": [],
+  "extras": [
+    {
+      "feature": "Raw-value exclusion",
+      "area": "privacy",
+      "priority": "must",
+      "clone": "yes",
+      "notes": "Existing IDG allowlisted redaction retained; no claim of equivalent GX defaults"
+    },
+    {
+      "feature": "Native keyboard return navigation",
+      "area": "review",
+      "priority": "should",
+      "clone": "yes",
+      "notes": "App-specific offline detail-to-overview links; no JavaScript"
+    }
+  ],
+  "problems": [],
+  "overall": 100.0
+}

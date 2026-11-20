@@ -24,7 +24,7 @@ def main() -> None:
     wheel = output / build_meta.build_wheel(str(output))
     with zipfile.ZipFile(wheel) as archive:
         wheel_names = archive.namelist()
-        for name in ("validator.py", "cli.py", "comparison.py", "reporting.py", "guidance.py", "__main__.py", "__init__.py"):
+        for name in ("validator.py", "cli.py", "comparison.py", "reporting.py", "guidance.py", "fact_review.py", "__main__.py", "__init__.py"):
             assert archive.read("insuredatagate/" + name) == (root / "src" / "insuredatagate" / name).read_bytes()
         metadata = archive.read(f"insuredatagate-{version}.dist-info/METADATA")
         assert b"Requires-Dist:" not in metadata
@@ -32,7 +32,8 @@ def main() -> None:
         source_names = ["/".join(item.name.split("/")[1:]) for item in archive.getmembers() if item.isfile()]
     assert {"insuredatagate/validator.py", "insuredatagate/cli.py", "insuredatagate/__main__.py"} <= set(wheel_names)
     assert {"examples/insurance-demo/manifest.json", "docs/CONTRACT.md", "tests/test_cli.py", "scripts/check_distribution.py"} <= set(source_names)
-    assert {"VALIDATION.md", "CHANGELOG.md"} <= set(source_names)
+    assert {"VALIDATION.md", "CHANGELOG.md", "docs/FACT_REVIEW.md",
+            "docs/schemas/fact-review.v1.schema.json", "tests/test_fact_review.py"} <= set(source_names)
     for name in wheel_names + source_names:
         assert not any(part in {".git", ".venv", ".runtime", "reports", "__pycache__"} for part in name.split("/")), name
     with tempfile.TemporaryDirectory(prefix="insuredatagate-wheel-") as scratch:
@@ -80,7 +81,24 @@ def main() -> None:
         run(cli, "review", manifest, candidate, "--html", workspace)
         assert workspace.read_bytes() == (root / "docs/examples/review-workspace.html").read_bytes()
         assert b"case-0" in workspace.read_bytes() and b"source-0" in workspace.read_bytes()
-    print("PASS: wheel/sdist contents, isolated offline wheel install, entrypoints, demo, gold-free export, comparison, offline HTML, output preservation")
+        imported = run(python, "-c", "import insuredatagate.fact_review as f; print(f.__file__)").stdout.strip()
+        assert Path(imported).is_relative_to(temp / "env"), imported
+        for name in ("disclosure-demo", "disclosure-demo-v2"):
+            facts_manifest = root / "examples" / name / "manifest.json"
+            args = ("review-facts", facts_manifest, "--profile", "disclosure-facts.v1")
+            fact_path = temp / (name + "-facts.json")
+            fact_report = json.loads(run(cli, *args, "--json", "--report", fact_path).stdout)
+            assert fact_report["status"] == "SUPPORTED"
+            assert sum(len(case["fields"]) for case in fact_report["cases"]) == 14
+            assert json.loads(fact_path.read_text(encoding="utf-8")) == fact_report
+            assert json.loads(run(python, "-m", "insuredatagate", *args, "--json").stdout) == fact_report
+            assert "SUPPORTED" in run(cli, *args).stdout
+            before = fact_path.read_bytes()
+            run(cli, *args, "--report", fact_path, expected=2)
+            assert fact_path.read_bytes() == before
+        run(cli, "review-facts", manifest, "--profile", "disclosure-facts.v1", expected=1)
+        run(cli, "review-facts", manifest, "--profile", "unknown", expected=2)
+    print("PASS: wheel/sdist contents, isolated offline wheel install, entrypoints, demo, gold-free export, comparison, offline HTML, output preservation, installed disclosure fact-review API/CLI")
 
 
 if __name__ == "__main__":

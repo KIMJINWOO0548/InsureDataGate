@@ -1,0 +1,11 @@
+feature,area,priority,original,clone,notes
+Human readable validation summary,review,must,yes,yes,"GX Data Docs documented concept; IDG local gate/findings summary; actual matched GXreport interaction not run"
+Detailed per-check validation findings,review,must,yes,yes,"GX and Frictionless official validation documentation; IDG grouped codes/locations/recovery without raw data bodies"
+Metadata based validation rules,validation,must,yes,partial,"Frictionless/GX support broader tabular schemas and expectations; IDG supports bounded synthetic insurance manifest/case/gold contract only"
+Arbitrary table data profiling,validation,should,yes,no,"GX public documentation; not implemented in IDG"
+SQL and distributed dataframe backends,scale,should,yes,no,"GX documented pandas Spark SQL ecosystem; IDG stdlib local JSON/JSONL only"
+HTML documentation from validation metadata,reporting,must,yes,yes,"GX Data Docs documented; IDG deterministic offline standalone HTML with no network/script"
+Authenticated approval workflow,governance,could,unknown,skip,"Not established from public observed sources; IDG expressly has declaration-only review"
+Split exposure before and after a release,investigation,must,no,yes,"Own synthetic evaluation release slice; no claim GX lacks comparable features"
+Bounded large report navigation with complete evidence,scale,must,no,yes,"Own max10000 case contract; all dossiers retained and optional index capped40; actual browser timing separately measured"
+Private case and answer body exclusion,privacy,must,no,yes,"Own metadata allowlist preserved; no claim about GX defaults"

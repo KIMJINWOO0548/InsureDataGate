@@ -16,7 +16,13 @@
 
 `validator.read_snapshot(manifest_path: Path, report: dict) -> dict`는 verify가 생성한 PASS 보고서만 소비한다. manifest SHA-256과 모든 source/cases/gold 파일의 관찰 hash 및 선언 hash를 안전한 재읽기로 재확인한다. 결과는 내부용 `{manifest, cases, gold}`이며 raw source는 반환하지 않는다. 불일치/누락/읽기 실패는 generic ValueError다. compare와 export가 공유한다. JSONL은 LF만 레코드 구분자로 사용한다.
 
+2026-11-09 보완: 기존 `insuredatagate.report.v1`의 정확한 필드와 PASS/빈 issues를 요구하며, manifest.v1·dataset_id·version도 재읽은 manifest와 대조한다. files는 중복 없는 전체 목록이어야 하고 각 bytes와 sources/cases/gold 및 split별 정수 개수도 재읽은 입력과 일치해야 한다(bool은 개수로 허용하지 않는다). JSON 왕복 보고서와 files 순서 변경은 허용한다. 맞지 않는 문맥은 비교/검토의 BLOCK·수치 보류, export 미생성, 사실 검토의 UNAVAILABLE 경로를 따른다. 보고서·입력·기존 schema·`disclosure-facts.v1` 정책은 변경하지 않는다.
+
+이 보완은 verify 결과를 보관하거나 연결하는 프로그래밍 API의 문맥 불일치를 차단한다. 저장된 보고서의 진위·정책 실행 이력을 인증하거나 모든 검증을 다시 수행하지 않는다. 정상 CLI의 PASS 우회가 재현된 것은 아니며, 새로운 정책 버전 체계나 미검사 정책의 통과를 추가하지 않는다.
+
 이는 검증 후 일반적인 파일 수정도 차단하기 위한 강화다. 파일시스템 트랜잭션이나 공격자의 동시 교체·hardlink 방어를 제공하지 않는다.
+
+출력 생성 전 `lstat`으로 경로 자체의 기존 항목을 확인하며, 대상이 없는 symlink도 거절한다. 이어지는 exclusive 생성은 그대로 유지한다. 이는 정적인 출력 경로 확인이며 공격자의 동시 교체에 대한 원자적 보장은 아니다.
 
 exclusive 출력 생성에 성공한 후 write/close/interrupt가 실패하면 자신이 생성한 출력만 제거하고 실패를 반환한다. open이 거절된 기존 파일은 제거하지 않는다. 강제 프로세스 종료·삭제 권한 상실·디스크 자체 고장까지 원자성을 보장하지 않는다.
 

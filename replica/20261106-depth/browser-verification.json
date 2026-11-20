@@ -1,0 +1,255 @@
+{
+  "renderer_sha256": "5b0545e429e584440a874c1e28b6a28b46adfbfce850be502e32bd869ad5a3bc",
+  "matrix_browser": {
+    "status": "pass",
+    "exit_code": 0,
+    "observations": 32,
+    "viewports": [
+      "375x812",
+      "390x844",
+      "844x390",
+      "1440x900"
+    ],
+    "versions": {
+      "playwright": "1.64.1",
+      "pyee": "14.0.0",
+      "greenlet": "3.5.6",
+      "typing_extensions": "4.16.0",
+      "python": "3.12.10",
+      "browser": "156.0.8078.80",
+      "channel": "chrome"
+    },
+    "source_hashes": {
+      "src\\insuredatagate\\validator.py": "fcd0a8765719bdbe1cf1628f8a8e308078d62e4c7527abc2fe8ec7e4fea446cd",
+      "src\\insuredatagate\\comparison.py": "ac4f6084996a7a97a270030df80f3d06ea5647f9c4fda294fe578d75d2a97fec",
+      "src\\insuredatagate\\guidance.py": "4725dae04f2c42a77bdbb20e81476b8b1f19412e66b4bf6229178d569957399b",
+      "src\\insuredatagate\\cli.py": "95851e4bbe1ca0964a09818f86f5418ba646099de600da927017f1ebb6e83e2f",
+      "src\\insuredatagate\\reporting.py": "5b0545e429e584440a874c1e28b6a28b46adfbfce850be502e32bd869ad5a3bc",
+      "scripts\\check_report_browser.py": "37271747cf799567a095a770697755a35be71731c4aa75099915c8b284d36e44"
+    },
+    "artifact": "reports/runs/competitive-depth-browser-disclosure/evidence.json",
+    "sha256": "0bca3cf13c199a7ac83b22aeec55fe3d6486a9c1ea0efc0f562ce728c5591c02",
+    "accessibility": {
+      "status": "pass",
+      "evidence": "All 32 DOM checks: lang/captions/th scopes, native Tab/Enter skip-to-main, issue-to-findings, fragment filters, both dossier link directions and full hashes; initially closed inventory and recovery before work, visible outlines, issue target >=44px, sampled contrast >=4.5; no static alerts; reduced-motion context."
+    },
+    "responsive": {
+      "status": "pass",
+      "evidence": "Eight states at four target sizes including 375px and landscape have scrollWidth <= clientWidth; actual full-page captures retained."
+    }
+  },
+  "same_fixture_1000_browser": {
+    "scope": "own identical synthetic checked report; cold browser context per sample; offline Chrome",
+    "viewport": [
+      1440,
+      900
+    ],
+    "runs": {
+      "before": {
+        "metrics": {
+          "height": 148088,
+          "cases": 1000,
+          "sources": 1,
+          "rails": 1001,
+          "width": 1440,
+          "client": 1440,
+          "resources": 0
+        },
+        "seconds": [
+          1.651884799997788,
+          1.7560743000358343,
+          1.4887865000055172
+        ],
+        "median_seconds": 1.651884799997788
+      },
+      "after": {
+        "metrics": {
+          "height": 199120,
+          "cases": 1000,
+          "sources": 1,
+          "rails": 21,
+          "width": 1440,
+          "client": 1440,
+          "resources": 0
+        },
+        "seconds": [
+          0.22734789998503402,
+          0.23179990000789985,
+          0.22649139998247847
+        ],
+        "median_seconds": 0.22734789998503402
+      }
+    },
+    "external_requests": [],
+    "browser": "156.0.8078.80",
+    "last_case_anchor": "case-999",
+    "test_split_cases": 333,
+    "status": "PASS",
+    "artifact": "reports/runs/depth-scale-browser-1000-final/result.json",
+    "sha256": "9e5944b7bdfaa418813c99ec2b5df7569bc4a7c9a25a1874bd703de3385a1304"
+  },
+  "current_10000_browser": {
+    "scope": "final own checked synthetic 10000-case HTML only; offline Chrome; no dataset or backend benchmark rerun",
+    "viewport": [
+      1440,
+      900
+    ],
+    "checks": [
+      {
+        "name": "existing final HTML matches frozen artifact hash",
+        "passed": true
+      },
+      {
+        "name": "current renderer matches frozen artifact source",
+        "passed": true
+      },
+      {
+        "name": "intended file identity and meaningful report content",
+        "passed": true
+      },
+      {
+        "name": "all 10000 case dossiers and one source dossier exist",
+        "passed": true
+      },
+      {
+        "name": "entity selector rail remains bounded to 21",
+        "passed": true
+      },
+      {
+        "name": "desktop has no horizontal page overflow or resources",
+        "passed": true
+      },
+      {
+        "name": "split disclosure starts closed with a 44px target",
+        "passed": true
+      },
+      {
+        "name": "native keyboard activation opens split disclosure",
+        "passed": true
+      },
+      {
+        "name": "visible matrix matches independent fixture split memberships",
+        "passed": true
+      },
+      {
+        "name": "visible source-only count is exactly 10000",
+        "passed": true
+      },
+      {
+        "name": "native keyboard activation closes disclosure before filtering",
+        "passed": true
+      },
+      {
+        "name": "last case anchor resolves and its dossier is visible",
+        "passed": true
+      },
+      {
+        "name": "native test filter contains exactly 3333 cases",
+        "passed": true
+      },
+      {
+        "name": "print reveals all 10001 dossiers from active split",
+        "passed": true
+      },
+      {
+        "name": "returning to screen retains native test split",
+        "passed": true
+      },
+      {
+        "name": "mobile has no horizontal page overflow",
+        "passed": true
+      },
+      {
+        "name": "no external requests or JavaScript page errors",
+        "passed": true
+      },
+      {
+        "name": "renderer remained identical throughout check",
+        "passed": true
+      }
+    ],
+    "external_requests": [],
+    "page_errors": [],
+    "load_budget_ms": 30000,
+    "html_sha256": "5a70f485de51cc43835393323ec44e77d3c72c2f1180839a276c91fac843b600",
+    "renderer_sha256": "5b0545e429e584440a874c1e28b6a28b46adfbfce850be502e32bd869ad5a3bc",
+    "checked_report_sha256": "6a45ba235ffb4eb907c29174dac5e39a09baf3a6b25b5d64518854dc9f871b6e",
+    "browser": "156.0.8078.80",
+    "load_seconds": 1.3187518999911845,
+    "metrics": {
+      "cases": 10000,
+      "sources": 1,
+      "rails": 21,
+      "width": 1440,
+      "client": 1440,
+      "resources": 0
+    },
+    "split_matrix": [
+      {
+        "split": "train",
+        "counts": [
+          0,
+          3334,
+          0,
+          3334
+        ]
+      },
+      {
+        "split": "validation",
+        "counts": [
+          0,
+          3333,
+          0,
+          3333
+        ]
+      },
+      {
+        "split": "test",
+        "counts": [
+          0,
+          3333,
+          0,
+          3333
+        ]
+      }
+    ],
+    "review_counts": {
+      "Cases with gold changes": 0,
+      "Cases moved between splits": 0,
+      "Cases added or removed": 0,
+      "Source-only cases": 10000
+    },
+    "test_split_cases": 3333,
+    "print_visible_dossiers": 10001,
+    "status": "PASS"
+  },
+  "current_10000_artifact": "reports/runs/depth-current-10000-browser/result.json",
+  "current_10000_artifact_sha256": "2d28282463aae2f956aed0740cbfad6212c5d4ca468306a7ab0809e1222f6fd8",
+  "prior_10000_browser": {
+    "status": "TIMEOUT",
+    "load_budget_ms": 30000,
+    "samples_completed": 0,
+    "artifact": "reports/runs/depth-scale-browser/result.json",
+    "interpretation": "censored old own HTML load; no finite baseline timing or speed ratio inferred"
+  },
+  "screens": [
+    {
+      "file": "screens/desktop-release.png",
+      "source": "reports/runs/competitive-depth-browser-disclosure/changed-1440x900-viewport.png",
+      "sha256": "cbffa0f5e1752311abc817c89d7d78d3eaf68ed6309d587a46085f13c18413c6",
+      "bytes": 59366
+    },
+    {
+      "file": "screens/mobile-source-impact.png",
+      "source": "reports/runs/competitive-depth-browser-disclosure/source-only-375x812-viewport.png",
+      "sha256": "37d264faec9db8955c41245afb7dbf2e2d88e250a1845a23bdefc8becf973bbd",
+      "bytes": 36440
+    },
+    {
+      "file": "screens/capacity-split-membership.png",
+      "source": "reports/runs/depth-current-10000-browser/current-10000-open-membership.png",
+      "sha256": "b93c9cfb8fbe26ddb26566a9eb122822ed96847b297c7d4639f1c836ca94a575",
+      "bytes": 79332
+    }
+  ]
+}

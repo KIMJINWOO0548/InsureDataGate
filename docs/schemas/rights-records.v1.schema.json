@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InsureDataGate purpose-specific rights declarations v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "manifest_sha256", "records"],
+  "properties": {
+    "schema_version": {"const": "insuredatagate.rights-records.v1"},
+    "manifest_sha256": {"$ref": "#/$defs/hash"},
+    "records": {
+      "type": "array", "maxItems": 200,
+      "description": "Each (source_id, purpose) pair must be unique.",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["source_id", "source_sha256", "purpose", "declaration", "reviewer_id", "evidence"],
+        "properties": {
+          "source_id": {"$ref": "#/$defs/id"},
+          "source_sha256": {"$ref": "#/$defs/hash"},
+          "purpose": {"enum": ["internal-eval", "external-redistribution"]},
+          "declaration": {"enum": ["SUPPORTS_USE", "RESTRICTS_USE"]},
+          "reviewer_id": {"$ref": "#/$defs/id"},
+          "evidence": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/evidence"}]}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"},
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["document_id", "version", "section"],
+      "properties": {
+        "document_id": {"$ref": "#/$defs/id"},
+        "version": {"$ref": "#/$defs/id"},
+        "section": {"$ref": "#/$defs/id"}
+      }
+    }
+  }
+}

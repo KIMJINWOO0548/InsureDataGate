@@ -1,8 +1,16 @@
 # InsureDataGate
 
+Checked-snapshot inventory: [`release-index`](docs/RELEASE_INDEX.md) records redacted lineage and file hashes without asserting rights certification or semantic-leakage assurance.
+
 [![Verify](https://github.com/KIMJINWOO0548/InsureDataGate/actions/workflows/ci.yml/badge.svg)](https://github.com/KIMJINWOO0548/InsureDataGate/actions/workflows/ci.yml)
 
-**Review a release by case, follow changed sources, and resolve blocked checks offline.**
+**Find release impact by train/validation/test split, inspect each changed case and source, and resolve blocked checks offline.**
+
+The review separates baseline/candidate direct changes from source-only split exposure, with native split filters and complete case/source destinations. Large reports bound the optional directory while preserving every dossier. [Design, comparable measurement plan and remaining gaps](replica/20261106-depth/recon.md); [actual verification and limits](replica/20261106-depth/verification.md).
+
+HTML gate findings include issue-type counts and native links to grouped safe
+locations, with a return path to the overview. Counts describe findings, not
+unique records or severity. [Reference, tool and verification record](replica/20261106/recon.md).
 
 InsureDataGate checks a versioned manifest, declared source rights, file hashes, separation of cases from gold answers, review declarations, and train/validation/test isolation. Review case and gold changes together, follow the declared source references from both releases, resolve blocked checks, then export only allowlisted model inputs. The runtime uses the Python standard library with no network calls.
 
@@ -79,6 +87,8 @@ flowchart LR
 
 [데모 manifest](examples/insurance-demo/manifest.json)는 [출처 규칙](examples/insurance-demo/sources/rules.txt), [사례](examples/insurance-demo/cases.jsonl), [분리된 정답](examples/insurance-demo/gold.jsonl)을 SHA-256으로 고정합니다. 여섯 개의 허구 사례가 train, validation, test에 나뉘어 있습니다. [별도 v2 예제](examples/insurance-demo-v2/manifest.json)는 입력 1건·정답 1건·출처 파일의 명시적 합성 수정본이며 원래 데이터는 보존합니다. 형식 설명은 [docs/FORMAT.md](docs/FORMAT.md), 기존 계약은 [docs/CONTRACT.md](docs/CONTRACT.md), 0.2 확장은 [QUALITY_UPGRADE.md](docs/QUALITY_UPGRADE.md), 새 검토 스키마와 흐름은 [REVIEW_WORKSPACE.md](docs/REVIEW_WORKSPACE.md)를 참고하세요.
 
+[합성 공시 추출 예제](docs/DISCLOSURE_EXAMPLE.md)는 같은 manifest·CLI 계약으로 기간·통화·금액 단위·연결/별도 구분을 다룹니다. 한 데이터셋의 두 릴리스를 검사·비교한 뒤 허용된 모델 입력만 내보내는 예시이며, 실제 공시 분석 정확도·투자 판단·규제 준수 인증을 제공하지 않습니다. 기존 보험 예제는 그대로 보존합니다.
+
 ## 범위와 한계
 
 이 도구는 오프라인 데이터셋 검사기입니다. 네트워크로 출처를 조회하지 않고 라이선스, 승인자, 검토자 신원을 인증하지 않습니다. 의미가 비슷한 문장이나 선언되지 않은 그룹 관계에 의한 누출, 자연어 입력 안에 숨은 정답을 판별하지 못합니다. 보험 인수·지급·청구 판단을 하지 않으며 운영 승인, 법률 자문, 규제 준수 인증을 제공하지 않습니다.
@@ -100,3 +110,14 @@ py -3.12 -m venv .runtime/browser-env
 배포물 검사는 별도 환경에서 `requirements-build.lock`을 `pip install --require-hashes -r requirements-build.lock`으로 설치한 뒤 `python scripts/check_distribution.py`로 실행합니다. CI에서는 선택적 Playwright 의존성도 hash로 고정하고 고립된 Chromium으로 같은 화면 회귀를 실행합니다. UI 출처·라이선스·채택 범위는 [UI_REFERENCES.md](docs/UI_REFERENCES.md)에 기록했습니다.
 
 [요구사항·인수 기준](docs/REQUIREMENTS.md), [0.1 구현 계획](docs/superpowers/plans/2026-11-01-insuredatagate.md), [0.2 구현 계획](docs/superpowers/plans/2026-11-01-release-review.md), [0.3 구현 계획](docs/superpowers/plans/2026-11-01-review-workspace.md), [실제 검증 기록](VALIDATION.md), [도구 사용 기록](docs/TOOLING.md)을 공개합니다. CaseProof에서 다루는 출처·정답 분리와 증거 원칙을 참고해 독립적으로 작성했으며 기존 API나 DB에 의존하지 않습니다. 코드와 예제는 [Apache-2.0](LICENSE)으로 제공합니다.
+
+### Opt-in disclosure fact review
+
+```bash
+insuredatagate review-facts examples/disclosure-demo/manifest.json --profile disclosure-facts.v1 --json
+```
+
+This finite, offline profile compares asserted annotation fields with explicit
+checked-input declarations. It returns support/conflict/abstention with replayable
+hashed spans and preserves the existing generic validation/export behavior.
+See [the grammar, report and limits](docs/FACT_REVIEW.md).

@@ -1,5 +1,41 @@
 # Changelog
 
+## Unreleased — checked-report context integrity
+
+- Require the existing v1 PASS report contract and an empty issue list before a
+  checked reread; bind dataset/version metadata, unique complete file inventory,
+  byte sizes and typed record/split counts to the reread inputs.
+- Preserve existing schemas, fact-review profile, normal CLI output and UI.
+  Incompatible report context follows the existing BLOCK/UNAVAILABLE paths and
+  cannot produce an export. This guards API/cache integration mistakes; it does
+  not authenticate a report or rerun every validation policy.
+- Independent RED/GREEN, regression, CLI compatibility and limitations are
+  recorded in `VALIDATION.md` and `docs/evidence/2026-11-09/check-context.json`.
+
+## Unreleased — finding-type navigation
+
+- Group offline HTML findings by code with counts, native detail/return links,
+  and safe numeric anchors; retain each location/reason and all validator/JSON contracts.
+- Regenerate the three checked-in synthetic report examples with the new renderer;
+  preserve byte-for-byte installed-package/example checks and all input fixture bytes.
+- Add independent red-to-green tests and native keyboard checks in the existing
+  browser runner. Actual results and known Windows limitations are recorded in
+  `replica/20261106/recon.md`; this is not release approval.
+
+## Unreleased — opt-in disclosure annotation support
+
+- Add standard-library `review_facts(Path)` and the required-profile `review-facts` CLI with a separate deterministic fact-review.v1 schema.
+- Bind revenue to explicit input targets, preserve whole unit labels, abstain on unsupported/ambiguous context and report hashed Unicode evidence spans without raw values.
+- Preserve existing example bytes, generic gates and gold-free export; add independent parser/snapshot/output tests and installed distribution checks.
+- This finite profile does not certify issuer truth, extraction accuracy, rights or approval. Local verification is recorded in VALIDATION.md.
+
+## Unreleased — synthetic disclosure example
+
+- Add one synthetic disclosure extraction dataset with baseline/candidate releases using the unchanged manifest.v1 and package/CLI contracts.
+- Cover period, currency, amount unit, consolidation scope and missing-field handling; document the single training-case/source-note revision and unchanged validation/test records.
+- Add five acceptance tests for both-domain validation, precise release comparison, exact allowlist export/output preservation, tampered-gold refusal and dataset identity separation.
+- Keep runtime source, original insurance datasets and historical portfolio/UI evidence unchanged. This local increment does not claim extraction accuracy, authenticated review, investment advice, new remote CI or deployment.
+
 ## 0.3.0 — 2026-11-01
 
 - Add explicit review.v1 case/gold dossiers and both-snapshot declared source impact without changing comparison.v1 JSON.

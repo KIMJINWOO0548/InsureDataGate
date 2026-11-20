@@ -1,5 +1,96 @@
 # Verification record
 
+## Checked-report context integrity — 2026-11-09 UTC
+
+Independent change on accessible remote `improve/competitive-depth-20261106`,
+base `04697076f4cd5f7a019ea27f13daa5d2ca14950a`, branch
+`improve/check-context-integrity-20261109`. Previously inaccessible preservation
+files were not read or restored. Package version 0.3.0, existing JSON schemas,
+fact-review policy profile, renderer/UI and example inputs are unchanged.
+
+The programming API previously accepted mismatched report schema/dataset/version,
+counts and duplicate inventory metadata when the manifest/file hashes matched.
+This is an API/cache integration boundary; no normal-CLI PASS bypass was
+reproduced. The checked reread now requires its known v1 PASS report shape,
+empty issues, matching manifest identity/version, unique complete inventory,
+observed byte sizes and exact integer record/split counts. Errors remain generic;
+downstream metrics are withheld and no export is created for rejected context.
+
+| Check | Actual local result |
+| --- | --- |
+| Baseline Linux/Python 3.12.14 | 151 run, 150 passed, one Windows-only directory-junction skip; exit 0 |
+| Independent context RED | Initial eight methods, 18 failures including subtests; exit 1. Expanded tests against an isolated exact-base source copy: eight methods, 21 failures including subtests; exit 1. A missing inventory item was already rejected; JSON roundtrip/reordered inventory already passed |
+| Context GREEN | Eight methods passed; exit 0. Includes BLOCK/withheld comparison metrics, export refusal and UNAVAILABLE fact review with no raw metadata disclosure |
+| Full regression | 159 run, 158 passed, the same one Windows-only skip; exit 0 |
+| Actual CLI compatibility | 14 byte-for-byte comparisons against the exact base: four check, four allowlisted export, two compare, two review and two disclosure-fact review outputs. All expected PASS/SUPPORTED statuses observed; four existing exports preserved on overwrite refusal |
+| Distribution | Preinstalled setuptools 84.2.1, wheel/sdist build and isolated offline no-index/no-deps wheel install passed; installed entrypoints, existing HTML bytes, gold-free export/output preservation and disclosure fact-review checks passed. No tool download or package publication |
+| Input preservation | All 19 tracked example files remain byte-identical; rejection tests also preserve their temporary inputs and report objects |
+| Read-only code review | Two internal agents reviewed the patch/callers; no blocking issue reported. This is not external human acceptance |
+
+Sanitized evidence is in [check-context.json](docs/evidence/2026-11-09/check-context.json).
+Raw local command logs are ignored under
+`reports/runs/20261109T160017Z-d32a9ac6-check-context/`. Tests use temporary
+synthetic datasets. No source URLs were fetched. Windows, other Python versions,
+new browser execution, real data and authenticated policy execution were not
+tested. The existing schemas identify the checked contract; this change does not
+add a policy-version registry, sign reports, prove their authenticity, rerun every
+validation rule or make checked rereads atomic against concurrent replacement.
+Remote SHA and CI observations are recorded separately after the commit.
+
+## Local opt-in disclosure fact review — 2026-11-02 UTC
+
+Base `b33b29de80a83cf81e76cec90b305695a987ab10`; local branch
+`feature/disclosure-fact-review`. Adds the finite standard-library
+`disclosure-facts.v1` profile and `review-facts` CLI; package version remains
+0.3.0. Existing manifest/report/comparison/review and export contracts remain.
+
+- Independent initial RED: 14 methods, 48 failures/subtest failures, exit 1 for
+  the missing API/CLI; design-ruling RED: 18 methods, 63 failures, exit 1.
+  Separate schema fixture RED: one failure. Review-context RED: two methods,
+  six failures for currency-prefix contradiction and embedded label poisoning.
+- Focused GREEN: 22 methods passed, exit 0. Includes both preserved disclosure
+  releases (14 asserted fields each), input-derived wrong-year conflict despite
+  wrong expected period, complete-token adversarial formats, field-local
+  abstention, explicit null, dependency-span Unicode replay, deterministic
+  redaction, every checked-role mutation/deletion and exclusive/symlink output.
+- Full local Linux/Python 3.12.14 unittest: 139 run, 138 passed, one Windows-only
+  directory-junction skip; exit 0. Existing tests were not removed or weakened.
+- Declared distribution self-check: wheel/sdist build with preinstalled pinned
+  setuptools 84.2.1, no runtime dependencies, isolated no-index/no-deps wheel
+  install and old check/compare/review/export checks passed. New installed API
+  path and both disclosure text/JSON/report flows and overwrite refusal passed.
+- All 19 tracked example files are byte-identical to base. Actual check,
+  compare, review JSON and export bytes for both insurance and disclosure
+  domains match a temporary base source snapshot (eight comparisons). Existing
+  HTML bytes and comparison digest tests also pass.
+
+Exact commands, RED/GREEN/full/build logs, hashes and sample redacted fact reports
+are recorded outside source in the task delivery's `InsureDataGate/` folder.
+Independent task review is recorded by the controller, separately from these
+implementer checks. No browser, network, new dependency, remote CI, push, merge,
+package publication, deployment or authenticated/real-model review occurred.
+Finite-grammar annotation support does not establish issuer truth, extraction
+accuracy, financial/legal certification, rights or release approval. Other
+Python versions/Windows were not executed, and checked rereads are not atomic
+against hostile filesystem replacement. See [FACT_REVIEW.md](docs/FACT_REVIEW.md).
+
+## Local disclosure example increment — 2026-11-01 UTC
+
+Base: `85ca41899d06bf6c791e069ed5fa81823b525ee2`; local branch `improve/synthetic-disclosure-flow`. This is a data/example and regression-test increment; runtime source, package version/dependencies, manifest/report contracts, original insurance datasets and historical HTML/images/evidence are byte-unchanged.
+
+| Check | Observed local result |
+| --- | --- |
+| Linux/Python 3.12.14 baseline | 112 tests run, 111 passed, one Windows-only directory-junction skip; insurance demo check and comparison exit 0 |
+| New acceptance tests before fixtures existed | Five methods run; three failures and three subtest/errors, exit 1. Missing disclosure fixtures were the expected RED; no runtime defect is claimed |
+| New acceptance tests with fixtures | Five passed, exit 0: existing manifest/report schemas; both-domain PASS; exact changed fields and unchanged validation/test records; CLI check→compare→allowlisted export; output preservation; tampered gold refusal; cross-dataset comparison refusal |
+| Full regression | 117 run, 116 passed, one Windows-only junction skip; exit 0. Existing tests were not removed or weakened |
+| Actual CLI workflow | Both disclosure releases PASS with six cases/two per split; comparison PASS with review required; offline review HTML generated; export contains exactly case_id/input/source_ids |
+| Distribution | Hash-pinned setuptools 84.2.1 in an isolated project venv; wheel/sdist build, zero runtime dependencies, isolated no-index/no-deps install and existing insurance/package checks passed. Additional isolated wheel commands passed the disclosure check/compare/export; sdist contains byte-identical new fixture files and guide |
+| Preservation | 212 tracked runtime/package/lock, insurance fixture and historical UI/evidence files compared byte-for-byte with main; all unchanged |
+| New original UI capture | **Unverified/blocked.** Browser navigation to the copied local baseline HTML via file:// returned ERR_BLOCKED_BY_ADMINISTRATOR. Subsequent set_content renders are excluded from deliverables by coordinator instruction; no new browser UI verification is claimed. Original HTML and historical source captures remain unchanged |
+
+Exact baseline/RED/GREEN/final commands, exit codes, generated reports and attempted-browser logs are in the ignored `reports/runs/20261101T144200Z-disclosure-first-increment/` and external restoration evidence package. Browser/runtime configuration was not changed. No remote push, PR, CI execution, merge, package publication or deployment occurred in this increment; older CI records below remain historical. Windows, other Python versions, full browser regression, extraction accuracy, semantic leakage detection, real issuer applicability, authenticated review and regulatory/investment claims were not verified.
+
 ## 0.3.0 — grouped review and recovery workspace
 
 2026-11-01 KST. This resumes the user's additional UI/function request after 0.2 completion. The implementation scope is fixed; no new feature or redesign round is planned.

@@ -1,0 +1,17 @@
+{
+  "1000": {
+    "html_bytes": 595197,
+    "html_sha256": "efbd7ddfbb76737487296287562d8719d617598a8f4183b3ffe3a42ed6e8396d",
+    "checked_report_sha256": "25f9c5b6a958d8db683c6785d9eca312bc713c57b88c7b8f688fd5788c5c41a4",
+    "case_anchors": 1000,
+    "entity_selectors": 21
+  },
+  "10000": {
+    "html_bytes": 5749233,
+    "html_sha256": "5a70f485de51cc43835393323ec44e77d3c72c2f1180839a276c91fac843b600",
+    "checked_report_sha256": "6a45ba235ffb4eb907c29174dac5e39a09baf3a6b25b5d64518854dc9f871b6e",
+    "case_anchors": 10000,
+    "entity_selectors": 21
+  },
+  "renderer_sha256": "5b0545e429e584440a874c1e28b6a28b46adfbfce850be502e32bd869ad5a3bc"
+}
