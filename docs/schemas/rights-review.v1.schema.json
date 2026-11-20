@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InsureDataGate checked-snapshot rights review v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "purpose", "status", "reason", "snapshot", "records_sha256", "counts", "sources"],
+  "properties": {
+    "schema_version": {"const": "insuredatagate.rights-review.v1"},
+    "purpose": {"enum": ["internal-eval", "external-redistribution"]},
+    "status": {"enum": ["COMPLETE", "UNAVAILABLE"]},
+    "reason": {"enum": [null, "GATE_BLOCKED", "SNAPSHOT_CHANGED", "RECORDS_UNREADABLE", "RECORDS_INVALID"]},
+    "snapshot": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/snapshot"}]},
+    "records_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/hash"}]},
+    "counts": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/counts"}]},
+    "sources": {"type": "array", "maxItems": 100, "items": {"$ref": "#/$defs/source"}}
+  },
+  "if": {"properties": {"status": {"const": "COMPLETE"}}},
+  "then": {"properties": {
+    "reason": {"type": "null"}, "snapshot": {"type": "object"}, "records_sha256": {"type": "string"},
+    "counts": {"type": "object"}, "sources": {"minItems": 1}
+  }},
+  "else": {"properties": {
+    "reason": {"type": "string"}, "records_sha256": {"type": "null"}, "counts": {"type": "null"},
+    "sources": {"maxItems": 0}
+  }},
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"},
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "count": {"type": "integer", "minimum": 0, "maximum": 100},
+    "snapshot": {
+      "type": "object", "additionalProperties": false,
+      "required": ["dataset_id", "version", "manifest_sha256"],
+      "properties": {
+        "dataset_id": {"$ref": "#/$defs/id"}, "version": {"type": "string", "minLength": 1, "maxLength": 128},
+        "manifest_sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "counts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["sources", "declared_support", "declared_restriction", "manual_review_required"],
+      "properties": {
+        "sources": {"$ref": "#/$defs/count"}, "declared_support": {"$ref": "#/$defs/count"},
+        "declared_restriction": {"$ref": "#/$defs/count"}, "manual_review_required": {"$ref": "#/$defs/count"}
+      }
+    },
+    "evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["document_id", "version", "section"],
+      "properties": {
+        "document_id": {"$ref": "#/$defs/id"}, "version": {"$ref": "#/$defs/id"}, "section": {"$ref": "#/$defs/id"}
+      }
+    },
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_id", "source_sha256", "state", "reason", "evidence"],
+      "properties": {
+        "source_id": {"$ref": "#/$defs/id"},
+        "source_sha256": {"$ref": "#/$defs/hash"},
+        "state": {"enum": ["DECLARED_SUPPORT", "DECLARED_RESTRICTION", "MANUAL_REVIEW_REQUIRED"]},
+        "reason": {"enum": [null, "MISSING_RECORD", "MISSING_EVIDENCE", "MANIFEST_CHANGED", "SOURCE_CHANGED"]},
+        "evidence": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/evidence"}]}
+      },
+      "if": {"properties": {"state": {"const": "MANUAL_REVIEW_REQUIRED"}}},
+      "then": {"properties": {"reason": {"type": "string"}, "evidence": {"type": "null"}}},
+      "else": {"properties": {"reason": {"type": "null"}, "evidence": {"type": "object"}}}
+    }
+  }
+}

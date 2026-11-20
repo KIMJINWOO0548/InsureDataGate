@@ -2,7 +2,9 @@
 
 from html import escape
 
+from .duplicate_review import SCHEMA_VERSION
 from .guidance import recovery
+from .validator import SPLITS
 
 
 _STYLE = """
@@ -249,8 +251,66 @@ def _review_workspace(review):
     return intro + _exposure(review) + '<div class="filter-scope">' + ''.join(targets) + '<nav class="filters" aria-label="Filter review dossiers">' + ''.join(controls) + '</nav><div class="dossiers" id="dossier-list">' + ''.join(sections) + '</div></div>'
 
 
+def _duplicate_location(location):
+    return (f'<code>{_e(location["case_id"])}</code> · {_e(location["split"])} · '
+            f'<code>cases[{_e(location["line"])}]</code>')
+
+
+def _duplicate_report(report):
+    status, reason, counts = report["status"], report["reason"], report["counts"]
+    message = {
+        "GATE_BLOCKED": "Local validation blocked duplicate review. Run check to see the findings.",
+        "SNAPSHOT_CHANGED": "The checked snapshot changed or became unreadable. Recheck the dataset before reviewing.",
+        "LIMIT_EXCEEDED": "A comparison limit was exceeded. Near candidates are unavailable.",
+        None: "All eligible cross-split pairs were compared.",
+    }[reason]
+    content = ""
+    if status != "UNAVAILABLE":
+        links = "".join(f'<a href="#exact-{split}">{split}</a>' for split in SPLITS)
+        content = (f'<nav class="finding-types" aria-label="Review sections">{links}'
+                   '<a href="#near-pairs">Near candidates</a></nav>'
+                   '<h2>Exact duplicates in the same split</h2>'
+                   f'<p>{_e(counts["exact_groups"])} groups · {_e(counts["exact_rows"])} rows</p>')
+        for split in SPLITS:
+            groups = "".join(
+                '<li><ul>' + "".join(f'<li>{_duplicate_location(member)}</li>' for member in group["members"])
+                + '</ul></li>' for group in report["exact_groups"] if group["split"] == split
+            )
+            content += (f'<section class="finding-group"><h3 id="exact-{split}" tabindex="-1">{split}</h3>'
+                        + (f'<ol>{groups}</ol>' if groups else '<p>No exact duplicate groups.</p>')
+                        + '<a class="finding-return" href="#summary">Back to summary</a></section>')
+        content += ('<section class="finding-group"><h2 id="near-pairs" tabindex="-1">Near candidates across splits</h2>'
+                    f'<p>{_e(counts["eligible_cross_pairs"])} eligible pairs · {_e(counts["short_rows"])} short inputs excluded</p>')
+        if status == "COMPLETE":
+            content += f'<p>{_e(counts["near_pairs"])} candidates · {_e(counts["compared_cross_pairs"])} comparisons completed</p>'
+            if counts["eligible_cross_pairs"] == 0:
+                content += '<p>Fewer than two splits contain inputs of at least 12 normalized characters.</p>'
+            if report["near_pairs"]:
+                content += '<ol>'
+                for pair in report["near_pairs"]:
+                    score = pair["score"]
+                    percent = score["numerator"] / score["denominator"]
+                    content += (f'<li class="dossier"><div class="relation-sides" style="padding:.6rem">'
+                                f'<p>{_duplicate_location(pair["left"])}</p><p>{_duplicate_location(pair["right"])}</p>'
+                                f'<p>Similarity {percent:.1%}</p></div></li>')
+                content += '</ol>'
+        else:
+            content += '<p>Candidate count and completed comparisons are unavailable.</p>'
+        content += '<a class="finding-return" href="#summary">Back to summary</a></section>'
+    return ('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
+            '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; base-uri \'none\'; form-action \'none\'">'
+            f'<title>Duplicate review · InsureDataGate</title><style>{_STYLE}</style></head><body><main>'
+            f'<header><h1 id="summary" tabindex="-1">Duplicate review</h1><p><strong>{_e(status)}</strong>'
+            + (f' · <code>{_e(reason)}</code>' if reason else '')
+            + f'</p><p>{message}</p></header>'
+            '<p>Character overlap guides review. Check the listed rows locally and record your decision before release.</p>'
+            + content + '</main></body></html>')
+
+
 def render_html(report: dict) -> str:
     """Return UTF-8 HTML with only allowlisted report metadata and native controls."""
+    if report.get("schema_version") == SCHEMA_VERSION:
+        return _duplicate_report(report)
     comparison = report.get("schema_version") in ("insuredatagate.comparison.v1", "insuredatagate.review.v1")
     enriched = report.get("schema_version") == "insuredatagate.review.v1"
     base = report.get("baseline") or {} if comparison else report
@@ -300,4 +360,4 @@ def render_html(report: dict) -> str:
             f'<header><div class="eyebrow">InsureDataGate / offline review</div><h1>{_value(dataset)}</h1>{context}</header>{recovery_html}'
             f'<div class="workspace">{rail}<div class="detail">{work}<section class="findings"><h2 id="issues" tabindex="-1">Gate findings</h2>{_issues(issues)}</section>'
             + _inventory(base, candidate) + _integrity(base, candidate) + '</div></div>'
-            '<footer>PASS confirms local checks, not release approval. Rights and reviewer identities are unverified declarations. Review dataset identifiers, versions and relative paths before sharing. Case input, gold answers and source bodies are omitted.</footer></main></body></html>')
+            '<footer>PASS confirms local checks, not release approval. Rights and reviewer identities are unverified declarations. Gold-answer correctness and semantic leakage are not checked; they require separate human review. Review dataset identifiers, versions and relative paths before sharing. Case input, gold answers and source bodies are omitted.</footer></main></body></html>')

@@ -30,6 +30,10 @@ def comparison(status="PASS", changes=None, review=True, content=True):
 
 
 class ReportingTests(unittest.TestCase):
+    def test_report_separates_local_checks_from_ground_truth_review(self):
+        document = reporting.render_html(comparison(changes={}, review=False, content=False))
+        self.assertIn("Gold-answer correctness and semantic leakage are not checked", document)
+
     def test_verifier_report_is_redacted_deterministic_and_semantic(self):
         with tempfile.TemporaryDirectory() as directory:
             report = validator.verify(DatasetFixture(Path(directory)).path)

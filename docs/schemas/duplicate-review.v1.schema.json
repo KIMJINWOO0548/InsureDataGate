@@ -1,0 +1,339 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "reason",
+    "counts",
+    "exact_groups",
+    "near_pairs"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "insuredatagate.duplicate-review.v1"
+    },
+    "status": {
+      "enum": [
+        "COMPLETE",
+        "EXACT_ONLY",
+        "UNAVAILABLE"
+      ]
+    },
+    "reason": {
+      "enum": [
+        null,
+        "LIMIT_EXCEEDED",
+        "GATE_BLOCKED",
+        "SNAPSHOT_CHANGED"
+      ]
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_rows",
+        "short_rows",
+        "exact_groups",
+        "exact_rows",
+        "eligible_cross_pairs",
+        "compared_cross_pairs",
+        "near_pairs"
+      ],
+      "properties": {
+        "case_rows": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "short_rows": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "exact_groups": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "exact_rows": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "eligible_cross_pairs": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "compared_cross_pairs": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "near_pairs": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "exact_groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "split",
+          "members"
+        ],
+        "properties": {
+          "split": {
+            "enum": [
+              "train",
+              "validation",
+              "test"
+            ]
+          },
+          "members": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "$ref": "#/$defs/location"
+            }
+          }
+        }
+      }
+    },
+    "near_pairs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "left",
+          "right",
+          "score"
+        ],
+        "properties": {
+          "left": {
+            "$ref": "#/$defs/location"
+          },
+          "right": {
+            "$ref": "#/$defs/location"
+          },
+          "score": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "numerator",
+              "denominator"
+            ],
+            "properties": {
+              "numerator": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "denominator": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "split",
+        "line"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+        },
+        "split": {
+          "enum": [
+            "train",
+            "validation",
+            "test"
+          ]
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "COMPLETE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "reason": {
+            "type": "null"
+          },
+          "counts": {
+            "properties": {
+              "case_rows": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "short_rows": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "exact_groups": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "exact_rows": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "eligible_cross_pairs": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "compared_cross_pairs": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "near_pairs": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "EXACT_ONLY"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "reason": {
+            "const": "LIMIT_EXCEEDED"
+          },
+          "counts": {
+            "properties": {
+              "case_rows": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "short_rows": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "exact_groups": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "exact_rows": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "eligible_cross_pairs": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "compared_cross_pairs": {
+                "type": "null"
+              },
+              "near_pairs": {
+                "type": "null"
+              }
+            }
+          },
+          "near_pairs": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "UNAVAILABLE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "reason": {
+            "enum": [
+              "GATE_BLOCKED",
+              "SNAPSHOT_CHANGED"
+            ]
+          },
+          "counts": {
+            "properties": {
+              "case_rows": {
+                "type": "null"
+              },
+              "short_rows": {
+                "type": "null"
+              },
+              "exact_groups": {
+                "type": "null"
+              },
+              "exact_rows": {
+                "type": "null"
+              },
+              "eligible_cross_pairs": {
+                "type": "null"
+              },
+              "compared_cross_pairs": {
+                "type": "null"
+              },
+              "near_pairs": {
+                "type": "null"
+              }
+            }
+          },
+          "exact_groups": {
+            "maxItems": 0
+          },
+          "near_pairs": {
+            "maxItems": 0
+          }
+        }
+      }
+    }
+  ]
+}

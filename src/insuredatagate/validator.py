@@ -174,6 +174,10 @@ def read_snapshot(manifest_path: Path, report: dict) -> dict:
         raise ValueError("Verified dataset snapshot changed or became unreadable") from None
 
 
+def _normalize_input(text: str) -> str:
+    return " ".join(unicodedata.normalize("NFKC", text).casefold().split())
+
+
 def verify(manifest_path: Path) -> dict:
     """Return a deterministic, redacted report; never modify dataset files."""
     report = {
@@ -337,7 +341,7 @@ def verify(manifest_path: Path) -> dict:
         creators_by_case.setdefault(case["case_id"], set()).add(case["created_by"].strip().casefold())
         split = case["split"]
         report["counts"][split] += 1
-        normalized = " ".join(unicodedata.normalize("NFKC", case["input"]).casefold().split())
+        normalized = _normalize_input(case["input"])
         for seen, key, code in ((groups, case["group_id"], "GROUP_LEAKAGE"), (inputs, normalized, "INPUT_LEAKAGE")):
             if key in seen and seen[key] != split:
                 issue(code, location, "Related cases must remain in one split.")
