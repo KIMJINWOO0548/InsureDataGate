@@ -69,6 +69,7 @@ def main(argv: list[str] | None = None) -> int:
     export = commands.add_parser("export-inputs", help="Export validated inputs without gold")
     export.add_argument("manifest", type=Path)
     export.add_argument("--output", type=Path, required=True)
+    export.add_argument("--expected-manifest-sha256", help="Require this checked manifest revision")
     index = commands.add_parser("release-index", help="Create a redacted checked-snapshot lineage index")
     index.add_argument("manifest", type=Path)
     index.add_argument("--output", type=Path, required=True)
@@ -145,6 +146,10 @@ def main(argv: list[str] | None = None) -> int:
 
         if report["status"] != "PASS":
             print("BLOCK: validation failed; no release output created.", file=sys.stderr)
+            return 1
+        if (args.command == "export-inputs" and args.expected_manifest_sha256 is not None
+                and report["manifest_sha256"] != args.expected_manifest_sha256):
+            print("BLOCK: the manifest revision changed; recheck before export.", file=sys.stderr)
             return 1
         try:
             snapshot = read_snapshot(args.manifest, report)

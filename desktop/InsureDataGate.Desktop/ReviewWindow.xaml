@@ -1,0 +1,147 @@
+<Window x:Class="InsureDataGate.Desktop.ReviewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="InsureDataGate — 데이터 출고 검토" Icon="Assets/insuredatagate.ico" Width="1100" Height="700" MinWidth="650" MinHeight="410"
+        FontFamily="Segoe UI, Malgun Gothic" FontSize="14" Background="#F2F5F6" Foreground="#162C34" Language="ko-KR"
+        WindowStartupLocation="CenterScreen" AllowDrop="True" Drop="OnDrop" DragOver="OnDragOver"
+        PreviewKeyDown="OnKey" Closing="OnClosing">
+  <Window.Resources>
+    <Style TargetType="Button">
+      <Setter Property="MinHeight" Value="34"/>
+      <Setter Property="Padding" Value="12,3"/>
+      <Setter Property="Margin" Value="0,0,6,4"/>
+      <Setter Property="Background" Value="White"/>
+      <Setter Property="BorderBrush" Value="#AABDC1"/>
+      <Setter Property="Foreground" Value="#162C34"/>
+    </Style>
+    <Style TargetType="DataGrid">
+      <Setter Property="AutoGenerateColumns" Value="False"/>
+      <Setter Property="IsReadOnly" Value="True"/>
+      <Setter Property="CanUserAddRows" Value="False"/>
+      <Setter Property="SelectionMode" Value="Single"/>
+      <Setter Property="HeadersVisibility" Value="Column"/>
+      <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+      <Setter Property="HorizontalGridLinesBrush" Value="#DFE9EB"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="MinRowHeight" Value="30"/>
+      <Setter Property="RowHeaderWidth" Value="0"/>
+      <Setter Property="AlternatingRowBackground" Value="#F4F8F8"/>
+    </Style>
+    <Style x:Key="StateLabel" TargetType="TextBlock">
+      <Setter Property="Foreground" Value="#405A62"/>
+      <Setter Property="FontSize" Value="12"/>
+    </Style>
+    <Style x:Key="StateValue" TargetType="TextBlock">
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+    <Style x:Key="RightNumber" TargetType="TextBlock">
+      <Setter Property="TextAlignment" Value="Right"/>
+    </Style>
+  </Window.Resources>
+  <DockPanel>
+    <WrapPanel DockPanel.Dock="Top" Margin="16,9,10,3" KeyboardNavigation.TabNavigation="Local">
+      <Button x:Name="OpenManifestButton" Click="OnOpenManifest" ToolTip="Ctrl+O" Content="매니페스트 열기"/>
+      <Button x:Name="OpenReportButton" Click="OnOpenReport" ToolTip="Ctrl+Shift+O" Content="저장 보고서 열기"/>
+      <Button x:Name="SaveButton" Click="OnSaveReport" ToolTip="Ctrl+S" Content="보고서 저장" IsEnabled="False"/>
+      <Button x:Name="CancelButton" Click="OnCancel" ToolTip="Esc" Content="검사 취소" IsEnabled="False" Visibility="Collapsed"/>
+      <ComboBox x:Name="ZoomSelector" AutomationProperties.Name="글자 배율" Width="85" MinHeight="34"
+                SelectedIndex="0" SelectionChanged="OnZoom" VerticalAlignment="Top">
+        <ComboBoxItem Content="100%"/>
+        <ComboBoxItem Content="125%"/>
+        <ComboBoxItem Content="150%"/>
+      </ComboBox>
+    </WrapPanel>
+    <Border DockPanel.Dock="Top" Margin="16,0,16,8" Padding="12,7" Background="White" BorderBrush="#CADBDD" BorderThickness="1,3,1,1">
+      <StackPanel>
+        <TextBlock x:Name="Status" Text="검사할 매니페스트를 열거나 이 창에 놓으세요." FontWeight="SemiBold"
+                   TextTrimming="CharacterEllipsis" ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}"
+                   AutomationProperties.LiveSetting="Polite"/>
+        <TextBlock x:Name="Summary" TextTrimming="CharacterEllipsis" Foreground="#405A62"
+                   ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}"/>
+      </StackPanel>
+    </Border>
+    <Border DockPanel.Dock="Top" Margin="16,0,16,8" BorderBrush="#CADBDD" BorderThickness="1" Background="#E5EEEE">
+      <UniformGrid Columns="3">
+        <Border Padding="11,7" BorderBrush="#CADBDD" BorderThickness="0,0,1,0">
+          <StackPanel>
+            <TextBlock Style="{StaticResource StateLabel}" Text="로컬 자동 검사"/>
+            <TextBlock x:Name="ValidationState" Style="{StaticResource StateValue}" Text="대기"/>
+          </StackPanel>
+        </Border>
+        <Border Padding="11,7" BorderBrush="#CADBDD" BorderThickness="0,0,1,0">
+          <StackPanel>
+            <TextBlock Style="{StaticResource StateLabel}" Text="사람 검토"/>
+            <TextBlock x:Name="HumanState" Style="{StaticResource StateValue}" Text="별도 확인"
+                       ToolTip="출처의 사용 권리와 정답 정확성을 사람이 직접 확인합니다."/>
+          </StackPanel>
+        </Border>
+        <Border Padding="11,7">
+          <StackPanel>
+            <TextBlock Style="{StaticResource StateLabel}" Text="모델 입력 내보내기"/>
+            <TextBlock x:Name="ExportState" Style="{StaticResource StateValue}" Text="검사 필요"/>
+          </StackPanel>
+        </Border>
+      </UniformGrid>
+    </Border>
+    <Border DockPanel.Dock="Bottom" Margin="16,8,16,10" Padding="8,4,3,0"
+            Background="White" BorderBrush="#CADBDD" BorderThickness="1">
+      <DockPanel LastChildFill="True">
+        <Button x:Name="ExportButton" DockPanel.Dock="Right" Click="OnExport"
+                Content="모델 입력 JSONL 저장" IsEnabled="False"/>
+        <TextBlock Margin="4,0,7,4" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                   Foreground="#405A62" Text="내보내기 전 파일을 재검사합니다. 출력은 사례 ID·입력·출처 ID로 제한합니다."
+                   ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}"/>
+      </DockPanel>
+    </Border>
+    <Grid Margin="16,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="3*" MinWidth="285"/>
+        <ColumnDefinition Width="10"/>
+        <ColumnDefinition Width="2*" MinWidth="210"/>
+      </Grid.ColumnDefinitions>
+      <TabControl x:Name="ResultsTabs" SelectionChanged="OnSelection" AutomationProperties.Name="검사 결과 목록" MinWidth="0">
+        <TabItem x:Name="IssuesTab" Header="검사 항목">
+          <DockPanel>
+            <Border DockPanel.Dock="Top" Padding="6,4" Background="#EAF2F3">
+              <DockPanel>
+                <TextBlock x:Name="FindingCount" DockPanel.Dock="Right" Margin="8,0,0,0" VerticalAlignment="Center" Text="0건"/>
+                <Label DockPanel.Dock="Left" Target="{Binding ElementName=FindingSearch}" Padding="3,2,7,2" Content="규칙·위치"/>
+                <TextBox x:Name="FindingSearch" AutomationProperties.Name="규칙 또는 입력 위치 검색"
+                         TextChanged="OnSearch" IsEnabled="False" Padding="3,1"/>
+              </DockPanel>
+            </Border>
+            <Grid>
+              <DataGrid x:Name="Issues" SelectionChanged="OnSelection" AutomationProperties.Name="검사 항목 목록">
+                <DataGrid.Columns>
+                  <DataGridTextColumn Header="유형" Binding="{Binding Kind}" Width="0.72*"/>
+                  <DataGridTextColumn Header="입력 위치" Binding="{Binding Location}" Width="1.25*"/>
+                  <DataGridTextColumn Header="규칙" Binding="{Binding Code}" Width="1*"/>
+                </DataGrid.Columns>
+              </DataGrid>
+              <TextBlock x:Name="NoFindings" Text="검사 결과가 여기에 표시됩니다." Margin="10,32,7,0"
+                         VerticalAlignment="Top" Foreground="#405A62" IsHitTestVisible="False" TextWrapping="Wrap"/>
+            </Grid>
+          </DockPanel>
+        </TabItem>
+        <TabItem Header="확인한 파일">
+          <DataGrid x:Name="Files" SelectionChanged="OnSelection" AutomationProperties.Name="확인한 파일 목록">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="파일" Binding="{Binding Path}" Width="*"/>
+              <DataGridTextColumn Header="바이트" Binding="{Binding Bytes, StringFormat=N0}" Width="100" ElementStyle="{StaticResource RightNumber}"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </TabItem>
+      </TabControl>
+      <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="Transparent" AutomationProperties.Name="상세 패널 너비"/>
+      <Border Grid.Column="2" BorderBrush="#CADBDD" BorderThickness="1" Background="White" Padding="10,7">
+        <DockPanel>
+          <TextBlock DockPanel.Dock="Top" Text="선택한 항목의 근거" FontWeight="SemiBold" Margin="0,0,0,5"/>
+          <TextBox x:Name="Details" Text="목록에서 검사 항목이나 확인한 파일을 선택하세요."
+                   AutomationProperties.Name="선택한 항목의 근거" TextWrapping="Wrap" AcceptsReturn="True"
+                   IsReadOnly="True" VerticalScrollBarVisibility="Auto" BorderThickness="0" Padding="0,0,3,0"/>
+        </DockPanel>
+      </Border>
+    </Grid>
+  </DockPanel>
+</Window>
