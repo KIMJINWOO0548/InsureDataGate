@@ -1,30 +1,22 @@
 # InsureDataGate
 
-[Windows x64 앱](docs/windows-app.md)에서 합성 데이터 매니페스트를 열고, 파일별 검사 결과를 확인해 로컬 보고서로 저장할 수 있습니다.
+**합성 AI 평가 데이터셋을 공개하기 전에 파일, 출처 선언, 정답 분리, 버전 차이를 검사하는 오프라인 도구입니다.**
 
-Checked-snapshot inventory: [`release-index`](docs/RELEASE_INDEX.md) records redacted lineage and file hashes without asserting rights certification or semantic-leakage assurance.
+[Windows x64 앱](docs/windows-app.md)에서 매니페스트를 열고, 파일별 검사 결과와 차단 원인을 확인해 새 로컬 보고서로 저장할 수 있습니다. CLI는 두 버전을 비교하고 검사한 파일을 다시 대조한 뒤 허용된 모델 입력만 내보냅니다.
 
-[![Verify](https://github.com/KIMJINWOO0548/InsureDataGate/actions/workflows/ci.yml/badge.svg)](https://github.com/KIMJINWOO0548/InsureDataGate/actions/workflows/ci.yml)
+[![검증 CI](https://github.com/KIMJINWOO0548/InsureDataGate/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/KIMJINWOO0548/InsureDataGate/actions/workflows/ci.yml?query=branch%3Amain)
 
-**Find release impact by train/validation/test split, inspect each changed case and source, and resolve blocked checks offline.**
+- **검사** · 파일의 SHA-256, 출처·검수 선언, 사례와 정답 파일의 분리, 학습·검증·시험 분할의 격리를 확인합니다.
+- **비교** · 사례 자체의 변경과 출처 변경으로 영향을 받는 사례를 분리해 분할별로 보여 줍니다. [검토 화면 설계](replica/20261106-depth/recon.md) · [검증 결과와 한계](replica/20261106-depth/verification.md)
+- **확인과 기록** · HTML 보고서에서 유형별 검사 항목과 해당 위치를 오갈 수 있습니다. 항목 수는 고유 사례 수나 심각도를 뜻하지 않습니다. `release-index`에는 검사한 파일 해시와 본문을 제외한 출처 이력이 남습니다. [HTML 검증 기록](replica/20261106/recon.md) · [릴리스 색인](docs/RELEASE_INDEX.md)
 
-The review separates baseline/candidate direct changes from source-only split exposure, with native split filters and complete case/source destinations. Large reports bound the optional directory while preserving every dossier. [Design, comparable measurement plan and remaining gaps](replica/20261106-depth/recon.md); [actual verification and limits](replica/20261106-depth/verification.md).
-
-HTML gate findings include issue-type counts and native links to grouped safe
-locations, with a return path to the overview. Counts describe findings, not
-unique records or severity. [Reference, tool and verification record](replica/20261106/recon.md).
-
-InsureDataGate checks a versioned manifest, declared source rights, file hashes, separation of cases from gold answers, review declarations, and train/validation/test isolation. Review case and gold changes together, follow the declared source references from both releases, resolve blocked checks, then export only allowlisted model inputs. The runtime uses the Python standard library with no network calls.
-
-> 모든 예시와 신원은 허구이며 합성 데이터입니다. 실제 고객 정보나 보험금·법률 판단을 위한 도구가 아닙니다.
-
-데이터셋을 공개하기 전에 **파일이 바뀌었는지, 검수 선언이 빠졌는지, 정답 파일과 모델 입력이 분리됐는지, 새 버전이 무엇을 바꿨는지**를 확인합니다. JSON 서식·레코드 순서·파일 위치 변경과 실제 입력·정답·출처 변경을 구분하며, 같은 버전 이름으로 내용이 달라지면 차단합니다. `review`는 같은 사례의 입력·정답 변경과 변경된 출처의 연결 사례·split을 함께 보여 줍니다. 차단 원인별 복구 안내와 실제 필터·이동을 제공하며, 사례와 정답 본문은 넣지 않습니다.
+모든 예시와 신원은 합성 자료입니다. 출처 사용 권리와 정답의 정확성은 사람이 별도로 검토합니다.
 
 ## 빠른 시작
 
 Python 3.11 이상이 필요합니다. 실행 시 외부 의존성과 네트워크 연결은 없습니다. 소스에서 설치할 때는 빌드 도구 setuptools가 필요하며 pip가 내려받을 수 있습니다.
 
-Windows PowerShell:
+Windows PowerShell에서 실행합니다.
 
 ```powershell
 git clone https://github.com/KIMJINWOO0548/InsureDataGate.git
@@ -37,7 +29,7 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\insuredatagate.exe export-inputs examples/insurance-demo/manifest.json --output .\demo-inputs.jsonl
 ```
 
-macOS / Linux:
+macOS와 Linux에서 실행합니다.
 
 ```sh
 git clone https://github.com/KIMJINWOO0548/InsureDataGate.git
@@ -62,7 +54,7 @@ python3 -m venv .venv
 
 예제 결과: [사례·출처 검토 workspace](docs/examples/review-workspace.html), [기존 비교 보고서 HTML](docs/examples/release-review.html), [단일 검사 HTML](docs/examples/validation-review.html). GitHub에서는 파일을 내려받아 브라우저로 열 수 있습니다. 보고서의 metadata와 상대 경로는 공유 전에 검토하세요.
 
-![Actual 0.3 review workspace at 1440px](docs/images/release-review-desktop.png)
+![실제 0.3 릴리스 검토 화면, 1440픽셀](docs/images/release-review-desktop.png)
 
 [375px 모바일 첫 화면](docs/images/release-review-mobile.png). 실제 합성 예제와 native HTML 검토 흐름을 캡처했습니다. 도구 0.3 버전과 예제 데이터셋 0.1/0.2 버전은 별개입니다. [0.2 화면](docs/evidence/0.2.0/browser-ci-final/changed-390x844.png)은 과거 증거로 보존합니다.
 
@@ -113,13 +105,10 @@ py -3.12 -m venv .runtime/browser-env
 
 [요구사항·인수 기준](docs/REQUIREMENTS.md), [0.1 구현 계획](docs/superpowers/plans/2026-11-01-insuredatagate.md), [0.2 구현 계획](docs/superpowers/plans/2026-11-01-release-review.md), [0.3 구현 계획](docs/superpowers/plans/2026-11-01-review-workspace.md), [실제 검증 기록](VALIDATION.md), [도구 사용 기록](docs/TOOLING.md)을 공개합니다. CaseProof에서 다루는 출처·정답 분리와 증거 원칙을 참고해 독립적으로 작성했으며 기존 API나 DB에 의존하지 않습니다. 코드와 예제는 [Apache-2.0](LICENSE)으로 제공합니다.
 
-### Opt-in disclosure fact review
+### 선택 기능 · 합성 공시 주석 검토
 
 ```bash
 insuredatagate review-facts examples/disclosure-demo/manifest.json --profile disclosure-facts.v1 --json
 ```
 
-This finite, offline profile compares asserted annotation fields with explicit
-checked-input declarations. It returns support/conflict/abstention with replayable
-hashed spans and preserves the existing generic validation/export behavior.
-See [the grammar, report and limits](docs/FACT_REVIEW.md).
+이 오프라인 프로필은 정해진 주석 필드를 검사한 입력 선언과 대조합니다. 근거 구간의 해시와 함께 지지·충돌·판단 유보 결과를 반환합니다. 일반 검사와 내보내기 명령도 같은 방식으로 사용할 수 있습니다. [입력 형식, 결과 보고서와 한계](docs/FACT_REVIEW.md)
